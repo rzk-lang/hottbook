@@ -6,8 +6,10 @@ edit_uri: edit/master
 docs_dir: src
 nav:
   - General: index.md
-  - Formalisations:
-      - Example: 0-example.rzk.md
+  - Foundations:
+      - 1 Type Theory:
+          - 1.4 Dependent function types: 1-foundations/1-type-theory/4-dependent-function-types.rzk.md
+          - 1.5 Product types: 1-foundations/1-type-theory/5-product-types.rzk.md
 
 markdown_extensions:
   - admonition

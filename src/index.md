@@ -1,6 +1,6 @@
-# rzk-project-template
+# HoTT Book formalisations in Rzk
 
-Template for a formalisation project in rzk proof assistant.
+This project contains formalisations that follow [the HoTT Book](https://homotopytypetheory.org/book/).
 
 ## How to check
 
