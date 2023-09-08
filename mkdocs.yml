@@ -1,6 +1,6 @@
-site_name: "rzk formalisation project template"
-repo_url: https://github.com/rzk-lang/rzk-project-template
-repo_name: rzk-lang/rzk-project-template
+site_name: "HoTT Book formalisation in Rzk proof assistant"
+repo_url: https://github.com/rzk-lang/hottbook
+repo_name: rzk-lang/hottbook
 edit_uri: edit/master
 
 docs_dir: src
