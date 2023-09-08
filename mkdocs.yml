@@ -8,8 +8,33 @@ nav:
   - General: index.md
   - Foundations:
       - 1 Type Theory:
-          - 1.4 Dependent function types: 1-foundations/1-type-theory/4-dependent-function-types.rzk.md
-          - 1.5 Product types: 1-foundations/1-type-theory/5-product-types.rzk.md
+          - 1.4 Dependent function types: 1-foundations/1-type-theory/04-dependent-function-types.rzk.md
+          - 1.5 Product types: 1-foundations/1-type-theory/05-product-types.rzk.md
+          - 1.6 Dependent pair types: 1-foundations/1-type-theory/06-dependent-pair-types.rzk.md
+          - 1.7 Coproduct types: 1-foundations/1-type-theory/07-coproduct-types.rzk.md
+          - 1.8 The type of booleans: 1-foundations/1-type-theory/08-booleans.rzk.md
+          - 1.9 The natural numbers: 1-foundations/1-type-theory/09-natural-numbers.rzk.md
+          - 1.10 Pattern matching and recursion: 1-foundations/1-type-theory/10-pattern-matching-and-recursion.rzk.md
+          - 1.11 Propositions as types: 1-foundations/1-type-theory/11-propositions-as-types.rzk.md
+          - 1.12 Identity types: 1-foundations/1-type-theory/12-identity-types.rzk.md
+          - Exercises: 1-foundations/1-type-theory/exercises.rzk.md
+      - 2 Homotopy Type Theory:
+          - 2.1 Types are higher groupoids: 1-foundations/2-homotopy-type-theory/01-types-are-higher-groupoids.rzk.md
+          - 2.2 Functions are functors: 1-foundations/2-homotopy-type-theory/02-functions-are-functors.rzk.md
+          - 2.3 Type families are fibrations: 1-foundations/2-homotopy-type-theory/03-type-families-are-fibrations.rzk.md
+          - 2.4 Homotopies are equivalences: 1-foundations/2-homotopy-type-theory/04-homotopies-are-equivalences.rzk.md
+          - 2.5 The higher groupoid structure of type formers: 1-foundations/2-homotopy-type-theory/05-the-higher-groupoid-structure-of-type-formers.rzk.md
+          - 2.6 Cartesian product types: 1-foundations/2-homotopy-type-theory/06-cartesian-product-types.rzk.md
+          - 2.7 Σ-types: 1-foundations/2-homotopy-type-theory/07-sigma-types.rzk.md
+          - 2.8 The unit type: 1-foundations/2-homotopy-type-theory/08-the-unit-type.rzk.md
+          - 2.9 Π-types and the function extensionality axiom: 1-foundations/2-homotopy-type-theory/09-pi-types-and-function-extensionality.rzk.md
+          - 2.10 Universes and univalence axiom: 1-foundations/2-homotopy-type-theory/10-universes-and-univalence-axiom.rzk.md
+          - 2.11 Identity type: 1-foundations/2-homotopy-type-theory/11-identity-type.rzk.md
+          - 2.12 Coproducts: 1-foundations/2-homotopy-type-theory/12-coproducts.rzk.md
+          - 2.13 Natural numbers: 1-foundations/2-homotopy-type-theory/13-natural-numbers.rzk.md
+          - "2.14 Example: equality of structures": 1-foundations/2-homotopy-type-theory/14-example-equality-of-structures.rzk.md
+          - 2.15 Universal properties: 1-foundations/2-homotopy-type-theory/15-universal-properties.rzk.md
+          - Exercises: 1-foundations/2-homotopy-type-theory/exercises.rzk.md
 
 markdown_extensions:
   - admonition
