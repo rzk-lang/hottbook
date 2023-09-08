@@ -8,19 +8,19 @@
       
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
-        <title>Example - rzk formalisation project template</title>
+        <title>1.4 Dependent function types - rzk formalisation project template</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.472b142f.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.472b142f.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.08040f6c.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.08040f6c.min.css">
         
       
       
@@ -37,7 +37,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#example-formalisation-module" class="md-skip">
+        <a href="#14-dependent-function-types-pi-types" class="md-skip">
           Skip to content
         </a>
       
@@ -80,9 +80,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="rzk formalisation project template" class="md-header__button md-logo" aria-label="rzk formalisation project template" data-md-component="logo">
+    <a href="../../.." title="rzk formalisation project template" class="md-header__button md-logo" aria-label="rzk formalisation project template" data-md-component="logo">
       
-  <img src="../assets/images/logo-1000x1000.png" alt="logo">
+  <img src="../../../assets/images/logo-1000x1000.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Example
+              1.4 Dependent function types
             
           </span>
         </div>
@@ -201,9 +201,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="rzk formalisation project template" class="md-nav__button md-logo" aria-label="rzk formalisation project template" data-md-component="logo">
+    <a href="../../.." title="rzk formalisation project template" class="md-nav__button md-logo" aria-label="rzk formalisation project template" data-md-component="logo">
       
-  <img src="../assets/images/logo-1000x1000.png" alt="logo">
+  <img src="../../../assets/images/logo-1000x1000.png" alt="logo">
 
     </a>
     rzk formalisation project template
@@ -231,7 +231,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         General
       </a>
     </li>
@@ -259,14 +259,42 @@
       
       
         <label class="md-nav__link" for="__nav_2">
-          Formalisations
+          Foundations
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Formalisations" data-md-level="1">
+      <nav class="md-nav" aria-label="Foundations" data-md-level="1">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
-          Formalisations
+          Foundations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          1 Type Theory
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="1 Type Theory" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          1 Type Theory
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -286,9 +314,30 @@
       
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Example
+        1.4 Dependent function types
       </a>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-product-types.rzk/" class="md-nav__link">
+        1.5 Product types
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -332,20 +381,30 @@
                 
                   
 
-  <a href="https://github.com/rzk-lang/rzk-project-template/edit/master/0-example.rzk.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/rzk-lang/rzk-project-template/edit/master/1-foundations/1-type-theory/4-dependent-function-types.rzk.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="example-formalisation-module">Example formalisation module<a class="headerlink" href="#example-formalisation-module" title="Permanent link">&para;</a></h1>
+<h1 id="14-dependent-function-types-pi-types">1.4 Dependent function types (<span class="arithmatex">\(\Pi\)</span>-types)<a class="headerlink" href="#14-dependent-function-types-pi-types" title="Permanent link">&para;</a></h1>
+<p>This is a literate Rzk file:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">#lang</span><span class="p"> </span><span class="s">rzk-1</span>
 </span></code></pre></div>
-<p>Here is an identity function:</p>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:identity" id="define:identity" style="visibility: visible; position: relative; color: inherit">identity</a></span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">    </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">    : A → A</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="err">    := </span><span class="p">\ </span>x <span class="err">→ x</span>
+<p>A polymorphic function is one which takes a type as one of its arguments,
+and then acts on elements of that type (or of other types constructed from it).
+An example is the polymorphic identity function:</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:id" id="define:id" style="visibility: visible; position: relative; color: inherit">id</a></span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">  : A → A</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="err">  := </span><span class="p">\ </span>x <span class="err">→ x</span>
+</span></code></pre></div>
+<p>Another, less trivial, example of a polymorphic function is the "swap" operation
+that switches the order of the arguments of a (curried) two-argument function:</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:swap" id="define:swap" style="visibility: visible; position: relative; color: inherit">swap</a></span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">  </span><span class="p">(</span>A B C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">  : (A → B → C) → (B → A → C)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">  := </span><span class="p">\ </span>f y x <span class="err">→ f x y</span>
 </span></code></pre></div>
 
 
@@ -367,7 +426,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: General" rel="prev">
+        <a href="../../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: General" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -381,6 +440,21 @@
           </div>
         </a>
       
+      
+        
+        <a href="../5-product-types.rzk/" class="md-footer__link md-footer__link--next" aria-label="Next: 1.5 Product types" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              1.5 Product types
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
       
     </nav>
   
@@ -405,12 +479,12 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.action.edit", "navigation.footer", "navigation.sections", "navigation.path"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.action.edit", "navigation.footer", "navigation.sections", "navigation.path"], "search": "../../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.d6c3db9e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d6c3db9e.min.js"></script>
       
-        <script src="../javascript/mathjax.js"></script>
+        <script src="../../../javascript/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
