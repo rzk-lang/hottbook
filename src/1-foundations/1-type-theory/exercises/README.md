@@ -1,5 +1,10 @@
 # Exercises for Section 1
 
+!!! warning
+
+    At the moment `rzk typecheck` does not check indented blocks,
+    so solutions in this section (which are nested in admonitions)
+    are not checked.
 ## Exercise 1.1
 
 Given functions $f : A \to B$ and $g : B \to C$,
