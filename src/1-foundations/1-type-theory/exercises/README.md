@@ -16,17 +16,18 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
 ## Exercise 1.2
 
-!!! warning
-
-    Description is missing.
+Derive the recursion principle for products
+$rec_{A \times B}$ using only the projections,
+and verify that the definitional equalities are valid.
+Do the same for $\Sigma$-types.
 
 [Go to solution](1.2-solution.rzk.md)
 
 ## Exercise 1.3
 
-!!! warning
-
-    Description is missing.
+Derive the induction principle for products $ind_{A \times B}$, using only the projections and
+the propositional uniqueness principle $uniq_{A \times B}$. Verify that the definitional equalities are valid.
+Generalize $uniq_{A \times B}$ to $\Sigma$-types, and do the same for $\Sigma$-types. (This requires concepts from Chapter 2.)
 
 [Go to solution](1.3-solution.rzk.md)
 
