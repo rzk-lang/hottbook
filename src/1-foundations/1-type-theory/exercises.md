@@ -6,7 +6,7 @@ Given functions $f : A \to B$ and $g : B \to C$,
 define their composite $g \circ f : A \to C$.
 Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
-[Go to solution](1.1-solution.rzk)
+[Go to solution](exercises/1.1-solution.rzk.md)
 
 ## Exercise 1.2
 
@@ -14,7 +14,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.2-solution.rzk)
+[Go to solution](exercises/1.2-solution.rzk.md)
 
 ## Exercise 1.3
 
@@ -22,7 +22,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.3-solution.rzk)
+[Go to solution](exercises/1.3-solution.rzk.md)
 
 ## Exercise 1.4
 
@@ -30,7 +30,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.4-solution.rzk)
+[Go to solution](exercises/1.4-solution.rzk.md)
 
 ## Exercise 1.5
 
@@ -38,7 +38,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.5-solution.rzk)
+[Go to solution](exercises/1.5-solution.rzk.md)
 
 ## Exercise 1.6
 
@@ -46,7 +46,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.6-solution.rzk)
+[Go to solution](exercises/1.6-solution.rzk.md)
 
 ## Exercise 1.7
 
@@ -54,7 +54,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.7-solution.rzk)
+[Go to solution](exercises/1.7-solution.rzk.md)
 
 ## Exercise 1.8
 
@@ -62,7 +62,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.8-solution.rzk)
+[Go to solution](exercises/1.8-solution.rzk.md)
 
 ## Exercise 1.9
 
@@ -70,7 +70,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.9-solution.rzk)
+[Go to solution](exercises/1.9-solution.rzk.md)
 
 ## Exercise 1.10
 
@@ -78,7 +78,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.10-solution.rzk)
+[Go to solution](exercises/1.10-solution.rzk.md)
 
 ## Exercise 1.11
 
@@ -86,7 +86,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.11-solution.rzk)
+[Go to solution](exercises/1.11-solution.rzk.md)
 
 ## Exercise 1.12
 
@@ -94,7 +94,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.12-solution.rzk)
+[Go to solution](exercises/1.12-solution.rzk.md)
 
 ## Exercise 1.13
 
@@ -102,7 +102,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.13-solution.rzk)
+[Go to solution](exercises/1.13-solution.rzk.md)
 
 ## Exercise 1.14
 
@@ -110,7 +110,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.14-solution.rzk)
+[Go to solution](exercises/1.14-solution.rzk.md)
 
 ## Exercise 1.15
 
@@ -118,7 +118,7 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.15-solution.rzk)
+[Go to solution](exercises/1.15-solution.rzk.md)
 
 ## Exercise 1.16
 
@@ -126,4 +126,4 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
     Description is missing.
 
-[Go to solution](1.16-solution.rzk)
+[Go to solution](exercises/1.16-solution.rzk.md)
