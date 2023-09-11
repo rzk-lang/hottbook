@@ -1,11 +1,5 @@
 # Exercises for Section 1
 
-This is a literate Rzk file:
-
-```rzk
-#lang rzk-1
-```
-
 ## Exercise 1.1
 
 Given functions $f : A \to B$ and $g : B \to C$,
