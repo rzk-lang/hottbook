@@ -21,4 +21,4 @@ jobs:
         uses: rzk-lang/rzk-action@v1
         with:
           rzk-version: latest
-          files: src/*/*/*.rzk.md
+          files: src/**/*.rzk.md
