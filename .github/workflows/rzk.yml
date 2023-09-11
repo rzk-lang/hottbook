@@ -21,4 +21,8 @@ jobs:
         uses: rzk-lang/rzk-action@v1
         with:
           rzk-version: latest
-          files: src/**/*.rzk.md
+          files: |
+            src/1-foundations/1-type-theory/*.rzk.md
+            src/1-foundations/1-type-theory/exercises/*.rzk.md
+            src/1-foundations/2-homotopy-type-theory/*.rzk.md
+            src/1-foundations/2-homotopy-type-theory/exercises/*.rzk.md
