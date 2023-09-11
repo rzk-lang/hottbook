@@ -6,7 +6,7 @@
 
     Description is missing.
 
-[Go to solution](2.1-solution.rzk)
+[Go to solution](2.1-solution.rzk.md)
 
 ## Exercise 2.2
 
@@ -14,7 +14,7 @@
 
     Description is missing.
 
-[Go to solution](2.2-solution.rzk)
+[Go to solution](2.2-solution.rzk.md)
 
 ## Exercise 2.3
 
@@ -22,7 +22,7 @@
 
     Description is missing.
 
-[Go to solution](2.3-solution.rzk)
+[Go to solution](2.3-solution.rzk.md)
 
 ## Exercise 2.4
 
@@ -30,7 +30,7 @@
 
     Description is missing.
 
-[Go to solution](2.4-solution.rzk)
+[Go to solution](2.4-solution.rzk.md)
 
 ## Exercise 2.5
 
@@ -38,7 +38,7 @@
 
     Description is missing.
 
-[Go to solution](2.5-solution.rzk)
+[Go to solution](2.5-solution.rzk.md)
 
 ## Exercise 2.6
 
@@ -46,7 +46,7 @@
 
     Description is missing.
 
-[Go to solution](2.6-solution.rzk)
+[Go to solution](2.6-solution.rzk.md)
 
 ## Exercise 2.7
 
@@ -54,7 +54,7 @@
 
     Description is missing.
 
-[Go to solution](2.7-solution.rzk)
+[Go to solution](2.7-solution.rzk.md)
 
 ## Exercise 2.8
 
@@ -62,7 +62,7 @@
 
     Description is missing.
 
-[Go to solution](2.8-solution.rzk)
+[Go to solution](2.8-solution.rzk.md)
 
 ## Exercise 2.9
 
@@ -70,7 +70,7 @@
 
     Description is missing.
 
-[Go to solution](2.9-solution.rzk)
+[Go to solution](2.9-solution.rzk.md)
 
 ## Exercise 2.10
 
@@ -78,7 +78,7 @@
 
     Description is missing.
 
-[Go to solution](2.10-solution.rzk)
+[Go to solution](2.10-solution.rzk.md)
 
 ## Exercise 2.11
 
@@ -86,7 +86,7 @@
 
     Description is missing.
 
-[Go to solution](2.11-solution.rzk)
+[Go to solution](2.11-solution.rzk.md)
 
 ## Exercise 2.12
 
@@ -94,7 +94,7 @@
 
     Description is missing.
 
-[Go to solution](2.12-solution.rzk)
+[Go to solution](2.12-solution.rzk.md)
 
 ## Exercise 2.13
 
@@ -102,7 +102,7 @@
 
     Description is missing.
 
-[Go to solution](2.13-solution.rzk)
+[Go to solution](2.13-solution.rzk.md)
 
 ## Exercise 2.14
 
@@ -110,7 +110,7 @@
 
     Description is missing.
 
-[Go to solution](2.14-solution.rzk)
+[Go to solution](2.14-solution.rzk.md)
 
 ## Exercise 2.15
 
@@ -118,7 +118,7 @@
 
     Description is missing.
 
-[Go to solution](2.15-solution.rzk)
+[Go to solution](2.15-solution.rzk.md)
 
 ## Exercise 2.16
 
@@ -126,7 +126,7 @@
 
     Description is missing.
 
-[Go to solution](2.16-solution.rzk)
+[Go to solution](2.16-solution.rzk.md)
 
 ## Exercise 2.17
 
@@ -134,7 +134,7 @@
 
     Description is missing.
 
-[Go to solution](2.17-solution.rzk)
+[Go to solution](2.17-solution.rzk.md)
 
 ## Exercise 2.18
 
@@ -142,4 +142,4 @@
 
     Description is missing.
 
-[Go to solution](2.18-solution.rzk)
+[Go to solution](2.18-solution.rzk.md)
