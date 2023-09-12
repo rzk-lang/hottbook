@@ -17,7 +17,7 @@ nav:
           - 1.10 Pattern matching and recursion: 1-foundations/1-type-theory/10-pattern-matching-and-recursion.rzk.md
           - 1.11 Propositions as types: 1-foundations/1-type-theory/11-propositions-as-types.rzk.md
           - 1.12 Identity types: 1-foundations/1-type-theory/12-identity-types.rzk.md
-          - Exercises: 1-foundations/1-type-theory/exercises.rzk.md
+          - Exercises: 1-foundations/1-type-theory/exercises/README.md
       - 2 Homotopy Type Theory:
           - 2.1 Types are higher groupoids: 1-foundations/2-homotopy-type-theory/01-types-are-higher-groupoids.rzk.md
           - 2.2 Functions are functors: 1-foundations/2-homotopy-type-theory/02-functions-are-functors.rzk.md
@@ -34,7 +34,7 @@ nav:
           - 2.13 Natural numbers: 1-foundations/2-homotopy-type-theory/13-natural-numbers.rzk.md
           - "2.14 Example: equality of structures": 1-foundations/2-homotopy-type-theory/14-example-equality-of-structures.rzk.md
           - 2.15 Universal properties: 1-foundations/2-homotopy-type-theory/15-universal-properties.rzk.md
-          - Exercises: 1-foundations/2-homotopy-type-theory/exercises.rzk.md
+          - Exercises: 1-foundations/2-homotopy-type-theory/exercises/README.md
 
 markdown_extensions:
   - admonition
@@ -89,7 +89,7 @@ theme:
 extra_javascript:
   - javascript/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js
 
 plugins:
   - search
