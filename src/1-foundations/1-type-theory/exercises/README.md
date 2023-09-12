@@ -10,9 +10,8 @@ Show that we have $h \circ (g \circ f) \equiv (h \circ g) \circ f$.
 
 ## Exercise 1.2
 
-!!! warning
-
-    Description is missing.
+Derive the recursion principle for products $rec_{A\times B}$ using only the projections, and verify that the definitional equalities are valid.
+Do the same for $\Sigma$-types.
 
 [Go to solution](1.2-solution.rzk.md)
 
