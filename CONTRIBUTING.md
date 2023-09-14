@@ -2,6 +2,10 @@
 
 Thank you for contributing to formalizations of the HoTT Book in rzk! In order to better organize the work it's better to follow these guidelines.
 
+## Code style
+
+[This](https://github.com/emilyriehl/yoneda/blob/master/STYLEGUIDE.md) style guide can be followed.
+
 ## Formalizing section definitions
 
 The repository follows the structure of the book. 
