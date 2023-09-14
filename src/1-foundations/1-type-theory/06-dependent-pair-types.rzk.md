@@ -22,7 +22,7 @@ TODO
 ```
 Recursor for sigma types. They are called like this:
 $$
-rec_{\Sigma_{x : A}B(x)} ((C: U), (g: (x : A) \rightarrow B (x) \rightarrow C), (p: \Sigma_{x : A} B(x)))
+\mathsf{rec}_{\Sigma_{x : A}B(x)} ((C: U), (g: (x : A) \rightarrow B (x) \rightarrow C), (p: \Sigma_{x : A} B(x)))
 $$
 
 ```rzk
