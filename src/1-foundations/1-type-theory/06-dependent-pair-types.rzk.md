@@ -21,6 +21,7 @@ TODO
   := \p -> second p
 ```
 Recursor for sigma types. They are called like this:
+
 $$
 \mathsf{rec}_{\Sigma_{x : A}B(x)} ((C: U), (g: (x : A) \rightarrow B (x) \rightarrow C), (p: \Sigma_{x : A} B(x)))
 $$
