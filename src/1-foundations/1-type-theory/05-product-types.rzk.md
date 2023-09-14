@@ -45,12 +45,12 @@ Then instead of defining functions such as pr1 and pr2 directly by a defining eq
 define
 
 ```rzk
-#define pr₁'
+#define pr₁-via-rec
   (A B : U)
   : prod A B → A
   := prod-rec A B A (\ a _b → a)
 
-#define pr₂'
+#define pr₂-via-rec
   (A B : U)
   : prod A B → B
   := prod-rec A B B (\ _a b → b)
