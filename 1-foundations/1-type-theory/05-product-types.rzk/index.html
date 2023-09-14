@@ -833,12 +833,12 @@ so we define product types here in terms of those.</p>
 </span></code></pre></div>
 <p>Then instead of defining functions such as pr1 and pr2 directly by a defining equation, we could
 define</p>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:pr₁&#39;" id="define:pr₁&#39;" style="visibility: visible; position: relative; color: inherit">pr₁&#39;</a></span>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:pr₁-via-rec" id="define:pr₁-via-rec" style="visibility: visible; position: relative; color: inherit">pr₁-via-rec</a></span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">  : prod A B → A</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="err">  := prod-rec A B A (</span><span class="p">\ </span>a _b <span class="err">→ a)</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:pr₂&#39;" id="define:pr₂&#39;" style="visibility: visible; position: relative; color: inherit">pr₂&#39;</a></span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:pr₂-via-rec" id="define:pr₂-via-rec" style="visibility: visible; position: relative; color: inherit">pr₂-via-rec</a></span>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="err">  : prod A B → B</span>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="err">  := prod-rec A B B (</span><span class="p">\ </span>_a b <span class="err">→ b)</span>

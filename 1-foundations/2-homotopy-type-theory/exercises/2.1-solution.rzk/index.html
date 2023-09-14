@@ -724,6 +724,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    Solution
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -744,12 +759,18 @@
 
 <h1 id="solution-to-exercise-21">Solution to exercise 2.1<a class="headerlink" href="#solution-to-exercise-21" title="Permanent link">&para;</a></h1>
 <p>This is a literate Rzk file:</p>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">#lang</span><span class="p"> </span><span class="s">rzk-1</span>
+<p><div class="language-rzk highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">#lang</span><span class="p"> </span><span class="s">rzk-1</span>
 </span></code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>To be done.</p>
-</div>
+Show that the three obvious proofs of Lemma 2.1.2 are pairwise equal.</p>
+<p>Lemma 2.1.2: (note we use <span class="arithmatex">\(\circ\)</span> instead of square dot due to technical limitations)</p>
+<p>For every type <span class="arithmatex">\(A\)</span> and every <span class="arithmatex">\(x, y, z : A\)</span> there is a function</p>
+<div class="arithmatex">\[
+(x = y) \rightarrow (y = z) \rightarrow (x = z),
+\]</div>
+<p>written
+<span class="arithmatex">\(p \mapsto q \mapsto p \circ q\)</span>, such that <span class="arithmatex">\(\text{refl}_x \circ \text{refl}_x \equiv \text{refl}_x\)</span> for any <span class="arithmatex">\(x : A\)</span>. We call <span class="arithmatex">\(p \circ q\)</span> the concatenation or
+composite of <span class="arithmatex">\(p\)</span> and <span class="arithmatex">\(q\)</span>.</p>
+<h2 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h2>
 
 
 
