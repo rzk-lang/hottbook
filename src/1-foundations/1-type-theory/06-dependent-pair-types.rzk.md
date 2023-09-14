@@ -5,7 +5,8 @@ This is a literate Rzk file:
 ```rzk
 #lang rzk-1
 ```
-TODO
+!!! warning "TODO"
+    Add proper descriptions and check for missing definitions
 
 ```rzk
 #def pr₁-Σ
