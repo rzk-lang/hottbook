@@ -83,9 +83,7 @@ Generalize $uniq_{A \times B}$ to $\Sigma$-types, and do the same for $\Sigma$-t
 
 ## Exercise 1.11
 
-!!! warning
-
-    Description is missing.
+Show that for any type $A$, we have $¬¬¬A \to ¬A$.
 
 [Go to solution](1.11-solution.rzk.md)
 
