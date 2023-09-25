@@ -12,8 +12,8 @@ Alternativerly, groupoids can be viewed as a generalization of groups, where not
 
 ## Path symmetry
 !!! lemma "Lemma 2.1.1."
-    For every type `A` and every `x, y : A` there is a function `(x = y) → (y = x)`
-    denoted `p ↦ p⁻¹`, such that `reflₓ⁻¹ ≡ reflₓ` for each `x : A`. We call `p⁻¹` the inverse of `p`.
+    For every type $A$ and every $x, y : A$ there is a function $(x = y) \to (y = x)$`
+    denoted $p \mapsto p^{-1}$, such that $refl_x^{-1} \equiv refl_x$ for each $x : A$. We call $p^{-1}$ the inverse of $p$.
 
 ```rzk
 #def path-sym
@@ -29,9 +29,9 @@ Alternativerly, groupoids can be viewed as a generalization of groups, where not
 
 ## Path concatenation
 !!! lemma "Lemma 2.1.2."
-    For every type `A` and every `x, y, z : A` there is a function `(x = y) → (y = z) → (x = z)`,
-    written `p ↦ q ↦ p • q`, such that `reflₓ • reflₓ ≡ reflₓ` for any `x : A`. 
-    We call `p • q` the concatenation or composite of `p` and `q`.
+    For every type $A$ and every $x, y, z : A$ there is a function $(x = y) \to (y = z) \to (x = z)$,
+    written $p \mapsto q \mapsto p \cdot q$`, such that $refl_x \cdot refl_x \equiv refl_x$` for any $x : A$. 
+    We call $p \cdot q$ the concatenation or composite of $p$ and $q$.
 
 ```rzk
 #def path-concat
@@ -48,13 +48,13 @@ Alternativerly, groupoids can be viewed as a generalization of groups, where not
 
 ## Coherence laws
 !!! lemma "Lemma 2.1.4."
-    Suppose `A : U`, that `x, y, z, w : A` and that `p : x = y` and `q : y = z` and `r : z = w`. We
+    Suppose $A : U$, that $x, y, z, w : A$ and that $p : x = y$ and $q : y = z$ and $r : z = w$. We
     have the following:
 
-    1. `p = p • refl` and `p=refl • p`.
-    2. `p⁻¹ • p = refl` and `p • p⁻¹ = refl`. 
-    3. `(p⁻¹)⁻¹ = p`.
-    4. `p • (q • r) = (p • q) • r`.
+    1. $p = p \cdot refl$ and $p=refl \cdot p$.
+    2. $p^{-1} \cdot p = refl$ and $p \cdot p^{-1} = refl$. 
+    3. $(p^{-1})^{-1} = p$.
+    4. $p \cdot (q \cdot r) = (p \cdot q) \cdot r`.
 
 1. Composition with `refl`
 ```rzk
