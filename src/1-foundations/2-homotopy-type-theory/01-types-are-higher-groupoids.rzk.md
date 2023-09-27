@@ -30,7 +30,7 @@ Alternativerly, groupoids can be viewed as a generalization of groups, where not
 ## Path concatenation
 !!! lemma "Lemma 2.1.2."
     For every type $A$ and every $x, y, z : A$ there is a function $(x = y) \to (y = z) \to (x = z)$,
-    written $p \mapsto q \mapsto p \cdot q$`, such that $refl_x \cdot refl_x \equiv refl_x$` for any $x : A$. 
+    written $p \mapsto q \mapsto p \cdot q$, such that $refl_x \cdot refl_x \equiv refl_x$ for any $x : A$. 
     We call $p \cdot q$ the concatenation or composite of $p$ and $q$.
 
 ```rzk
@@ -54,7 +54,7 @@ Alternativerly, groupoids can be viewed as a generalization of groups, where not
     1. $p = p \cdot refl$ and $p=refl \cdot p$.
     2. $p^{-1} \cdot p = refl$ and $p \cdot p^{-1} = refl$. 
     3. $(p^{-1})^{-1} = p$.
-    4. $p \cdot (q \cdot r) = (p \cdot q) \cdot r`.
+    4. $p \cdot (q \cdot r) = (p \cdot q) \cdot r$.
 
 1. Composition with `refl`
 ```rzk
