@@ -21,7 +21,7 @@ This is a literate Rzk file:
     := (x : A) → f x = g x
 ```
 
-## Homotopies as equivalences
+## Homotopies are equivalence relations
 !!! lemma "Lemma 2.4.2."
     Homotopy is an equivalence relation on each dependent function type $\Pi_{(x:A) P(x)}$. That is, we have elements of the types
 
@@ -119,4 +119,156 @@ This is a literate Rzk file:
 --     (x : A)
 --     : H (f x) = ap A A f (f x) (id A x) (H x)
 --     :=
+```
+
+## Quasi-Inverses
+The traditional notion of isomorphism is poorly behaved for proof-relevant mathematics. Thus, it is given the name of quasi-inverse.
+!!! lemma "Definition 2.4.6."
+    For a function $f : A → B$, a quasi-inverse of $f$ is a triple $(g, \alpha, \beta)$ consisting of a function $g : B → A$ and homotopies $\alpha : f \circ g \sim id_B$ and $\beta : g \circ f \sim id_A$.
+
+```rzk
+#def qinv
+    (A B : U)
+    (f : A → B)
+    : U
+    := Σ (g : B → A),
+        prod
+            (homotopy B (\ _ → B) (compose B A B f g) (id B))
+            (homotopy A (\ _ → A) (compose A B A g f) (id A))
+```
+
+## Equivalences
+An improved notion, `isequiv`, has the following properties:
+
+1. For each $f : A \to B$ there is a function $qinv(f) \to isequiv(f)$
+2. Similarly, for each $f$ we have $isequiv(f) \to qinv(f)$; thus the two are logically equivalent.
+3. For any two inhabitants $e_1, e_2 : isequiv(f)$, we have $e_1 = e_2$.
+
+One of numerous, but equivalent ways to define `isequiv`:
+!!! lemma "Definition 2.4.10."
+    $$isequiv(f) :\equiv (\Sigma_{(g:B \to A)} (f \circ g \sim id_B)) \times (\Sigma_{(h:B \to A)} (h \circ f \sim id_A)).$$
+
+```rzk
+#def isequiv
+    (A B : U)
+    (f : A → B)
+    : U
+    := prod
+        (Σ (g : B → A), homotopy B (\ _ → B) (compose B A B f g) (id B))
+        (Σ (h : B → A), homotopy A (\ _ → A) (compose A B A h f) (id A))
+```
+
+1. For the $qinv(f) \to isequiv(f)$ direction, $g$ can play the role of both $g$ and $h$, i.e. we take $(g, \alpha, \beta)$ to $(g, \alpha, g, \beta)$.
+
+```rzk
+#def qinv-to-isequiv
+    (A B : U)
+    (f : A → B)
+    : (qinv A B f) → (isequiv A B f)
+    := \ (g, (α, β)) → ((g, α), (g, β))
+```
+
+2. For the other direction, we are given $(g, \alpha, h, \beta)$. Notice that $h \circ f \circ g \sim_{\alpha} h$ and $h \circ f \circ g \sim_{\beta} g$. Let $\gamma$ be the composite homotopy
+
+$$g \sim_{\beta^{-1}} h \circ f \circ g \sim_{\alpha} h,$$
+
+meaning $\gamma(x) :\equiv \beta(g(x))^{-1} \cdot h(\alpha(x))$. Now define $\beta'(x) :\equiv \gamma(f(x)) \cdot \beta(x)$. Then $(g, \alpha, \beta) : qinv(f)'$.
+
+```rzk
+#def isequiv-to-qinv
+    (A B : U)
+    (f : A → B)
+    : (isequiv A B f) → (qinv A B f)
+    := \ ((g, α), (h, β)) →
+        (g,
+            (α,
+                \ x → path-concat -- g (f x) = id x
+                    A
+                    (compose A B A g f x)
+                    (compose A B A h f x)
+                    (id A x)
+                    (path-concat -- g (f x) = h (f x)
+                        A
+                        (g (f x))
+                        (h (f (g (f x))))
+                        (h (f x))
+                        (path-sym -- g (f x) = (h . f . g) (f x)
+                            A
+                            (compose A B A h f (g (f x)))
+                            (id A (g (f x)))
+                            (β (g (f x)))
+                        )
+                        (ap -- (h . f . g) (f x) = h (f x)
+                            B
+                            A
+                            h
+                            (compose B A B f g (f x))
+                            (id B (f x))
+                            (α (f x))
+                        )
+                    )
+                    (β x) -- h (f x) = id x
+            )
+        )
+```
+
+3. Proof of the third property requires identifying the identity types of cartesian products and dependent pair types, which are discussed in Sections 2.6 and 2.7.
+
+## Equivalence of types
+!!! lemma "Definition 2.4.11."
+    An equivalence from type $A$ to type $B$ is defined to be a function $f : A \to B$ together with an inhabitant of $isequiv(f)$.
+
+    $$(A \simeq B) :\equiv \Sigma_{(f:A \to B)} isequiv(f).$$
+
+!!! lemma "Note"
+    If we have a function $f : A \to B$ and we know that $e : isequiv(f)$, we may write $f : A \simeq B$, rather than $(f, e)$.
+
+```rzk
+#def equivalence
+    (A B : U)
+    : U
+    := Σ (f : A → B), isequiv A B f
+```
+
+## Type equivalences are equivalence relations
+!!! lemma "Lemma 2.4.12."
+    Type equivalence is an equivalence relation on $U$. More specifically:
+
+    1. For any $A$, the identity function $id_A$ is an equivalence; hence $A \simeq A$.
+    2. For any $f : A \simeq B$, we have an equivalence $f^{-1} : B \simeq A$.
+    3. For any $f : A \simeq B$ and $g : B \simeq C$, we have $g \circ f : A \simeq C$.
+
+1. Reflexivity
+```rzk
+#def equivalence-refl
+    (A : U)
+    : equivalence A A
+    := (id A, ((id A, \ x → refl), (id A, \ x → refl)))
+```
+
+2. Symmetry
+```rzk
+#def equivalence-sym
+    (A B : U)
+    : equivalence A B → equivalence B A
+    := \ (f, isequiv-f) →
+        ( first (isequiv-to-qinv A B f isequiv-f)
+        , qinv-to-isequiv
+            B
+            A
+            (first (isequiv-to-qinv A B f isequiv-f))
+            ( f
+            , ( second (second (isequiv-to-qinv A B f isequiv-f))
+              , first (second (isequiv-to-qinv A B f isequiv-f))
+              )
+            )
+        )
+```
+
+3. Transitivity
+```rzk
+-- #def equivalence-trans
+--     (A B C : U)
+--     : equivalence A B → equivalence B C → equivalence A C
+--     := \ (f, isequiv-f) (g, isequiv-g) →
 ```
