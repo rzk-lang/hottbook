@@ -7,7 +7,7 @@ This is a literate Rzk file:
 ```
 
 ## Transport, path lifting, and dependent map
-!!! lemma "Lemma 2.3.1. Transport"
+!!! note "Lemma 2.3.1. Transport"
     Suppose that $P$ is a type family over $A$ and that $p : x =_A y$. Then there is a function $p_\ast : P(x) → P(y)$.
 
 ```rzk  
@@ -25,7 +25,7 @@ This is a literate Rzk file:
         x y p
 ```
 
-!!! lemma "Lemma 2.3.2. Path lifting property"
+!!! note "Lemma 2.3.2. Path lifting property"
     Let $P : A \to U$ be a type family over $A$ and assume we have $u : P(x)$ for some $x : A$. Then for any $p : x = y$, we have
     $\mathsf{lift}(u, p) : (x, u) = (y, p_\ast(u))$ in $\Sigma_{(x:A)} P(x)$, such that $\mathsf{pr}_1(\mathsf{lift}(u, p)) = p$    .
 
@@ -49,7 +49,7 @@ This is a literate Rzk file:
 ```
 
 
-!!! lemma "Lemma 2.3.4. Dependent map"
+!!! note "Lemma 2.3.4. Dependent map"
     Suppose $f : \Pi_{(x:A)} P(x)$; then we have a map $\mathsf{apd}_f : \Pi_{p:x=y} (p_\ast(f(x)) =_{P(y)} f(y))$.
 
 ```rzk  
@@ -71,7 +71,7 @@ This is a literate Rzk file:
 ```
 
 ## Dependent and non-dependent maps
-!!! lemma "Lemma 2.3.5. Transport in a constant type family"
+!!! note "Lemma 2.3.5. Transport in a constant type family"
     If $P : A \to U$ is defined by $P(x) :\equiv B$ for a fixed $B : U$, then for any $x,y : A$ and $p : x = y$ and $b : B$ we have a path
     $\mathsf{transportconst}^B_p (b) : \mathsf{transport}^P(p, b) = b$.
 ```rzk  
@@ -91,8 +91,12 @@ This is a literate Rzk file:
 ```
 
 
-!!! lemma "Functions 2.3.6 and 2.3.7"
-    Inverse equivalences that relate $\mathsf{ap}_f(p)$ and $\mathsf{apd}_f(p)$
+!!! note "Functions 2.3.6 and 2.3.7"
+    Inverse equivalences that relate $\mathsf{ap}_f(p)$ and $\mathsf{apd}_f(p)$:
+
+    - $(f(x) = f(y)) \to (p_\ast(f(x)) = f(y))$, and
+
+    - $(p_\ast(f(x)) = f(y)) \to (f(x) = f(y))$
 
 ```
 given
@@ -136,7 +140,7 @@ find                            : f x = f y
 
 
 
-!!! lemma "Lemma 2.3.8. $\mathsf{ap}$ and $\mathsf{apd}$ in a constant type family"
+!!! note "Lemma 2.3.8. $\mathsf{ap}$ and $\mathsf{apd}$ in a constant type family"
     For $f : A \to B$ and $p : x =_A y$, we have
     $\mathsf{apd}_f(p) = \mathsf{transportconst}_p^B(f(x)) \cdot \mathsf{ap}_f(p)$
 
@@ -161,7 +165,7 @@ find                            : f x = f y
 ```
 
 ## Properties of transport
-!!! lemma "Lemma 2.3.9. Transport along a concatenation of paths"
+!!! note "Lemma 2.3.9. Transport along a concatenation of paths"
     Given $P : A \to U$ with $p : x =_A y$ and $q : y =_A z$ while $u:P(x)$, we have $q_\ast(p_\ast(u)) = (p \cdot q)_\ast(u)$.
 
 ```rzk  
@@ -183,7 +187,7 @@ find                            : f x = f y
 ```
 
 
-!!! lemma "Lemma 2.3.10. Transport along a path obtained by $\mathsf{ap}_f$" 
+!!! note "Lemma 2.3.10. Transport along a path obtained by $\mathsf{ap}_f$" 
     For a function $f : A \to B$ and a type family $P : B \to U$, and any $p : x =_A y$ and $u : P(f(x))$, we have
     $\mathsf{transport} ^{P \circ f}(p,u) = \mathsf{transport}^P(\mathsf{ap}_f(p),u)$.
 
@@ -206,7 +210,7 @@ find                            : f x = f y
         x y p) u
 ```
 
-!!! lemma "Lemma 2.3.11. Function from fiber to fiber and transport in different type families can be rearranged"
+!!! note "Lemma 2.3.11. Function from fiber to fiber and transport in different type families can be rearranged"
     For $P, Q : A \to U$ and a family of functions $f : \Pi_{(x:A)} P(x) \to Q(x)$, 
     and any $p : x =_A y$ and $u : P(x)$, we have $\mathsf{transport}^Q(p, f_x(u)) = f_y(\mathsf{transport}^P(p, u))$.
 

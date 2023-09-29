@@ -11,8 +11,8 @@ Alternativerly, groupoids can be viewed as a generalization of groups, where not
 (but the group laws for the operation hold).
 
 ## Path symmetry
-!!! lemma "Lemma 2.1.1."
-    For every type $A$ and every $x, y : A$ there is a function $(x = y) \to (y = x)$`
+!!! note "Lemma 2.1.1. Symmetry / Inversion of paths / Inverse morphism"
+    For every type $A$ and every $x, y : A$ there is a function $(x = y) \to (y = x)$
     denoted $p \mapsto p^{-1}$, such that $refl_x^{-1} \equiv refl_x$ for each $x : A$. We call $p^{-1}$ the inverse of $p$.
 
 ```rzk
@@ -28,7 +28,7 @@ Alternativerly, groupoids can be viewed as a generalization of groups, where not
 ```
 
 ## Path concatenation
-!!! lemma "Lemma 2.1.2."
+!!! note "Lemma 2.1.2. Transitivity / Path concatenation / Composition of morphisms"
     For every type $A$ and every $x, y, z : A$ there is a function $(x = y) \to (y = z) \to (x = z)$,
     written $p \mapsto q \mapsto p \cdot q$, such that $refl_x \cdot refl_x \equiv refl_x$ for any $x : A$. 
     We call $p \cdot q$ the concatenation or composite of $p$ and $q$.
@@ -46,8 +46,8 @@ Alternativerly, groupoids can be viewed as a generalization of groups, where not
 ```
 
 
-## Coherence laws
-!!! lemma "Lemma 2.1.4."
+## Properties
+!!! note "Lemma 2.1.4. Coherence laws"
     Suppose $A : U$, that $x, y, z, w : A$ and that $p : x = y$ and $q : y = z$ and $r : z = w$. We
     have the following:
 

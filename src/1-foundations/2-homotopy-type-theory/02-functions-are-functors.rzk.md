@@ -8,7 +8,7 @@ This is a literate Rzk file:
 
 ## Action on paths
 
-!!! lemma "Lemma 2.2.1"
+!!! note "Lemma 2.2.1 Action on path"
     Suppose that $f : A → B$ is a function. 
     Then for any $x, y : A$ there is an operation  $\mathsf{ap}_f : (x =_A y) \to (f(x) =_B f(y))$.
     Moreover, for each $x : A$ we have $\mathsf{ap}_f (\mathsf{refl}_x) ≡ \mathsf{refl}_{h(x)}$.
@@ -30,9 +30,9 @@ This is a literate Rzk file:
 
 
 
-## Functor laws
+## Properties
 
-!!! lemma "Lemma 2.2.2"
+!!! note "Lemma 2.2.2. Functor laws"
     For functions $f : A → B$ and $g : B → C$ and paths $p : x =_A y$ and $q : y =_A z$, we have:
     
     1. $\mathsf{ap}_f(p \cdot q) = \mathsf{ap}_f(p)\cdot \mathsf{ap}_f(q)$
@@ -62,7 +62,7 @@ This is a literate Rzk file:
             x y p) z q
 ```
  
-2. Action of path and path inversion can be reordered.
+2. Action of path and path inversion commute.
 ```rzk
 #def ap-inverse
     (A B : U)
@@ -81,7 +81,7 @@ This is a literate Rzk file:
         x y p
 ```
  
-3. Sequential application of functions and application of functions composed.
+3. Sequential application of functions to paths is application of functions composed.
 ```rzk      
 #def ap-twice
     (A B C : U)
