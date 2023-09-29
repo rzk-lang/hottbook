@@ -7,10 +7,12 @@ This is a literate Rzk file:
 ```
 
 ## Transport, path lifting, and dependent map
+
 !!! note "Lemma 2.3.1. Transport"
+
     Suppose that $P$ is a type family over $A$ and that $p : x =_A y$. Then there is a function $p_\ast : P(x) → P(y)$.
 
-```rzk  
+```rzk
 #def transport
     (A : U)
     (P : A → U)
@@ -26,10 +28,11 @@ This is a literate Rzk file:
 ```
 
 !!! note "Lemma 2.3.2. Path lifting property"
-    Let $P : A \to U$ be a type family over $A$ and assume we have $u : P(x)$ for some $x : A$. Then for any $p : x = y$, we have
-    $\mathsf{lift}(u, p) : (x, u) = (y, p_\ast(u))$ in $\Sigma_{(x:A)} P(x)$, such that $\mathsf{pr}_1(\mathsf{lift}(u, p)) = p$    .
 
-```rzk  
+    Let $P : A \to U$ be a type family over $A$ and assume we have $u : P(x)$ for some $x : A$. Then for any $p : x = y$, we have
+    $\mathsf{lift}(u, p) : (x, u) = (y, p_\ast(u))$ in $\Sigma_{(x:A)} P(x)$, such that $\mathsf{pr}_1(\mathsf{lift}(u, p)) = p$ .
+
+```rzk
 #def lift
     (A : U)
     (P : A → U)
@@ -48,11 +51,11 @@ This is a literate Rzk file:
         x y p u
 ```
 
-
 !!! note "Lemma 2.3.4. Dependent map"
+
     Suppose $f : \Pi_{(x:A)} P(x)$; then we have a map $\mathsf{apd}_f : \Pi_{p:x=y} (p_\ast(f(x)) =_{P(y)} f(y))$.
 
-```rzk  
+```rzk
 #def apd
     (A : U)
     (P : A → U)
@@ -67,14 +70,17 @@ This is a literate Rzk file:
         -- path-ind A C (\ x' → \ px → px) x x refl) (f x) = (f x)
         -- (\ px → px) (f x) = (f x)
         (\ x' → refl)
-        x y p 
+        x y p
 ```
 
 ## Dependent and non-dependent maps
+
 !!! note "Lemma 2.3.5. Transport in a constant type family"
+
     If $P : A \to U$ is defined by $P(x) :\equiv B$ for a fixed $B : U$, then for any $x,y : A$ and $p : x = y$ and $b : B$ we have a path
     $\mathsf{transportconst}^B_p (b) : \mathsf{transport}^P(p, b) = b$.
-```rzk  
+
+```rzk
 #def transportconst
     (A B : U)
     (b : B)
@@ -87,15 +93,14 @@ This is a literate Rzk file:
         -- ? : transport A (\ _ → B) x' x' refl b = b
         -- (\ px → px) b = b
         (\ x' → refl)
-        x y p 
+        x y p
 ```
 
-
 !!! note "Functions 2.3.6 and 2.3.7"
+
     Inverse equivalences that relate $\mathsf{ap}_f(p)$ and $\mathsf{apd}_f(p)$:
 
     - $(f(x) = f(y)) \to (p_\ast(f(x)) = f(y))$, and
-
     - $(p_\ast(f(x)) = f(y)) \to (f(x) = f(y))$
 
 ```
@@ -106,15 +111,15 @@ and a hypothesis                : f x = f y
 find                            : transport A (\ _ → B) x y p (f x) = f y
 ```
 
-```rzk  
+```rzk
 #def ap2apd
     (A B : U)
     (x y : A)
     (p : x = y)
     (f : A → B)
-    : (f x = f y) → (transport A (\ _ → B) x y p (f x) = f y) 
-    := \ fp → path-concat B (transport A (\ _ → B) x y p (f x)) (f x) (f y) 
-        (transportconst A B (f x) x y p) 
+    : (f x = f y) → (transport A (\ _ → B) x y p (f x) = f y)
+    := \ fp → path-concat B (transport A (\ _ → B) x y p (f x)) (f x) (f y)
+        (transportconst A B (f x) x y p)
         fp
 ```
 
@@ -126,38 +131,36 @@ and a hypothesis                : transport A (\ _ → B) x y p (f x) = f y
 find                            : f x = f y
 ```
 
-```rzk  
+```rzk
 #def apd2ap
     (A B : U)
     (x y : A)
     (p : x = y)
     (f : A → B)
-    : (transport A (\ _ → B) x y p (f x) = f y) → (f x = f y) 
-    := \ fpd → path-concat B (f x) (transport A (\ _ → B) x y p (f x)) (f y) 
+    : (transport A (\ _ → B) x y p (f x) = f y) → (f x = f y)
+    := \ fpd → path-concat B (f x) (transport A (\ _ → B) x y p (f x)) (f y)
         (path-sym B (transport A (\ _ → B) x y p (f x)) (f x) (transportconst A B (f x) x y p))
         fpd
 ```
 
-
-
 !!! note "Lemma 2.3.8. $\mathsf{ap}$ and $\mathsf{apd}$ in a constant type family"
+
     For $f : A \to B$ and $p : x =_A y$, we have
     $\mathsf{apd}_f(p) = \mathsf{transportconst}_p^B(f(x)) \cdot \mathsf{ap}_f(p)$
 
-
-```rzk  
+```rzk
 #def apd-ap
     (A B : U)
     (x y : A)
     (p : x = y)
     (f : A → B)
-    : apd A (\ _ → B) f x y p = path-concat B (transport A (\ _ → B) x y p (f x)) (f x) (f y) 
+    : apd A (\ _ → B) f x y p = path-concat B (transport A (\ _ → B) x y p (f x)) (f x) (f y)
         (transportconst A B (f x) x y p) (ap A B f x y p)
-    := path-ind 
+    := path-ind
         A
-        (\ x' y' p' → apd A (\ _ → B) f x' y' p' = path-concat B (transport A (\ _ → B) x' y' p' (f x')) (f x') (f y') 
+        (\ x' y' p' → apd A (\ _ → B) f x' y' p' = path-concat B (transport A (\ _ → B) x' y' p' (f x')) (f x') (f y')
             (transportconst A B (f x') x' y' p') (ap A B f x' y' p'))
-        -- ? : apd A (\ _ → B) f x' x' refl = path-concat B (transport A (\ _ → B) x' x' refl (f x')) (f x') (f x') 
+        -- ? : apd A (\ _ → B) f x' x' refl = path-concat B (transport A (\ _ → B) x' x' refl (f x')) (f x') (f x')
         --    (transportconst A B (f x') x' x' refl) (ap A B f x' x' refl) ===
         -- refl = path-concat B (f x') (f x') (f x') refl refl
         (\ _ → refl)
@@ -165,10 +168,12 @@ find                            : f x = f y
 ```
 
 ## Properties of transport
+
 !!! note "Lemma 2.3.9. Transport along a concatenation of paths"
+
     Given $P : A \to U$ with $p : x =_A y$ and $q : y =_A z$ while $u:P(x)$, we have $q_\ast(p_\ast(u)) = (p \cdot q)_\ast(u)$.
 
-```rzk  
+```rzk
 #def transport-concat
     (A : U)
     (P : A → U)
@@ -177,7 +182,7 @@ find                            : f x = f y
     (q : y = z)
     (u : P x)
     : transport A P y z q (transport A P x y p u) = transport A P x z (path-concat A x y z p q) u
-    := (path-ind 
+    := (path-ind
         A
         (\ x' y' p' → (z' : A) → (q' : y' = z') → (u' : P x') → transport A P y' z' q' (transport A P x' y' p' u') = transport A P x' z' (path-concat A x' y' z' p' q') u')
         -- ? : (z' : A) → (q' : y' = z') → (u' : P x') → transport A P x' z' q' (transport A P x' x' refl u) = transport A P x' z' (path-concat A x' x' z' refl q') u
@@ -186,12 +191,12 @@ find                            : f x = f y
         x y p) z q u
 ```
 
+!!! note "Lemma 2.3.10. Transport along a path obtained by $\mathsf{ap}_f$"
 
-!!! note "Lemma 2.3.10. Transport along a path obtained by $\mathsf{ap}_f$" 
     For a function $f : A \to B$ and a type family $P : B \to U$, and any $p : x =_A y$ and $u : P(f(x))$, we have
     $\mathsf{transport} ^{P \circ f}(p,u) = \mathsf{transport}^P(\mathsf{ap}_f(p),u)$.
 
-```rzk  
+```rzk
 #def transport-ap
     (A B : U)
     (P : B → U)
@@ -200,7 +205,7 @@ find                            : f x = f y
     (p : x = y)
     (u : P (f x))
     : transport A (\ z → P (f z)) x y p u = transport B P (f x) (f y) (ap A B f x y p) u
-    := (path-ind 
+    := (path-ind
         A
         (\ x' y' p' → (u' : P (f x')) → transport A (\ z → P (f z)) x' y' p' u' = transport B P (f x') (f y') (ap A B f x' y' p') u')
         -- ? :  (u : P x') → transport A (\ z → P (f z)) x' x' refl = transport B P (f x') (f x') (ap A B f x' x' refl)
@@ -211,10 +216,11 @@ find                            : f x = f y
 ```
 
 !!! note "Lemma 2.3.11. Function from fiber to fiber and transport in different type families can be rearranged"
-    For $P, Q : A \to U$ and a family of functions $f : \Pi_{(x:A)} P(x) \to Q(x)$, 
+
+    For $P, Q : A \to U$ and a family of functions $f : \Pi_{(x:A)} P(x) \to Q(x)$,
     and any $p : x =_A y$ and $u : P(x)$, we have $\mathsf{transport}^Q(p, f_x(u)) = f_y(\mathsf{transport}^P(p, u))$.
 
-```rzk  
+```rzk
 #def transport-f
     (A : U)
     (P Q : A → U)
@@ -223,7 +229,7 @@ find                            : f x = f y
     (p : x = y)
     (u : P x)
     : transport A Q x y p (f x u) = f y (transport A P x y p u)
-    := (path-ind 
+    := (path-ind
         A
         (\ x' y' p' → (u' : P x') → transport A Q x' y' p' (f x' u') = f y' (transport A P x' y' p' u'))
         -- ? :  (u : P x') → transport A Q x' x' refl (f x' u') = f x' (transport A P x' x' refl u'))
