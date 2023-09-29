@@ -612,6 +612,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    2.2 Functions are functors
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -621,6 +632,73 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#action-on-paths" class="md-nav__link">
+    Action on paths
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+    <nav class="md-nav" aria-label="Properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ap-disctributes-over-path-concatenation" class="md-nav__link">
+    ap disctributes over path concatenation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action-of-path-and-path-inversion-commute" class="md-nav__link">
+    Action of path and path inversion commute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sequential-application-of-functions-to-paths-is-application-of-functions-composed" class="md-nav__link">
+    Sequential application of functions to paths is application of functions composed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-leaves-the-path-unchanged" class="md-nav__link">
+    Identity leaves the path unchanged
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -942,6 +1020,62 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#action-on-paths" class="md-nav__link">
+    Action on paths
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+    <nav class="md-nav" aria-label="Properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ap-disctributes-over-path-concatenation" class="md-nav__link">
+    ap disctributes over path concatenation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action-of-path-and-path-inversion-commute" class="md-nav__link">
+    Action of path and path inversion commute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sequential-application-of-functions-to-paths-is-application-of-functions-composed" class="md-nav__link">
+    Sequential application of functions to paths is application of functions composed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-leaves-the-path-unchanged" class="md-nav__link">
+    Identity leaves the path unchanged
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -966,6 +1100,103 @@
 <h1 id="22-functions-are-functors">2.2 Functions are functors<a class="headerlink" href="#22-functions-are-functors" title="Permanent link">&para;</a></h1>
 <p>This is a literate Rzk file:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">#lang</span><span class="p"> </span><span class="s">rzk-1</span>
+</span></code></pre></div>
+<h2 id="action-on-paths">Action on paths<a class="headerlink" href="#action-on-paths" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Lemma 2.2.1 Action on path</p>
+<p>Suppose that <span class="arithmatex">\(f : A → B\)</span> is a function.
+Then for any <span class="arithmatex">\(x, y : A\)</span> there is an operation  <span class="arithmatex">\(\mathsf{ap}_f : (x =_A y) \to (f(x) =_B f(y))\)</span>.
+Moreover, for each <span class="arithmatex">\(x : A\)</span> we have <span class="arithmatex">\(\mathsf{ap}_f (\mathsf{refl}_x) ≡ \mathsf{refl}_{h(x)}\)</span>.</p>
+</div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ap" id="define:ap" style="visibility: visible; position: relative; color: inherit">ap</a></span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">    </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">    </span><span class="p">(</span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="err">    </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="err">    </span><span class="p">(</span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="err">    : f x = f y</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="err">    := path-ind</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="err">        A</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="err">        (</span><span class="p">\ </span>x&#39; y&#39; p&#39; <span class="err">→ f x&#39; = f y&#39;)</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="err">        (</span><span class="p">\</span>x&#39; <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="err">        x y p</span>
+</span></code></pre></div>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Lemma 2.2.2. Functor laws</p>
+<p>For functions <span class="arithmatex">\(f : A → B\)</span> and <span class="arithmatex">\(g : B → C\)</span> and paths <span class="arithmatex">\(p : x =_A y\)</span> and <span class="arithmatex">\(q : y =_A z\)</span>, we have:</p>
+<ol>
+<li><span class="arithmatex">\(\mathsf{ap}_f(p \cdot q) = \mathsf{ap}_f(p)\cdot \mathsf{ap}_f(q)\)</span></li>
+<li><span class="arithmatex">\(\mathsf{ap}_f (p^{−1}) = \mathsf{ap}_f (p)^{−1}\)</span></li>
+<li><span class="arithmatex">\(\mathsf{ap}_g(\mathsf{ap}_f(p)) = \mathsf{ap}_{g \circ f} (p)\)</span></li>
+<li><span class="arithmatex">\(\mathsf{ap}_{id_A}(p)=p\)</span></li>
+</ol>
+</div>
+<h3 id="ap-disctributes-over-path-concatenation"><code>ap</code> disctributes over path concatenation<a class="headerlink" href="#ap-disctributes-over-path-concatenation" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ap-concat" id="define:ap-concat" style="visibility: visible; position: relative; color: inherit">ap-concat</a></span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">    </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">    </span><span class="p">(</span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">    </span><span class="p">(</span>x y z <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="err">    </span><span class="p">(</span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="err">    </span><span class="p">(</span>q <span class="p">:</span><span class="err"> y = z)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="err">    : ap A B f x z (path-concat A x y z p q) =</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="err">        path-concat B (f x) (f y) (f z) (ap A B f x y p) (ap A B f y z q)</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="err">    := </span><span class="p">(</span>path-ind
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            A
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>            (\ x&#39; y&#39; p&#39; → (z&#39; <span class="p">:</span><span class="err"> A) → </span><span class="p">(</span>q&#39; <span class="p">:</span><span class="err"> y&#39; = z&#39;) → ap A B f x&#39; z&#39; (path-concat A x&#39; y&#39; z&#39; p&#39; q&#39;) =</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="err">                    path-concat B (f x&#39;) (f y&#39;) (f z&#39;) (ap A B f x&#39; y&#39; p&#39;) (ap A B f y&#39; z&#39; q&#39;))</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="err">            </span><span class="c">-- ? : (z&#39; : A) → (q&#39; : x&#39; = z&#39;) → ap A B f x&#39; z&#39; (path-concat A x&#39; x&#39; z&#39; refl q&#39;) =</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="err">            </span><span class="c">--      path-concat B (f x&#39;) (f x&#39;) (f z&#39;) (ap A B f x&#39; x&#39; refl) (ap A B f x&#39; z&#39; q&#39;)) ===</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="err">            </span><span class="c">-- (z&#39; : A) → (q&#39; : x&#39; = z&#39;) → ap A B f x&#39; z&#39; q&#39; = (ap A B f x&#39; z&#39; q&#39;))</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="err">            (</span><span class="p">\</span>x&#39; z&#39; q&#39; <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="err">            x y p) z q</span>
+</span></code></pre></div>
+<h3 id="action-of-path-and-path-inversion-commute">Action of path and path inversion commute<a class="headerlink" href="#action-of-path-and-path-inversion-commute" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ap-inverse" id="define:ap-inverse" style="visibility: visible; position: relative; color: inherit">ap-inverse</a></span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">    </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">    </span><span class="p">(</span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">    </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="err">    </span><span class="p">(</span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="err">    : ap A B f y x (path-sym A x y p) =</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="err">        path-sym B (f x) (f y) (ap A B f x y p)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="err">    := path-ind</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="err">        A</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="err">        (</span><span class="p">\ </span>x&#39; y&#39; p&#39; <span class="err">→ ap A B f y&#39; x&#39; (path-sym A x&#39; y&#39; p&#39;) = path-sym B (f x&#39;) (f y&#39;) (ap A B f x&#39; y&#39; p&#39;))</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="err">        </span><span class="c">-- ? : ap A B f x&#39; x&#39; (path-sym A x&#39; x&#39; refl) = path-sym B (f x&#39;) (f y&#39;) (ap A B f x&#39; x&#39; refl) ===</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="err">        </span><span class="c">-- ap A B f x&#39; x&#39; refl = path-sym B (f x&#39;) (f y&#39;) refl ==</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="err">        </span><span class="c">-- refl = refl</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="err">        (</span><span class="p">\ </span>x&#39; <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="err">        x y p</span>
+</span></code></pre></div>
+<h3 id="sequential-application-of-functions-to-paths-is-application-of-functions-composed">Sequential application of functions to paths is application of functions composed<a class="headerlink" href="#sequential-application-of-functions-to-paths-is-application-of-functions-composed" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ap-twice" id="define:ap-twice" style="visibility: visible; position: relative; color: inherit">ap-twice</a></span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">    </span><span class="p">(</span>A B C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">    </span><span class="p">(</span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="err">    </span><span class="p">(</span>g <span class="p">:</span><span class="err"> B → C)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="err">    </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="err">    </span><span class="p">(</span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="err">    : ap B C g (f x) (f y) (ap A B f x y p) =</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="err">        ap A C (</span><span class="p">\ </span>a <span class="err">→ g (f a)) x y p</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="err">    := path-ind</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="err">        A</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="err">        (</span><span class="p">\ </span>x&#39; y&#39; p&#39; <span class="err">→ ap B C g (f x&#39;) (f y&#39;) (ap A B f x&#39; y&#39; p&#39;) = ap A C (</span><span class="p">\ </span>a <span class="err">→ g(f a)) x&#39; y&#39; p&#39;)</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="err">        </span><span class="c">-- ?: ap B C g (f x&#39;) (f x&#39;) (ap A B f x&#39; x&#39; refl) = ap A C (\ a → g(f a)) x&#39; x&#39; refl ===</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="err">        </span><span class="c">-- ap B C g (f x&#39;) (f x&#39;) refl = refl</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="err">        </span><span class="c">-- refl = refl</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="err">        (</span><span class="p">\ </span>x&#39; <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="err">        x y p</span>
+</span></code></pre></div>
+<h3 id="identity-leaves-the-path-unchanged">Identity leaves the path unchanged<a class="headerlink" href="#identity-leaves-the-path-unchanged" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ap-id" id="define:ap-id" style="visibility: visible; position: relative; color: inherit">ap-id</a></span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="err">    </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="err">    </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="err">    </span><span class="p">(</span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="err">    : ap A A (</span><span class="p">\ </span>a <span class="err">→ a) x y p = p</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="err">    := path-ind</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="err">        A</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="err">        (</span><span class="p">\ </span>x&#39; y&#39; p&#39; <span class="err">→ ap A A (</span><span class="p">\ </span>a <span class="err">→ a) x&#39; y&#39; p&#39; = p&#39;)</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="err">        </span><span class="c">-- ? : ap A A (\ a → a) x&#39; x&#39; refl = refl</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="err">        (</span><span class="p">\ </span>x&#39; <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="err">        x y p</span>
 </span></code></pre></div>
 
 

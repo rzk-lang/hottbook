@@ -592,6 +592,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    2.1 Types are higher groupoids
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -601,6 +612,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#path-symmetry" class="md-nav__link">
+    Path symmetry
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-concatenation" class="md-nav__link">
+    Path concatenation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+    <nav class="md-nav" aria-label="Properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#composition-with-refl" class="md-nav__link">
+    Composition with refl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composition-with-inverse" class="md-nav__link">
+    Composition with inverse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inverse-of-inverse" class="md-nav__link">
+    Inverse of inverse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#associativity-of-concatenation" class="md-nav__link">
+    Associativity of concatenation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -942,6 +1027,69 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#path-symmetry" class="md-nav__link">
+    Path symmetry
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-concatenation" class="md-nav__link">
+    Path concatenation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+    <nav class="md-nav" aria-label="Properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#composition-with-refl" class="md-nav__link">
+    Composition with refl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composition-with-inverse" class="md-nav__link">
+    Composition with inverse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inverse-of-inverse" class="md-nav__link">
+    Inverse of inverse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#associativity-of-concatenation" class="md-nav__link">
+    Associativity of concatenation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -966,6 +1114,134 @@
 <h1 id="21-types-are-higher-groupoids">2.1 Types are higher groupoids<a class="headerlink" href="#21-types-are-higher-groupoids" title="Permanent link">&para;</a></h1>
 <p>This is a literate Rzk file:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">#lang</span><span class="p"> </span><span class="s">rzk-1</span>
+</span></code></pre></div>
+<p>Groupoids are categories in which all morphisms are isomorphisms.
+Alternativerly, groupoids can be viewed as a generalization of groups, where not all pairs of elements can be composed
+(but the group laws for the operation hold).</p>
+<h2 id="path-symmetry">Path symmetry<a class="headerlink" href="#path-symmetry" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Lemma 2.1.1. Symmetry / Inversion of paths / Inverse morphism</p>
+<p>For every type <span class="arithmatex">\(A\)</span> and every <span class="arithmatex">\(x, y : A\)</span> there is a function <span class="arithmatex">\((x = y) \to (y = x)\)</span>
+denoted <span class="arithmatex">\(p \mapsto p^{-1}\)</span>, such that <span class="arithmatex">\(\mathsf{refl}_x^{-1} \equiv \mathsf{refl}_x\)</span> for each <span class="arithmatex">\(x : A\)</span>. We call <span class="arithmatex">\(p^{-1}\)</span> the inverse of <span class="arithmatex">\(p\)</span>.</p>
+</div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:path-sym" id="define:path-sym" style="visibility: visible; position: relative; color: inherit">path-sym</a></span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">  </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="err">  : (x = y) → (y = x)</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="err">  := path-ind</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="err">    A</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="err">    (</span><span class="p">\ </span>x&#39; y&#39; _ <span class="err">→ y&#39; = x&#39;)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="err">    (</span><span class="p">\ </span>z <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="err">    x y</span>
+</span></code></pre></div>
+<h2 id="path-concatenation">Path concatenation<a class="headerlink" href="#path-concatenation" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Lemma 2.1.2. Transitivity / Path concatenation / Composition of morphisms</p>
+<p>For every type <span class="arithmatex">\(A\)</span> and every <span class="arithmatex">\(x, y, z : A\)</span> there is a function <span class="arithmatex">\((x = y) \to (y = z) \to (x = z)\)</span>,
+written <span class="arithmatex">\(p \mapsto q \mapsto p \cdot q\)</span>, such that <span class="arithmatex">\(\mathsf{refl}_x \cdot \mathsf{refl}_x \equiv \mathsf{refl}_x\)</span> for any <span class="arithmatex">\(x : A\)</span>.
+We call <span class="arithmatex">\(p \cdot q\)</span> the concatenation or composite of <span class="arithmatex">\(p\)</span> and <span class="arithmatex">\(q\)</span>.</p>
+</div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:path-concat" id="define:path-concat" style="visibility: visible; position: relative; color: inherit">path-concat</a></span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">  </span><span class="p">(</span>x y z <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">  : (x = y) → (y = z) → (x = z)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="err">  := </span><span class="p">\ </span>p <span class="err">→ path-ind</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="err">      A</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="err">      (</span><span class="p">\ </span>x&#39; y&#39; p&#39; <span class="err">→ ((y&#39; = z) → (x&#39; = z)))</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="err">      (</span><span class="p">\ </span>x&#39; <span class="err">→ </span><span class="p">\ </span>r <span class="err">→ r)</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="err">      x y p</span>
+</span></code></pre></div>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Lemma 2.1.4. Coherence laws</p>
+<p>Suppose <span class="arithmatex">\(A : U\)</span>, that <span class="arithmatex">\(x, y, z, w : A\)</span> and that <span class="arithmatex">\(p : x = y\)</span> and <span class="arithmatex">\(q : y = z\)</span> and <span class="arithmatex">\(r : z = w\)</span>. We
+have the following:</p>
+<ol>
+<li><span class="arithmatex">\(p = p \cdot \mathsf{refl}\)</span> and <span class="arithmatex">\(p=\mathsf{refl} \cdot p\)</span>.</li>
+<li><span class="arithmatex">\(p^{-1} \cdot p = \mathsf{refl}\)</span> and <span class="arithmatex">\(p \cdot p^{-1} = \mathsf{refl}\)</span>.</li>
+<li><span class="arithmatex">\((p^{-1})^{-1} = p\)</span>.</li>
+<li><span class="arithmatex">\(p \cdot (q \cdot r) = (p \cdot q) \cdot r\)</span>.</li>
+</ol>
+</div>
+<h3 id="composition-with-refl">Composition with <code>refl</code><a class="headerlink" href="#composition-with-refl" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:concat-refl" id="define:concat-refl" style="visibility: visible; position: relative; color: inherit">concat-refl</a></span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">  </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">  </span><span class="p">(</span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="err">  : p = path-concat A x y y p </span><span class="s">refl</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="err">  := path-ind</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="err">    A</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="err">    (</span><span class="p">\ </span>x&#39; y&#39; p&#39; <span class="err">→ p&#39; = path-concat A x&#39; y&#39; y&#39; p&#39; </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="err">    </span><span class="c">-- ? : refl = path-concat A x x x refl refl ==</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="err">    (</span><span class="p">\ </span>_ <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="err">    x y p</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:refl-concat" id="define:refl-concat" style="visibility: visible; position: relative; color: inherit">refl-concat</a></span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="err">  </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="err">  </span><span class="p">(</span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="err">  : p = path-concat A x x y </span><span class="s">refl</span><span class="err"> p</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="err">  := path-ind</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="err">    A</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="err">    (</span><span class="p">\ </span>x&#39; y&#39; p&#39; <span class="err">→ p&#39; = path-concat A x&#39; x&#39; y&#39; </span><span class="s">refl</span><span class="err"> p&#39;)</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="err">    </span><span class="c">-- ? : p = path-concat A x x x refl refl</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="err">    (</span><span class="p">\ </span>_ <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="err">    x y p</span>
+</span></code></pre></div>
+<h3 id="composition-with-inverse">Composition with inverse<a class="headerlink" href="#composition-with-inverse" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:inverse-l" id="define:inverse-l" style="visibility: visible; position: relative; color: inherit">inverse-l</a></span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">  </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="err">  </span><span class="p">(</span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="err">  : path-concat A y x y (path-sym A x y p) p  = </span><span class="s">refl</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="err">  := path-ind</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="err">    A</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="err">    (</span><span class="p">\ </span>x&#39; y&#39; p&#39; <span class="err">→ path-concat A y&#39; x&#39; y&#39; (path-sym A x&#39; y&#39; p&#39;) p&#39;  = </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="err">    (</span><span class="p">\ </span>_ <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="err">    x y p</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:inverse-r" id="define:inverse-r" style="visibility: visible; position: relative; color: inherit">inverse-r</a></span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="err">  </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="err">  </span><span class="p">(</span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="err">  : path-concat A x y x p (path-sym A x y p) = </span><span class="s">refl</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="err">  := path-ind A</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="err">     (</span><span class="p">\ </span>x&#39; y&#39; p&#39; <span class="err">→ path-concat A x&#39; y&#39; x&#39; p&#39; (path-sym A x&#39; y&#39; p&#39;) = </span><span class="s">refl</span><span class="err"> )</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="err">     (</span><span class="p">\ </span>_ <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="err">      x y p</span>
+</span></code></pre></div>
+<h3 id="inverse-of-inverse">Inverse of inverse<a class="headerlink" href="#inverse-of-inverse" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:inverse-twice" id="define:inverse-twice" style="visibility: visible; position: relative; color: inherit">inverse-twice</a></span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="err">  </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="err">  </span><span class="p">(</span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="err">  : path-sym A y x (path-sym A x y p) = p</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="err">  := path-ind A</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="err">     (</span><span class="p">\ </span>x&#39; y&#39; p&#39; <span class="err">→ path-sym A y&#39; x&#39; (path-sym A x&#39; y&#39; p&#39;) = p&#39;)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="err">     (</span><span class="p">\ </span>_ <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="err">      x y p</span>
+</span></code></pre></div>
+<h3 id="associativity-of-concatenation">Associativity of concatenation<a class="headerlink" href="#associativity-of-concatenation" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:concat-assoc" id="define:concat-assoc" style="visibility: visible; position: relative; color: inherit">concat-assoc</a></span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="err">  </span><span class="p">(</span>x y z w <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="err">  </span><span class="p">(</span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="err">  </span><span class="p">(</span>q <span class="p">:</span><span class="err"> y = z)</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="err">  </span><span class="p">(</span>r <span class="p">:</span><span class="err"> z = w)</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="err">  : path-concat A x y w p (path-concat A y z w q r) =</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="err">      path-concat A x z w (path-concat A x y z p q) r</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="err">  := </span><span class="p">(</span>path-ind
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        A
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        (\ x&#39; y&#39; p&#39; → (z&#39; <span class="p">:</span><span class="err"> A) → </span><span class="p">(</span>q&#39; <span class="p">:</span><span class="err"> y&#39; = z&#39;) → </span><span class="p">(</span>w&#39; <span class="p">:</span><span class="err"> A) → </span><span class="p">(</span>r&#39; <span class="p">:</span><span class="err"> z&#39; = w&#39;) →</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="err">          path-concat A x&#39; y&#39; w&#39; p&#39; (path-concat A y&#39; z&#39; w&#39; q&#39; r&#39;) =</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="err">            path-concat A x&#39; z&#39; w&#39; (path-concat A x&#39; y&#39; z&#39; p&#39; q&#39;) r&#39; )</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="err">        </span><span class="c">-- ? : (z&#39; : A) → (q&#39; : y&#39; = z&#39;) → (w&#39; : A) → (r&#39; : z&#39; = w&#39;) →</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="err">          </span><span class="c">-- path-concat A x&#39; x&#39; w&#39; refl (path-concat A x&#39; z&#39; w&#39; q&#39; r&#39;) =</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="err">          </span><span class="c">-- path-concat A x&#39; z&#39; w&#39; (path-concat A x&#39; x&#39; z&#39; refl q&#39;) r&#39; ) ===</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="err">          </span><span class="c">-- (z&#39; : A) → (q&#39; : y&#39; = z&#39;) → (w&#39; : A) → (r&#39; : z&#39; = w&#39;) →</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="err">          </span><span class="c">-- path-concat A x&#39; z&#39; w&#39; q&#39; r&#39; = path-concat A x&#39; z&#39; w&#39; q&#39; r&#39; )</span>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="err">        (</span><span class="p">\ </span>x&#39; z&#39; q&#39; w&#39; r&#39; <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="err">        x y p) z q w r</span>
 </span></code></pre></div>
 
 
