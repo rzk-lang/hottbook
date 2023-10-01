@@ -111,6 +111,7 @@ This is a literate Rzk file:
 
     Here $f(x)$ denotes the ordinary application of $f$ to $x$, while $f(H(x))$ denotes $ap_f(H(x))$.
 
+Proof is given in the end of the file.
 ```rzk
 -- #def homotopy-id-swap
 --     (A : U)
@@ -133,9 +134,134 @@ The traditional notion of isomorphism is poorly behaved for proof-relevant mathe
     : U
     := Σ (g : B → A),
         prod
-            (homotopy B (\ _ → B) (compose B A B f g) (id B))
-            (homotopy A (\ _ → A) (compose A B A g f) (id A))
+                        (homotopy B (\ _ → B) (compose B A B f g) (id B))
+                        (homotopy A (\ _ → A) (compose A B A g f) (id A))
 ```
+
+### Examples
+!!! note "Example 2.4.7. Identity quasi-inverse"
+     The identity function $id_A : A \to A$ has a quasi-inverse given by $id_A$ itself, together with homotopies defined by $\alpha(y) :\equiv \mathsf{refl}_y$ and $\beta(x) :\equiv \mathsf{refl}_x$.
+
+```rzk
+#def qinv-id
+     (A : U)
+     : qinv A A (id A)
+     := (id A, 
+          (\ x → refl, 
+          \ x → refl))
+```
+
+!!! note "Example 2.4.8. Quasi-inverse for path concatenation"
+     For any $p : x =_A y$ and $z : A$, the functions $(p \cdot –) : (y =_A z) \to (x =_A z)$ and $(– \cdot p) : (z =_A x) \to (z =_A y)$ have quasi-inverses given by $(p^{−1} \cdot –)$ and $(– \cdot p^{−1})$, respectively.
+
+**Quasi-inverse of the concatenation from the right side.**
+
+!!! note "Change of variables in the code"
+     Note the change of variables: $p \mapsto q, x \mapsto y, y \mapsto z, z \mapsto x$. That is, the code corrsesponds to the statement that for any $q : y =_A z$ and $x : A$, the function $(– \cdot q) : (x =_A y) \to (x =_A z)$ have quasi-inverse given by $(– \cdot q^{−1})$, respectively.
+
+
+```rzk title="Definition of right concatenation as a function, and its inverse"
+#def right-concat
+     (A : U)
+     (x y z : A)
+     (q : y = z)
+     : (x = y) → (x = z)
+     := \ p → path-concat A x y z p q
+
+
+#def right-concat-inv
+     (A : U)
+     (x y z : A)
+     (q : y = z)
+     : (x = z) → (x = y)
+     := right-concat A x z y (path-sym A y z q)
+
+```
+
+```rzk title="Proofs that both compositions are homotopical to identity"
+#def right-concat-right-inv-remove-refl
+     (A : U)
+     (x y z : A)
+     (p : x = y)
+     (q : y = z)
+     : (compose (x = y) (x = z) (x = y) (right-concat-inv A x y z q) (right-concat A x y z q)) p = p
+     := 3-path-concat
+          (x = y) -- type of things that are connected my paths
+          -- 1st point: (p • q) • q⁻¹
+          (compose (x = y) (x = z) (x = y) (right-concat-inv A x y z q) (right-concat A x y z q) p)
+          -- 2nd point: p • (q • q⁻¹)
+          (path-concat A x y y p (path-concat A y z y q (path-sym A y z q)))
+          -- 3rd point: p • refl
+          (path-concat A x y y p refl)
+          -- 4th point: p
+          p
+          -- 1st proof: (p • q) • q⁻¹ = p • (q • q⁻¹)
+          (concat-assoc-2 A x y z y
+               p
+               q
+               (path-sym A y z q)
+          )
+          -- 2nd proof: p • (q • q⁻¹) = p • refl
+          (ap
+               (y = y)
+               (x = y)
+               (\ p' → (path-concat A x y y p p'))
+               (path-concat A y z y q (path-sym A y z q))
+               refl
+               (inverse-r A y z q)
+          )
+          -- 3rd proof: p • refl = p
+          (path-sym (x = y) p (path-concat A x y y p refl) (concat-refl A x y p))
+
+
+#def right-concat-left-inv-remove-refl
+     (A : U)
+     (x y z : A)
+     (r : x = z)
+     (q : y = z)
+     : (compose (x = z) (x = y) (x = z) (right-concat A x y z q) (right-concat-inv A x y z q)) r = r
+     := 3-path-concat
+          (x = z) -- type of things that are connected my paths
+          -- 1st point: (r • q⁻¹) • q
+          (compose (x = z) (x = y) (x = z) (right-concat A x y z q) (right-concat-inv A x y z q) r)
+          -- 2nd point: r • (q⁻¹ • q)
+          (path-concat A x z z r (path-concat A z y z (path-sym A y z q) q))
+          -- 3rd point: r • refl
+          (path-concat A x z z r refl)
+          -- 4th point: p
+          r
+          -- 1st proof: (r • q⁻¹) • q = r • (q⁻¹ • q)
+          (concat-assoc-2 A x z y z
+               r
+               (path-sym A y z q)
+               q
+          )
+          -- 2nd proof: r • (q⁻¹ • q) = r • refl
+          (ap
+               (z = z)
+               (x = z)
+               (\ p' → (path-concat A x z z r p'))
+               (path-concat A z y z (path-sym A y z q) q)
+               refl
+               (inverse-l A y z q)
+          )
+          -- 3rd proof: r • refl = r
+          (path-sym (x = z) r (path-concat A x z z r refl) (concat-refl A x z r))
+```     
+
+```rzk title="Proof for quasi-inverse of right concatenation"
+#def right-concat-inv-is-qinv-for-right-concat
+     (A : U)
+     (x y z : A)
+     (q : y = z)
+     : qinv (x = y) (x = z) (right-concat A x y z q)
+     := (right-concat-inv A x y z q,
+          (
+               \ (r : x = z) → right-concat-left-inv-remove-refl  A x y z r q,
+               \ (p : x = y) → right-concat-right-inv-remove-refl A x y z p q
+          ))
+```
+
 
 ## Equivalences
 An improved notion, `isequiv`, has the following properties:
@@ -271,4 +397,77 @@ meaning $\gamma(x) :\equiv \beta(g(x))^{-1} \cdot h(\alpha(x))$. Now define $\be
 --     (A B C : U)
 --     : equivalence A B → equivalence B C → equivalence A C
 --     := \ (f, isequiv-f) (g, isequiv-g) →
+```
+
+
+
+``` title="Proof for corollary 2.4.4. Homotopy with id"
+lemma 2.4.3 :  H(x) • g  (p)   = f (p)   • H y
+
+Substitutions:
+x → f x
+y → x
+g → id
+p → H x
+
+Result of application of lemma with the corresponding values:
+H(f x) • id (H x) = f (H x) • H x 
+
+
+By right-concatenating (H x)⁻¹ to the both sides, we have
+H(f x) = H(f x) • id (H x) • (H x)⁻¹ = f (H x) • H x • (H x)⁻¹ = f (H x)
+```
+
+
+```rzk
+#def homotopy-id-swap
+     (A : U)
+     (f : A → A)
+     (H : homotopy A (\ _ → A) f (id A))
+     (x : A)
+     : H (f x) = ap A A f (f x) (id A x) (H x)
+     := 3-path-concat
+          (f (f x) = (f x)) -- type of points
+          -- 1st point: H (f x)
+          (H (f x))
+          -- 2nd point: (H (f x) • (H x)) • (H x)⁻¹
+          (path-concat A (f (f x)) x (f x) (path-concat A (f (f x)) (f x) x (H (f x)) (H x)) (path-sym A (f x) x (H x)))
+          -- 3rd point:  (f (H x) • (H x)) • (H x)⁻¹ 
+          (path-concat A (f (f x)) x (f x) (path-concat A (f (f x)) (f x) x (ap A A f (f x) x (H x)) (H x)) (path-sym A (f x) x (H x)))
+          -- 4th point: f (H x)
+          (ap A A f (f x) x (H x))
+          -- proof that H (f x) = (H (f x) • H x) • (H x)⁻¹
+          (path-sym
+               (f (f x) = f x) 
+               (path-concat A (f (f x)) x (f x) (path-concat A (f (f x)) (f x) x (H (f x)) (H x)) (path-sym A (f x) x (H x)))
+               (H (f x))
+               (right-concat-right-inv-remove-refl A (f (f x)) (f x) x (H (f x)) (H x)))
+          -- proof that (H (f x) • H x) • (H x)⁻¹ = (f (H x) • (H x)) • (H x)⁻¹
+          (ap 
+               (f (f x) = x) -- (type of domain) 
+               (f (f x) = f x) -- (type of codomain) 
+               (\ p' → path-concat A (f (f x)) x (f x) p' (path-sym A (f x) x (H x)))
+               -- function-to-apply: whiskering by (Hx)⁻¹, a.k.a. cancel out H x
+               (path-concat A (f (f x)) (f x) x (H (f x)) (H x)) -- left point in path below
+               (path-concat A (f (f x)) (f x) x (ap A A f (f x) x (H x)) (H x)) -- right point in path below
+               (path-concat
+                    (f (f x) = x)
+                    -- (H (f x) • H x)
+                    (path-concat A (f (f x)) ((\ (z : A) → z) (f x)) ((\ (z : A) → z) x) (H (f x)) (H x))
+                    -- (H (f x) • id (H x))
+                    (path-concat A (f (f x)) ((\ (z : A) → z) (f x)) ((\ (z : A) → z) x) (H (f x)) (ap A A (\ (z : A) → z) (f x) x (H x)))
+                    -- f (H x) • (H x)
+                    (path-concat A (f (f x)) (f x) ((\ (z : A) → z) x) (ap A A f (f x) x (H x)) (H x))
+                    -- (H (f x) • H x) = (H (f x) • id (H x))
+                    (ap
+                         (f x = x) -- domain
+                         ((f (f x)) = x) -- codomain
+                         (\p' → path-concat A (f (f x)) ((\ (z : A) → z) (f x)) ((\ (z : A) → z) x) (H (f x)) p') -- action of concatenation
+                         ( H x ) -- left point in path
+                         (ap A A (\ z → z) (f x) x (H x)) -- right point in path
+                         (path-sym (f x = x) (ap A A (\ z → z) (f x) x (H x)) (H x) (ap-id A (f x) x (H x))))
+                    -- (H (f x) • id (H x)) = f (H x) • (H x)
+                    (hom-naturality A A f (\ z → z) H (f x) x (H x))))
+          -- proof that (f (H x) • (H x)) • (H x)⁻¹ = f (H x)
+          (right-concat-right-inv-remove-refl A (f (f x)) (f x) x (ap A A f (f x) (id A x) (H x)) (H x))
 ```

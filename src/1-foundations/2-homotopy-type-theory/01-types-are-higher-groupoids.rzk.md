@@ -143,3 +143,34 @@ Alternativerly, groupoids can be viewed as a generalization of groups, where not
         (\ x' z' q' w' r' → refl)
         x y p) z q w r
 ```
+
+## Related statements used in further proofs:
+
+!!! note "Concatencation of three paths"
+
+```rzk
+#def 3-path-concat
+  (A : U)
+  (x y z w : A)
+  : (x = y) → (y = z) → (z = w) → (x = w)
+  := \ p q r → path-concat A x z w (path-concat A x y z p q) r
+```
+
+!!! note "Associativity symmetrical to 2.1.4-4"
+    $$(p \cdot q) \cdot r = p \cdot (q \cdot r)$$
+
+```rzk
+#def concat-assoc-2
+  (A : U)
+  (x y z w : A)
+  (p : x = y)
+  (q : y = z)
+  (r : z = w)
+  : path-concat A x z w (path-concat A x y z p q) r = 
+      path-concat A x y w p (path-concat A y z w q r)
+  := path-sym
+      (x = w)
+      (path-concat A x y w p (path-concat A y z w q r))
+      (path-concat A x z w (path-concat A x y z p q) r)
+      (concat-assoc A x y z w p q r)
+```
