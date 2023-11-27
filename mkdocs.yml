@@ -35,6 +35,8 @@ nav:
           - "2.14 Example: equality of structures": 1-foundations/2-homotopy-type-theory/14-example-equality-of-structures.rzk.md
           - 2.15 Universal properties: 1-foundations/2-homotopy-type-theory/15-universal-properties.rzk.md
           - Exercises: 1-foundations/2-homotopy-type-theory/exercises/README.md
+      - 3 Sets and Logic:
+          - 3.1 Sets and n-types: 1-foundations/3-sets-and-logic/01-sets-and-n-types.rzk.md
 
 markdown_extensions:
   - admonition
