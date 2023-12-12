@@ -10,16 +10,16 @@ This is a literate Rzk file:
 
 ```rzk
 #def pr₁-Σ
-  (A : U)
-  (B : A -> U)
-  : (Σ (x : A), B x) -> A
-  := \p -> first p
+  ( A : U)
+  ( B : A → U)
+  : ( Σ ( x : A) , B x) → A
+  := \ p → first p
 
 #def pr₂-Σ
-  (A : U)
-  (B : A -> U)
-  : (p : Σ (x : A), B x) -> (B (first p))
-  := \p -> second p
+  ( A : U)
+  ( B : A → U)
+  : ( p : Σ (x : A) , B x) → (B (first p))
+  := \ p → second p
 ```
 Recursor for $\Sigma$-types. They are called like this:
 
@@ -29,18 +29,18 @@ $$
 
 ```rzk
 #def rec-Σ
-  (A : U)
-  (B : A -> U)
-  (C : U)
-  : (g : (x : A) -> B x -> C) -> (p : Σ (x : A), B x) -> C
-  := \ g (a, b) -> g a b
+  ( A : U)
+  ( B : A → U)
+  ( C : U)
+  : ( g : (x : A) → B x → C) → (p : Σ (x : A) , B x) → C
+  := \ g (a , b) → g a b
 ```
 
 ```rzk
 #def ind-Σ
-  (A : U)
-  (B : A -> U)
-  (C : (Σ (x : A), B x) -> U)
-  : (g : (x : A) -> (y : B x) -> C (x, y)) -> (p : Σ (x : A), B x) -> C p
-  := \ g (a, b) -> g a b
+  ( A : U)
+  ( B : A → U)
+  ( C : (Σ (x : A) , B x) → U)
+  : ( g : (x : A) → (y : B x) → C (x , y)) → (p : Σ (x : A) , B x) → C p
+  := \ g (a , b) → g a b
 ```

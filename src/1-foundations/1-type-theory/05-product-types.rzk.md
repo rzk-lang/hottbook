@@ -12,7 +12,7 @@ so we define product types here in terms of those.
 ```rzk
 #define prod (A B : U)
   : U
-  := Σ (_ : A), B
+  := Σ (_ : A) , B
 ```
 
 To construct a pair, we can now simply use tuple syntax for
@@ -22,23 +22,23 @@ To use a pair, we can use pattern matching or introduce projections:
 
 ```rzk
 #define pr₁
-  (A B : U)
+  ( A B : U)
   : prod A B → A
-  := \ (a, _b) → a
+  := \ (a , _b) → a
 
 #define pr₂
-  (A B : U)
+  ( A B : U)
   : prod A B → B
-  := \ (_a, b) → b
+  := \ (_a , b) → b
 ```
 
 The recursor for product types can be defined as follows:
 
 ```rzk
 #define prod-rec
-  (A B : U)
-  : (C : U) → (A → B → C) → prod A B → C
-  := \ C f (a, b) → f a b
+  ( A B : U)
+  : ( C : U) → (A → B → C) → prod A B → C
+  := \ C f (a , b) → f a b
 ```
 
 Then instead of defining functions such as pr1 and pr2 directly by a defining equation, we could
@@ -46,12 +46,12 @@ define
 
 ```rzk
 #define pr₁-via-rec
-  (A B : U)
+  ( A B : U)
   : prod A B → A
   := prod-rec A B A (\ a _b → a)
 
 #define pr₂-via-rec
-  (A B : U)
+  ( A B : U)
   : prod A B → B
   := prod-rec A B B (\ _a b → b)
 ```
@@ -61,9 +61,9 @@ we have to generalize the recursor:
 
 ```rzk
 #define prod-ind
-  (A B : U)
-  : (C : prod A B → U) → ((x : A) → (y : B) → C (x, y)) → (x : prod A B) → C x
-  := \ C f (x, y) → f x y
+  ( A B : U)
+  : ( C : prod A B → U) → ((x : A) → (y : B) → C (x , y)) → (x : prod A B) → C x
+  := \ C f (x , y) → f x y
 ```
 
 For example, in this way we can prove the propositional uniqueness principle, which says that
@@ -71,9 +71,9 @@ every element of `#!rzk A × B` is equal to a pair. Specifically, we can constru
 
 ```rzk
 #define prod-uniq
-  (A B : U)
-  : (x : prod A B) → (pr₁ A B x, pr₂ A B x) =_{prod A B} x
-  := \ (a, b) → refl_{(a, b)}
+  ( A B : U)
+  : ( x : prod A B) → (pr₁ A B x , pr₂ A B x) =_{prod A B} x
+  := \ (a , b) → refl_{(a , b)}
 ```
 
 ## Unit type
@@ -86,7 +86,7 @@ Still, following the book, here is the recursor for the unit type:
 
 ```rzk
 #define Unit-rec
-  : (C : U) → C → Unit → C
+  : ( C : U) → C → Unit → C
   := \ _C c _unit → c
 ```
 
@@ -94,7 +94,7 @@ And, similarly, the induction principle for the unit type:
 
 ```rzk
 #define Unit-ind
-  : (C : Unit → U) → C unit → (x : Unit) → C x
+  : ( C : Unit → U) → C unit → (x : Unit) → C x
   := \ _C c unit → c
 ```
 
@@ -103,7 +103,7 @@ which asserts that its only inhabitant is `#!rzk unit`:
 
 ```rzk
 #define Unit-uniq
-  : (x : Unit) → x = unit
+  : ( x : Unit) → x = unit
   := Unit-ind (\ x → x = unit) refl_{unit}
 ```
 
@@ -113,6 +113,6 @@ allowing to use `#!rzk refl` immediately:
 
 ```rzk
 #define Unit-uniq'
-  : (x : Unit) → x = unit
+  : ( x : Unit) → x = unit
   := \ _ → refl
 ```
