@@ -14,16 +14,16 @@ This is a literate Rzk file:
 
 ```rzk
 #def transport
-    (A : U)
-    (P : A → U)
-    (x y : A)
-    (p : x = y)
-    : P x → P y
-    := path-ind
+    ( A : U)
+    ( P : A → U)
+    ( x y : A)
+    ( p : x = y)
+  : P x → P y
+  := path-ind
         A
-        (\ x' y' p' → P x' → P y')
+        ( \ x' y' p' → P x' → P y')
         -- ? : P x' → P x'
-        (\ x' → \ px → px)
+        ( \ x' → \ px → px)
         x y p
 ```
 
@@ -34,20 +34,20 @@ This is a literate Rzk file:
 
 ```rzk
 #def lift
-    (A : U)
-    (P : A → U)
-    (x : A)
-    (u : P x)
-    (y : A)
-    (p : x = y)
-    : (x, u) =_{Σ (z : A), P z} (y, (transport A P x y p u))
-    := path-ind
+    ( A : U)
+    ( P : A → U)
+    ( x : A)
+    ( u : P x)
+    ( y : A)
+    ( p : x = y)
+  : ( x , u) =_{Σ (z : A) , P z} (y , (transport A P x y p u))
+  := path-ind
         A
-        (\ x' y' p' → (u' : P x') → (x', u') =_{Σ (z : A), P z} (y', (transport A P x' y' p' u')))
+        ( \ x' y' p' → (u' : P x') → (x' , u') =_{Σ (z : A) , P z} (y' , (transport A P x' y' p' u')))
         -- ? : (u' : P x') → (x', u') = (x', (transport A P x' x' refl u')))
         -- (u' : P x') → (x', u') = (x', ((\px → px) u'))
         -- u' → (x, u) = (x, u)
-        (\ x' u' → refl)
+        ( \ x' u' → refl)
         x y p u
 ```
 
@@ -57,19 +57,19 @@ This is a literate Rzk file:
 
 ```rzk
 #def apd
-    (A : U)
-    (P : A → U)
-    (f : (z : A) → P z)
-    (x y : A)
-    (p : x = y)
-    : transport A P x y p (f x) = f y
-    := path-ind
+    ( A : U)
+    ( P : A → U)
+    ( f : (z : A) → P z)
+    ( x y : A)
+    ( p : x = y)
+  : transport A P x y p (f x) = f y
+  := path-ind
         A
-        (\ x' y' p' → transport A P x' y' p' (f x') = f y')
+        ( \ x' y' p' → transport A P x' y' p' (f x') = f y')
         -- ? : transport A P x x refl (f x) = f x
         -- path-ind A C (\ x' → \ px → px) x x refl) (f x) = (f x)
         -- (\ px → px) (f x) = (f x)
-        (\ x' → refl)
+        ( \ x' → refl)
         x y p
 ```
 
@@ -82,17 +82,17 @@ This is a literate Rzk file:
 
 ```rzk
 #def transportconst
-    (A B : U)
-    (b : B)
-    (x y : A)
-    (p : x = y)
-    : transport A (\ _ → B) x y p b = b
-    := path-ind
+    ( A B : U)
+    ( b : B)
+    ( x y : A)
+    ( p : x = y)
+  : transport A (\ _ → B) x y p b = b
+  := path-ind
         A
-        (\ x' y' p' → transport A (\ _ → B) x' y' p' b = b)
+        ( \ x' y' p' → transport A (\ _ → B) x' y' p' b = b)
         -- ? : transport A (\ _ → B) x' x' refl b = b
         -- (\ px → px) b = b
-        (\ x' → refl)
+        ( \ x' → refl)
         x y p
 ```
 
@@ -113,13 +113,13 @@ find                            : transport A (\ _ → B) x y p (f x) = f y
 
 ```rzk
 #def ap2apd
-    (A B : U)
-    (x y : A)
-    (p : x = y)
-    (f : A → B)
-    : (f x = f y) → (transport A (\ _ → B) x y p (f x) = f y)
-    := \ fp → path-concat B (transport A (\ _ → B) x y p (f x)) (f x) (f y)
-        (transportconst A B (f x) x y p)
+    ( A B : U)
+    ( x y : A)
+    ( p : x = y)
+    ( f : A → B)
+  : ( f x = f y) → (transport A (\ _ → B) x y p (f x) = f y)
+  := \ fp → path-concat B (transport A (\ _ → B) x y p (f x)) (f x) (f y)
+        ( transportconst A B (f x) x y p)
         fp
 ```
 
@@ -133,13 +133,13 @@ find                            : f x = f y
 
 ```rzk
 #def apd2ap
-    (A B : U)
-    (x y : A)
-    (p : x = y)
-    (f : A → B)
-    : (transport A (\ _ → B) x y p (f x) = f y) → (f x = f y)
-    := \ fpd → path-concat B (f x) (transport A (\ _ → B) x y p (f x)) (f y)
-        (path-sym B (transport A (\ _ → B) x y p (f x)) (f x) (transportconst A B (f x) x y p))
+    ( A B : U)
+    ( x y : A)
+    ( p : x = y)
+    ( f : A → B)
+  : ( transport A (\ _ → B) x y p (f x) = f y) → (f x = f y)
+  := \ fpd → path-concat B (f x) (transport A (\ _ → B) x y p (f x)) (f y)
+        ( path-sym B (transport A (\ _ → B) x y p (f x)) (f x) (transportconst A B (f x) x y p))
         fpd
 ```
 
@@ -150,20 +150,20 @@ find                            : f x = f y
 
 ```rzk
 #def apd-ap
-    (A B : U)
-    (x y : A)
-    (p : x = y)
-    (f : A → B)
-    : apd A (\ _ → B) f x y p = path-concat B (transport A (\ _ → B) x y p (f x)) (f x) (f y)
-        (transportconst A B (f x) x y p) (ap A B f x y p)
-    := path-ind
+    ( A B : U)
+    ( x y : A)
+    ( p : x = y)
+    ( f : A → B)
+  : apd A (\ _ → B) f x y p = path-concat B (transport A (\ _ → B) x y p (f x)) (f x) (f y)
+        ( transportconst A B (f x) x y p) (ap A B f x y p)
+  := path-ind
         A
-        (\ x' y' p' → apd A (\ _ → B) f x' y' p' = path-concat B (transport A (\ _ → B) x' y' p' (f x')) (f x') (f y')
-            (transportconst A B (f x') x' y' p') (ap A B f x' y' p'))
+        ( \ x' y' p' → apd A (\ _ → B) f x' y' p' = path-concat B (transport A (\ _ → B) x' y' p' (f x')) (f x') (f y')
+            ( transportconst A B (f x') x' y' p') (ap A B f x' y' p'))
         -- ? : apd A (\ _ → B) f x' x' refl = path-concat B (transport A (\ _ → B) x' x' refl (f x')) (f x') (f x')
         --    (transportconst A B (f x') x' x' refl) (ap A B f x' x' refl) ===
         -- refl = path-concat B (f x') (f x') (f x') refl refl
-        (\ _ → refl)
+        ( \ _ → refl)
         x y p
 ```
 
@@ -175,19 +175,19 @@ find                            : f x = f y
 
 ```rzk
 #def transport-concat
-    (A : U)
-    (P : A → U)
-    (x y z : A)
-    (p : x = y)
-    (q : y = z)
-    (u : P x)
-    : transport A P y z q (transport A P x y p u) = transport A P x z (path-concat A x y z p q) u
-    := (path-ind
+    ( A : U)
+    ( P : A → U)
+    ( x y z : A)
+    ( p : x = y)
+    ( q : y = z)
+    ( u : P x)
+  : transport A P y z q (transport A P x y p u) = transport A P x z (path-concat A x y z p q) u
+  := (path-ind
         A
-        (\ x' y' p' → (z' : A) → (q' : y' = z') → (u' : P x') → transport A P y' z' q' (transport A P x' y' p' u') = transport A P x' z' (path-concat A x' y' z' p' q') u')
+        ( \ x' y' p' → (z' : A) → (q' : y' = z') → (u' : P x') → transport A P y' z' q' (transport A P x' y' p' u') = transport A P x' z' (path-concat A x' y' z' p' q') u')
         -- ? : (z' : A) → (q' : y' = z') → (u' : P x') → transport A P x' z' q' (transport A P x' x' refl u) = transport A P x' z' (path-concat A x' x' z' refl q') u
         -- \ (z' : A) → (q' : y' = z') → (u' : P x') → transport A P x' z' q' u = transport A P x' z' q' u
-        (\ x' z' q' u' → refl)
+        ( \ x' z' q' u' → refl)
         x y p) z q u
 ```
 
@@ -198,20 +198,20 @@ find                            : f x = f y
 
 ```rzk
 #def transport-ap
-    (A B : U)
-    (P : B → U)
-    (f : A → B)
-    (x y : A)
-    (p : x = y)
-    (u : P (f x))
-    : transport A (\ z → P (f z)) x y p u = transport B P (f x) (f y) (ap A B f x y p) u
-    := (path-ind
+    ( A B : U)
+    ( P : B → U)
+    ( f : A → B)
+    ( x y : A)
+    ( p : x = y)
+    ( u : P (f x))
+  : transport A (\ z → P (f z)) x y p u = transport B P (f x) (f y) (ap A B f x y p) u
+  := (path-ind
         A
-        (\ x' y' p' → (u' : P (f x')) → transport A (\ z → P (f z)) x' y' p' u' = transport B P (f x') (f y') (ap A B f x' y' p') u')
+        ( \ x' y' p' → (u' : P (f x')) → transport A (\ z → P (f z)) x' y' p' u' = transport B P (f x') (f y') (ap A B f x' y' p') u')
         -- ? :  (u : P x') → transport A (\ z → P (f z)) x' x' refl = transport B P (f x') (f x') (ap A B f x' x' refl)
         -- (u : P x') → id u = transport B P (f x') (f x') refl u
         -- (u : P x') → id u = id u
-        (\ x' u' → refl)
+        ( \ x' u' → refl)
         x y p) u
 ```
 
@@ -222,19 +222,19 @@ find                            : f x = f y
 
 ```rzk
 #def transport-f
-    (A : U)
-    (P Q : A → U)
-    (f : (x : A) → (P x) → (Q x))
-    (x y : A)
-    (p : x = y)
-    (u : P x)
-    : transport A Q x y p (f x u) = f y (transport A P x y p u)
-    := (path-ind
+    ( A : U)
+    ( P Q : A → U)
+    ( f : (x : A) → (P x) → (Q x))
+    ( x y : A)
+    ( p : x = y)
+    ( u : P x)
+  : transport A Q x y p (f x u) = f y (transport A P x y p u)
+  := (path-ind
         A
-        (\ x' y' p' → (u' : P x') → transport A Q x' y' p' (f x' u') = f y' (transport A P x' y' p' u'))
+        ( \ x' y' p' → (u' : P x') → transport A Q x' y' p' (f x' u') = f y' (transport A P x' y' p' u'))
         -- ? :  (u : P x') → transport A Q x' x' refl (f x' u') = f x' (transport A P x' x' refl u'))
         -- (u : P x') → id (f x' u') = f x' (id u'))
         -- (u : P x') → (f x' u') = (f x' u')
-        (\ x' u' → refl)
+        ( \ x' u' → refl)
         x y p) u
 ```

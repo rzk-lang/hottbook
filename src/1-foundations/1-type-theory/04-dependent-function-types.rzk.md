@@ -12,7 +12,7 @@ An example is the polymorphic identity function:
 
 ```rzk
 #define id
-  (A : U)
+  ( A : U)
   : A → A
   := \ x → x
 ```
@@ -22,7 +22,7 @@ that switches the order of the arguments of a (curried) two-argument function:
 
 ```rzk
 #define swap
-  (A B C : U)
-  : (A → B → C) → (B → A → C)
+  ( A B C : U)
+  : ( A → B → C) → (B → A → C)
   := \ f y x → f x y
 ```
