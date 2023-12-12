@@ -26,3 +26,16 @@ jobs:
             src/1-foundations/1-type-theory/exercises/*.rzk.md
             src/1-foundations/2-homotopy-type-theory/*.rzk.md
             src/1-foundations/2-homotopy-type-theory/exercises/*.rzk.md
+
+  check-formatting:
+    runs-on: ubuntu-latest
+    name: Check Rzk formatting
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check formatting
+        uses: rzk-lang/rzk-action@v1.2.0
+        with:
+          rzk-version: v0.7.2
+          typecheck: false
+          check-formatting: true
