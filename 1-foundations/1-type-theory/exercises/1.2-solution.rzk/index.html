@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.2.7">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.046329b4.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.9f615399.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.85d0ee34.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.649f08f9.min.css">
       
       
 
@@ -1016,9 +1016,9 @@ Do the same for <span class="arithmatex">\(\Sigma\)</span>-types.</p>
 <p>In this solution, we use <code>prod</code> and projections (<code>pr₁</code> and <code>pr₂</code>), defined earlier in <a href="../../05-product-types.rzk/">section 1.5</a>.</p>
 <p>Introducing constructor for values of <code>prod</code> type:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:pair" id="define:pair" style="visibility: visible; position: relative; color: inherit">pair</a></span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">  : A -&gt; B -&gt; prod A B</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="err">  := </span><span class="p">\ </span>a b <span class="err">-&gt; (a, b)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">  : A → B → prod A B</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="err">  := </span><span class="p">\ </span>a b <span class="err">→ (a , b)</span>
 </span></code></pre></div>
 <p>The type of the recursor on <span class="arithmatex">\(A \times B\)</span> is</p>
 <div class="arithmatex">\[
@@ -1028,10 +1028,10 @@ Do the same for <span class="arithmatex">\(\Sigma\)</span>-types.</p>
 <div class="arithmatex">\[ rec_{A\times B}(C, g, x) :\equiv g(\mathsf{pr}_1(x))(\mathsf{pr}_2(x)) \]</div>
 <p>And represented in rzk like so:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:prod-rec-via-projections" id="define:prod-rec-via-projections" style="visibility: visible; position: relative; color: inherit">prod-rec-via-projections</a></span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">  </span><span class="p">(</span>C <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">  </span><span class="p">(</span>g <span class="p">:</span><span class="err"> A -&gt; B -&gt; C)</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="err">  </span><span class="p">(</span>p <span class="p">:</span><span class="err"> prod A B)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">  </span><span class="p">( </span>C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">  </span><span class="p">( </span>g <span class="p">:</span><span class="err"> A → B → C)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="err">  </span><span class="p">( </span>p <span class="p">:</span><span class="err"> prod A B)</span>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="err">  : C</span>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="err">  := g (pr₁ A B p) (pr₂ A B p)</span>
 </span></code></pre></div>
@@ -1039,10 +1039,10 @@ Do the same for <span class="arithmatex">\(\Sigma\)</span>-types.</p>
 <h3 id="checking-definitional-equalities">Checking definitional equalities<a class="headerlink" href="#checking-definitional-equalities" title="Permanent link">&para;</a></h3>
 <p>Recursion from projections:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:prod-rec-via-projections-works" id="define:prod-rec-via-projections-works" style="visibility: visible; position: relative; color: inherit">prod-rec-via-projections-works</a></span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">  </span><span class="p">(</span>A B C <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">  </span><span class="p">(</span>g <span class="p">:</span><span class="err"> A -&gt; B -&gt; C)</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">  </span><span class="p">(</span>a <span class="p">:</span><span class="err"> A)</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="err">  </span><span class="p">(</span>b <span class="p">:</span><span class="err"> B)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">  </span><span class="p">( </span>g <span class="p">:</span><span class="err"> A → B → C)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">  </span><span class="p">( </span>a <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="err">  </span><span class="p">( </span>b <span class="p">:</span><span class="err"> B)</span>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="err">  : prod-rec-via-projections A B C g (pair A B a b) = g a b</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="err">  := </span><span class="s">refl</span>
 </span></code></pre></div>
@@ -1052,16 +1052,16 @@ Do the same for <span class="arithmatex">\(\Sigma\)</span>-types.</p>
 </div>
 <p>Projections from the recursion:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:pr₁-via-rec-works" id="define:pr₁-via-rec-works" style="visibility: visible; position: relative; color: inherit">pr₁-via-rec-works</a></span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">  </span><span class="p">(</span>a <span class="p">:</span><span class="err"> A)</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="err">  </span><span class="p">(</span>b <span class="p">:</span><span class="err"> B)</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">  </span><span class="p">( </span>a <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="err">  </span><span class="p">( </span>b <span class="p">:</span><span class="err"> B)</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="err">  : pr₁-via-rec A B (pair A B a b) = a</span>
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="err">  := </span><span class="s">refl</span>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:pr₂-from-rec-works" id="define:pr₂-from-rec-works" style="visibility: visible; position: relative; color: inherit">pr₂-from-rec-works</a></span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="err">  </span><span class="p">(</span>a <span class="p">:</span><span class="err"> A)</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="err">  </span><span class="p">(</span>b <span class="p">:</span><span class="err"> B)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="err">  </span><span class="p">( </span>a <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="err">  </span><span class="p">( </span>b <span class="p">:</span><span class="err"> B)</span>
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="err">  : pr₂-via-rec A B (pair A B a b) = b</span>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="err">  := </span><span class="s">refl</span>
 </span></code></pre></div>
@@ -1077,53 +1077,53 @@ Do the same for <span class="arithmatex">\(\Sigma\)</span>-types.</p>
 <p><span class="arithmatex">\(\Sigma\)</span>-types are built-in. Also, <code>pr₁-Σ</code>, <code>pr₂-Σ</code>, <code>rec-Σ</code>, <code>ind-Σ</code> were already defined in <a href="../../06-dependent-pair-types.rzk/">section 1.6</a>.</p>
 <p>Defining recursion from <code>pr₁-Σ</code> and <code>pr₂-Σ</code>:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:rec-Σ-via-projections" id="define:rec-Σ-via-projections" style="visibility: visible; position: relative; color: inherit">rec-Σ-via-projections</a></span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="err">  </span><span class="p">(</span>B <span class="p">:</span><span class="err"> A -&gt; U)</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="err">  </span><span class="p">(</span>C <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="err">  </span><span class="p">(</span>g <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) -&gt; B x -&gt; C)</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="err">  </span><span class="p">(</span>p <span class="p">:</span><span class="err"> </span><span class="kt">Σ</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A), B x)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="err">  </span><span class="p">( </span>C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="err">  </span><span class="p">( </span>g <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → B x → C)</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="err">  </span><span class="p">( </span>p <span class="p">:</span><span class="err"> </span><span class="kt">Σ</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) , B x)</span>
 </span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="err">  : C</span>
 </span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="err">  := g (pr₁-Σ A B p) (pr₂-Σ A B p)</span>
 </span></code></pre></div>
 <p>(Extra, not in the task) Other direction of definition (projecitons via recursion):</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:pr₁-Σ-via-rec" id="define:pr₁-Σ-via-rec" style="visibility: visible; position: relative; color: inherit">pr₁-Σ-via-rec</a></span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="err">  </span><span class="p">(</span>B <span class="p">:</span><span class="err"> A -&gt; U)</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="err">  : </span><span class="p">(</span>Σ (x <span class="p">:</span><span class="err"> A), B x) -&gt; A</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="err">  := rec-Σ A B A (</span><span class="p">\ </span>x y <span class="err">-&gt; x)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="err">  : </span><span class="p">( </span>Σ ( x <span class="p">:</span><span class="err"> A) , B x) → A</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="err">  := rec-Σ A B A (</span><span class="p">\ </span>x y <span class="err">→ x)</span>
 </span></code></pre></div>
 <p>For the second projection (<span class="arithmatex">\(\mathsf{pr}_2\)</span>) we need the induction, since the output type depends on <span class="arithmatex">\(x : A\)</span>:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:pr₂-Σ-via-rec" id="define:pr₂-Σ-via-rec" style="visibility: visible; position: relative; color: inherit">pr₂-Σ-via-rec</a></span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="err">  </span><span class="p">(</span>B <span class="p">:</span><span class="err"> A -&gt; U)</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="err">  : </span><span class="p">(</span>p <span class="p">:</span><span class="err"> </span><span class="kt">Σ</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A), B x) -&gt; (B (pr₁-Σ-via-rec A B p))</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="err">  := ind-Σ A B (</span><span class="p">\ </span>p1 <span class="err">-&gt; B (pr₁-Σ-via-rec A B p1)) (</span><span class="p">\ </span>x y <span class="err">-&gt; y)</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="err">  : </span><span class="p">( </span>p <span class="p">:</span><span class="err"> </span><span class="kt">Σ</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) , B x) → (B (pr₁-Σ-via-rec A B p))</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="err">  := ind-Σ A B (</span><span class="p">\ </span>p1 <span class="err">→ B (pr₁-Σ-via-rec A B p1)) (</span><span class="p">\ </span>x y <span class="err">→ y)</span>
 </span></code></pre></div>
 <h3 id="checking-the-definitional-equalities">Checking the definitional equalities<a class="headerlink" href="#checking-the-definitional-equalities" title="Permanent link">&para;</a></h3>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:rec-Σ-via-projections-works" id="define:rec-Σ-via-projections-works" style="visibility: visible; position: relative; color: inherit">rec-Σ-via-projections-works</a></span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="err">  </span><span class="p">(</span>B <span class="p">:</span><span class="err"> A -&gt; U)</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="err">  </span><span class="p">(</span>C <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="err">  </span><span class="p">(</span>g <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) -&gt; B x -&gt; C)</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="err">  </span><span class="p">(</span>a <span class="p">:</span><span class="err"> A)</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="err">  </span><span class="p">(</span>b <span class="p">:</span><span class="err"> B a)</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="err">  : rec-Σ-via-projections A B C g (a, b) = g a b</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="err">  </span><span class="p">( </span>C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="err">  </span><span class="p">( </span>g <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → B x → C)</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="err">  </span><span class="p">( </span>a <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="err">  </span><span class="p">( </span>b <span class="p">:</span><span class="err"> B a)</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="err">  : rec-Σ-via-projections A B C g (a , b) = g a b</span>
 </span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="err">  := </span><span class="s">refl</span>
 </span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
 </span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:pr₁-Σ-via-rec-works" id="define:pr₁-Σ-via-rec-works" style="visibility: visible; position: relative; color: inherit">pr₁-Σ-via-rec-works</a></span>
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="err">  </span><span class="p">(</span>B <span class="p">:</span><span class="err"> A -&gt; U)</span>
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="err">  </span><span class="p">(</span>a <span class="p">:</span><span class="err"> A)</span>
-</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="err">  </span><span class="p">(</span>b <span class="p">:</span><span class="err"> B a)</span>
-</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="err">  : pr₁-Σ-via-rec A B (a, b) = a</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="err">  </span><span class="p">( </span>a <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="err">  </span><span class="p">( </span>b <span class="p">:</span><span class="err"> B a)</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="err">  : pr₁-Σ-via-rec A B (a , b) = a</span>
 </span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="err">  := </span><span class="s">refl</span>
 </span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>
 </span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:pr₂-Σ-via-rec-works" id="define:pr₂-Σ-via-rec-works" style="visibility: visible; position: relative; color: inherit">pr₂-Σ-via-rec-works</a></span>
-</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="err">  </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="err">  </span><span class="p">(</span>B <span class="p">:</span><span class="err"> A -&gt; U)</span>
-</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="err">  </span><span class="p">(</span>a <span class="p">:</span><span class="err"> A)</span>
-</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="err">  </span><span class="p">(</span>b <span class="p">:</span><span class="err"> B a)</span>
-</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="err">  : pr₂-Σ-via-rec A B (a, b) = b</span>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="err">  </span><span class="p">( </span>a <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="err">  </span><span class="p">( </span>b <span class="p">:</span><span class="err"> B a)</span>
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="err">  : pr₂-Σ-via-rec A B (a , b) = b</span>
 </span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="err">  := </span><span class="s">refl</span>
 </span></code></pre></div>
 <div class="admonition warning">
@@ -1169,10 +1169,10 @@ Do the same for <span class="arithmatex">\(\Sigma\)</span>-types.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.action.edit", "navigation.footer", "navigation.sections", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.action.edit", "navigation.footer", "navigation.sections", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
       
         <script src="../../../../javascript/mathjax.js"></script>
       

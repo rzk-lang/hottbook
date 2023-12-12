@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.2.7">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
     
     
       
@@ -24,10 +24,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.046329b4.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.9f615399.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.85d0ee34.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.649f08f9.min.css">
       
       
 
@@ -1023,52 +1023,52 @@
 so we define product types here in terms of those.</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:prod" id="define:prod" style="visibility: visible; position: relative; color: inherit">prod</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">  : U</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">  := </span><span class="kt">Σ</span><span class="err"> </span><span class="p">(</span>_ <span class="p">:</span><span class="err"> A), B</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">  := </span><span class="kt">Σ</span><span class="err"> </span><span class="p">(</span>_ <span class="p">:</span><span class="err"> A) , B</span>
 </span></code></pre></div>
 <p>To construct a pair, we can now simply use tuple syntax for
 <span class="arithmatex">\(\Sigma\)</span>-types: <code class="language-rzk highlight"><span class="err">(a, b)</span></code>.</p>
 <p>To use a pair, we can use pattern matching or introduce projections:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:pr₁" id="define:pr₁" style="visibility: visible; position: relative; color: inherit">pr₁</a></span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">  : prod A B → A</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">  := \ (a, _b) → a</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">  := \ (a , _b) → a</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:pr₂" id="define:pr₂" style="visibility: visible; position: relative; color: inherit">pr₂</a></span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="err">  : prod A B → B</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="err">  := \ (_a, b) → b</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="err">  := \ (_a , b) → b</span>
 </span></code></pre></div>
 <p>The recursor for product types can be defined as follows:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:prod-rec" id="define:prod-rec" style="visibility: visible; position: relative; color: inherit">prod-rec</a></span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">  : </span><span class="p">(</span>C <span class="p">:</span><span class="err"> U) → (A → B → C) → prod A B → C</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">  := </span><span class="p">\ </span>C f <span class="err">(a, b) → f a b</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">  : </span><span class="p">( </span>C <span class="p">:</span><span class="err"> U) → (A → B → C) → prod A B → C</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">  := </span><span class="p">\ </span>C f <span class="err">(a , b) → f a b</span>
 </span></code></pre></div>
 <p>Then instead of defining functions such as pr1 and pr2 directly by a defining equation, we could
 define</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:pr₁-via-rec" id="define:pr₁-via-rec" style="visibility: visible; position: relative; color: inherit">pr₁-via-rec</a></span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">  : prod A B → A</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="err">  := prod-rec A B A (</span><span class="p">\ </span>a _b <span class="err">→ a)</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:pr₂-via-rec" id="define:pr₂-via-rec" style="visibility: visible; position: relative; color: inherit">pr₂-via-rec</a></span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="err">  : prod A B → B</span>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="err">  := prod-rec A B B (</span><span class="p">\ </span>_a b <span class="err">→ b)</span>
 </span></code></pre></div>
 <p>To be able to define dependent functions over the product type,
 we have to generalize the recursor:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:prod-ind" id="define:prod-ind" style="visibility: visible; position: relative; color: inherit">prod-ind</a></span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="err">  : </span><span class="p">(</span>C <span class="p">:</span><span class="err"> prod A B → U) → </span><span class="p">(</span>(x <span class="p">:</span><span class="err"> A) → </span><span class="p">(</span>y <span class="p">:</span><span class="err"> B) → C (x, y)) → </span><span class="p">(</span>x <span class="p">:</span><span class="err"> prod A B) → C x</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="err">  := </span><span class="p">\ </span>C f <span class="err">(x, y) → f x y</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="err">  : </span><span class="p">( </span>C <span class="p">:</span><span class="err"> prod A B → U) → </span><span class="p">(</span>(x <span class="p">:</span><span class="err"> A) → </span><span class="p">(</span>y <span class="p">:</span><span class="err"> B) → C (x , y)) → </span><span class="p">(</span>x <span class="p">:</span><span class="err"> prod A B) → C x</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="err">  := </span><span class="p">\ </span>C f <span class="err">(x , y) → f x y</span>
 </span></code></pre></div>
 <p>For example, in this way we can prove the propositional uniqueness principle, which says that
 every element of <code class="language-rzk highlight"><span class="err">A × B</span></code> is equal to a pair. Specifically, we can construct a function</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:prod-uniq" id="define:prod-uniq" style="visibility: visible; position: relative; color: inherit">prod-uniq</a></span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="err">  </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U)</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="err">  : </span><span class="p">(</span>x <span class="p">:</span><span class="err"> prod A B) → (pr₁ A B x, pr₂ A B x) =_{prod A B} x</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="err">  := \ (a, b) → </span><span class="s">refl</span><span class="err">_{(a, b)}</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="err">  : </span><span class="p">( </span>x <span class="p">:</span><span class="err"> prod A B) → (pr₁ A B x , pr₂ A B x) =_{prod A B} x</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="err">  := \ (a , b) → </span><span class="s">refl</span><span class="err">_{(a , b)}</span>
 </span></code></pre></div>
 <h2 id="unit-type">Unit type<a class="headerlink" href="#unit-type" title="Permanent link">&para;</a></h2>
 <p>Rzk has a built-in <code class="language-rzk highlight"><span class="kt">Unit</span></code> type which behaves slightly differently from
@@ -1076,25 +1076,25 @@ the unit type in the HoTT Book. In particular, in Rzk, uniqueness principle
 for the unit type is built in, making some proofs easier than in the book.</p>
 <p>Still, following the book, here is the recursor for the unit type:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:Unit-rec" id="define:Unit-rec" style="visibility: visible; position: relative; color: inherit">Unit-rec</a></span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="err">  : </span><span class="p">(</span>C <span class="p">:</span><span class="err"> U) → C → Unit → C</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="err">  : </span><span class="p">( </span>C <span class="p">:</span><span class="err"> U) → C → Unit → C</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="err">  := </span><span class="p">\ </span>_C c _unit <span class="err">→ c</span>
 </span></code></pre></div>
 <p>And, similarly, the induction principle for the unit type:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:Unit-ind" id="define:Unit-ind" style="visibility: visible; position: relative; color: inherit">Unit-ind</a></span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="err">  : </span><span class="p">(</span>C <span class="p">:</span><span class="err"> Unit → U) → C </span><span class="s">unit</span><span class="err"> → </span><span class="p">(</span>x <span class="p">:</span><span class="err"> Unit) → C x</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="err">  : </span><span class="p">( </span>C <span class="p">:</span><span class="err"> Unit → U) → C </span><span class="s">unit</span><span class="err"> → </span><span class="p">(</span>x <span class="p">:</span><span class="err"> Unit) → C x</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="err">  := </span><span class="p">\ </span>_C c unit <span class="err">→ c</span>
 </span></code></pre></div>
 <p>Induction enables us to prove the propositional uniqueness principle for <code class="language-rzk highlight"><span class="kt">Unit</span></code>,
 which asserts that its only inhabitant is <code class="language-rzk highlight"><span class="s">unit</span></code>:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:Unit-uniq" id="define:Unit-uniq" style="visibility: visible; position: relative; color: inherit">Unit-uniq</a></span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="err">  : </span><span class="p">(</span>x <span class="p">:</span><span class="err"> Unit) → x = </span><span class="s">unit</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="err">  : </span><span class="p">( </span>x <span class="p">:</span><span class="err"> Unit) → x = </span><span class="s">unit</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="err">  := Unit-ind (</span><span class="p">\ </span>x <span class="err">→ x = </span><span class="s">unit</span><span class="err">) </span><span class="s">refl</span><span class="err">_{</span><span class="s">unit</span><span class="err">}</span>
 </span></code></pre></div>
 <p>As mentioned above, this uniqueness principle is built into Rzk
 (making any value of type <code class="language-rzk highlight"><span class="kt">Unit</span></code> definitionally equal to <code class="language-rzk highlight"><span class="s">unit</span></code>),
 allowing to use <code class="language-rzk highlight"><span class="s">refl</span></code> immediately:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:Unit-uniq&#39;" id="define:Unit-uniq&#39;" style="visibility: visible; position: relative; color: inherit">Unit-uniq&#39;</a></span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="err">  : </span><span class="p">(</span>x <span class="p">:</span><span class="err"> Unit) → x = </span><span class="s">unit</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="err">  : </span><span class="p">( </span>x <span class="p">:</span><span class="err"> Unit) → x = </span><span class="s">unit</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="err">  := </span><span class="p">\ </span>_ <span class="err">→ </span><span class="s">refl</span>
 </span></code></pre></div>
 
@@ -1174,10 +1174,10 @@ allowing to use <code class="language-rzk highlight"><span class="s">refl</span>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.action.edit", "navigation.footer", "navigation.sections", "navigation.path"], "search": "../../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.action.edit", "navigation.footer", "navigation.sections", "navigation.path"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
       
         <script src="../../../javascript/mathjax.js"></script>
       
