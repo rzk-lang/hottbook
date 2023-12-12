@@ -13,8 +13,8 @@ We expect a type to be a set, if there is no higher homotopical information.
     A type $A$ is a **set** if for all $x, y : A$ and all $p, q : x = y$, we have $p = q$.
 
 ```rzk
-#def isSet
-    (A : U)
+#def is-set
+    ( A : U)
     : U
     := (x : A) → (y : A) → (p : x = y) → (q : x = y) → (p = q)
 ```
@@ -23,25 +23,26 @@ We expect a type to be a set, if there is no higher homotopical information.
     The type $\mathbb{1}$ is a set.
 
 ```rzk
-#def unit-isSet
-    : isSet Unit
+#def is-set-Unit
+  : is-set Unit
     := \ x y p q → 3-path-concat
-        (x = y)
+        ( x = y)
         -- p = f_inv (f(p)) = f_inv (f(q)) = q
         p
-        ((first (second (second (paths-in-unit-equiv-unit x y)))) ((first (paths-in-unit-equiv-unit x y)) p))
-        ((first (second (second (paths-in-unit-equiv-unit x y)))) ((first (paths-in-unit-equiv-unit x y)) q))
+        ( ( first (second (second (paths-in-unit-equiv-unit x y)))) ((first (paths-in-unit-equiv-unit x y)) p))
+        ( ( first (second (second (paths-in-unit-equiv-unit x y)))) ((first (paths-in-unit-equiv-unit x y)) q))
         q
         -- p = f_inv (f(p)) : use the proof embedded in the equivalence
-        (path-sym (x = y) (((first (second (second (paths-in-unit-equiv-unit x y)))) ((first (paths-in-unit-equiv-unit x y)) p))) p
-            ((second (second (second (paths-in-unit-equiv-unit x y)))) p))
+        ( path-sym (x = y) (((first (second (second (paths-in-unit-equiv-unit x y)))) ((first (paths-in-unit-equiv-unit x y)) p))) p
+            ( ( second (second (second (paths-in-unit-equiv-unit x y)))) p))
         -- f_inv (f(p)) = f_inv (f(q)) : use the fact that f(p) and f(q) are of type Unit and therefore there is equality between them
-        (ap 
+        ( ap
             Unit (x = y)
-            (first (second (second (paths-in-unit-equiv-unit x y))))
-            ((first (paths-in-unit-equiv-unit x y)) p) 
-            ((first (paths-in-unit-equiv-unit x y)) q) 
-            (units-eq ((first (paths-in-unit-equiv-unit x y)) p) ((first (paths-in-unit-equiv-unit x y)) q)))
+            ( first (second (second (paths-in-unit-equiv-unit x y))))
+            ( ( first (paths-in-unit-equiv-unit x y)) p)
+            ( ( first (paths-in-unit-equiv-unit x y)) q)
+            refl)
         -- f_inv (f(q)) = q : use the proof embedded in the equivalence
-        ((second (second (second (paths-in-unit-equiv-unit x y)))) q)
+        ( ( second (second (second (paths-in-unit-equiv-unit x y)))) q)
+```
 ```
