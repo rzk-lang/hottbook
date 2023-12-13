@@ -32,6 +32,34 @@ We expect a type to be a set, if there is no higher homotopical information.
 
 ## Some examples
 
+Many of the proofs below appeal to the injectivity of equivalences:
+
+```rzk
+#define injective-equivalence
+  ( A B : U)
+  ( ( f , isequiv-f) : equivalence A B)
+  ( x y : A)
+  : ( f x = f y)
+  → ( x = y)
+  :=
+  \ fx-eq-fy →
+    3-path-concat A
+    ( x)
+    ( first (second isequiv-f) (f x))
+    ( first (second isequiv-f) (f y))
+    ( y)
+    ( path-sym A
+      ( first (second isequiv-f) (f x))
+      ( x)
+      ( second (second isequiv-f) x))
+    ( ap B A
+      ( first (second isequiv-f))
+      ( f x)
+      ( f y)
+      fx-eq-fy)
+    ( second (second isequiv-f) y)
+```
+
 ### Unit type is a set
 
 !!! example "Example 3.1.2."
@@ -40,25 +68,15 @@ We expect a type to be a set, if there is no higher homotopical information.
 ```rzk
 #def isSet-Unit
   : isSet Unit
-  := \ x y p q → 3-path-concat
-        ( x = y)
-        -- p = f_inv (f(p)) = f_inv (f(q)) = q
-        p
-        ( ( first (second (second (paths-in-unit-equiv-unit x y)))) ((first (paths-in-unit-equiv-unit x y)) p))
-        ( ( first (second (second (paths-in-unit-equiv-unit x y)))) ((first (paths-in-unit-equiv-unit x y)) q))
-        q
-        -- p = f_inv (f(p)) : use the proof embedded in the equivalence
-        ( path-sym (x = y) (((first (second (second (paths-in-unit-equiv-unit x y)))) ((first (paths-in-unit-equiv-unit x y)) p))) p
-            ( ( second (second (second (paths-in-unit-equiv-unit x y)))) p))
-        -- f_inv (f(p)) = f_inv (f(q)) : use the fact that f(p) and f(q) are of type Unit and therefore there is equality between them
-        ( ap
-            Unit (x = y)
-            ( first (second (second (paths-in-unit-equiv-unit x y))))
-            ( ( first (paths-in-unit-equiv-unit x y)) p)
-            ( ( first (paths-in-unit-equiv-unit x y)) q)
-            refl)
-        -- f_inv (f(q)) = q : use the proof embedded in the equivalence
-        ( ( second (second (second (paths-in-unit-equiv-unit x y)))) q)
+  :=
+  \ x y p q →
+    injective-equivalence
+    ( x = y)
+    ( Unit)
+    ( paths-in-unit-equiv-unit x y)
+    ( p)
+    ( q)
+    ( refl)
 ```
 
 ### Products of sets are sets
@@ -72,31 +90,28 @@ We expect a type to be a set, if there is no higher homotopical information.
   ( isSet-A : isSet A)
   ( isSet-B : isSet B)
   : isSet (prod A B)
-  := \ (a₁ , b₁) (a₂ , b₂) p q → 3-path-concat
+  :=
+  \ (a₁ , b₁) (a₂ , b₂) p q →
+    injective-equivalence
     ( ( a₁ , b₁) = (a₂ , b₂))
-    p
-    ( prod-of-paths-to-path-in-prod A B a₁ a₂ b₁ b₂ (path-in-prod-to-prod-of-paths A B (a₁ , b₁) (a₂ , b₂) p))
-    ( prod-of-paths-to-path-in-prod A B a₁ a₂ b₁ b₂ (path-in-prod-to-prod-of-paths A B (a₁ , b₁) (a₂ , b₂) q))
-    q
-    ( path-sym ((a₁ , b₁) = (a₂ , b₂))
-      ( prod-of-paths-to-path-in-prod A B a₁ a₂ b₁ b₂ (path-in-prod-to-prod-of-paths A B (a₁ , b₁) (a₂ , b₂) p))
-      p
-      ( second (second (prod-path-qinv A B a₁ a₂ b₁ b₂)) p))
-    ( ap (prod (a₁ = a₂) (b₁ = b₂)) ((a₁ , b₁) = (a₂ , b₂))
-      ( \ x → (prod-of-paths-to-path-in-prod A B a₁ a₂ b₁ b₂ x))
-      ( path-in-prod-to-prod-of-paths A B (a₁ , b₁) (a₂ , b₂) p)
-      ( path-in-prod-to-prod-of-paths A B (a₁ , b₁) (a₂ , b₂) q)
-      -- proof that (pa, pb) = (qa, qb)
-      ( prod-of-paths-to-path-in-prod (a₁ = a₂) (b₁ = b₂)
-        ( ap (prod A B) A (pr₁ A B) (a₁ , b₁) (a₂ , b₂) p)
-        ( ap (prod A B) A (pr₁ A B) (a₁ , b₁) (a₂ , b₂) q)
-        ( ap (prod A B) B (pr₂ A B) (a₁ , b₁) (a₂ , b₂) p)
-        ( ap (prod A B) B (pr₂ A B) (a₁ , b₁) (a₂ , b₂) q)
-        ( ( isSet-A a₁ a₂ (ap (prod A B) A (pr₁ A B) (a₁ , b₁) (a₂ , b₂) p) (ap (prod A B) A (pr₁ A B) (a₁ , b₁) (a₂ , b₂) q)
-      , isSet-B b₁ b₂ (ap (prod A B) B (pr₂ A B) (a₁ , b₁) (a₂ , b₂) p) (ap (prod A B) B (pr₂ A B) (a₁ , b₁) (a₂ , b₂) q)))
-      )
+    ( prod (a₁ = a₂) (b₁ = b₂))
+    ( paths-in-prod-equiv-prod-of-paths A B a₁ a₂ b₁ b₂)
+    ( p)
+    ( q)
+    ( prod-of-paths-to-path-in-prod
+      ( a₁ = a₂)
+      ( b₁ = b₂)
+      ( ap (prod A B) A (pr₁ A B) (a₁ , b₁) (a₂ , b₂) p)
+      ( ap (prod A B) A (pr₁ A B) (a₁ , b₁) (a₂ , b₂) q)
+      ( ap (prod A B) B (pr₂ A B) (a₁ , b₁) (a₂ , b₂) p)
+      ( ap (prod A B) B (pr₂ A B) (a₁ , b₁) (a₂ , b₂) q)
+      ( ( isSet-A a₁ a₂
+          ( ap (prod A B) A (pr₁ A B) (a₁ , b₁) (a₂ , b₂) p)
+          ( ap (prod A B) A (pr₁ A B) (a₁ , b₁) (a₂ , b₂) q)
+        , isSet-B b₁ b₂
+          ( ap (prod A B) B (pr₂ A B) (a₁ , b₁) (a₂ , b₂) p)
+          ( ap (prod A B) B (pr₂ A B) (a₁ , b₁) (a₂ , b₂) q)))
     )
-    ( second (second (prod-path-qinv A B a₁ a₂ b₁ b₂)) q)
 ```
 
 ### Function types into sets form sets
@@ -140,58 +155,18 @@ We expect a type to be a set, if there is no higher homotopical information.
   ( happly A (\ _ → B) f g q)
   ( weak-isSet-function₁ A B isSet-B f g p q)
 
-#define weak-isSet-function₃ uses (funext)
-  ( A B : U)
-  ( isSet-B : isSet B)
-  ( f g : A → B)
-  ( p q : f = g)
-  : map-funext funext A (\ _ → B) f g (happly A (\ _ → B) f g p)
-  = map-funext funext A (\ _ → B) f g (happly A (\ _ → B) f g q)
-  :=
-  ap
-  ( homotopy A (\ _ → B) f g)
-  ( f = g)
-  ( map-funext funext A (\ _ → B) f g)
-  ( happly A (\ _ → B) f g p)
-  ( happly A (\ _ → B) f g q)
-  ( weak-isSet-function₂ A B isSet-B f g p q)
-
-#define funext-happly-eq-id uses (funext)
-  ( A B : U)
-  ( isSet-B : isSet B)
-  ( f g : A → B)
-  ( p : f = g)
-  : map-funext funext A (\ _ → B) f g (happly A (\ _ → B) f g p)
-  = p
-  := second (second (funext A (\ _ → B) f g)) p
-
-#define path-concat3
-  ( A : U)
-  ( x y z w : A)
-  : ( x = y) → (y = z) → (z = w) → (x = w)
-  :=
-  \ p q r →
-    path-concat A x z w
-      ( path-concat A x y z p q)
-      r
-
 #define isSet-function uses (funext)
   ( A B : U)
   ( isSet-B : isSet B)
   : isSet (A → B)
   :=
   \ f g p q →
-    path-concat3 (f = g)
-
-      p
-      ( map-funext funext A (\ _ → B) f g (happly A (\ _ → B) f g p))
-      ( map-funext funext A (\ _ → B) f g (happly A (\ _ → B) f g q))
-      q
-
-      ( path-sym (f = g)
-        ( map-funext funext A (\ _ → B) f g (happly A (\ _ → B) f g p))
-        p
-        ( funext-happly-eq-id A B isSet-B f g p))
-      ( weak-isSet-function₃ A B isSet-B f g p q)
-      ( funext-happly-eq-id A B isSet-B f g q)
+    injective-equivalence
+    ( f = g)
+    ( homotopy A (\ _ → B) f g)
+    ( happly A (\ _ → B) f g
+    , funext A (\ _ → B) f g)
+    ( p)
+    ( q)
+    ( weak-isSet-function₂ A B isSet-B f g p q)
 ```

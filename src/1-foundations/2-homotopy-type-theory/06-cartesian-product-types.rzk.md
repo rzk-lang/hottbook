@@ -102,3 +102,20 @@ For any elements $x, y : A \times B$ and a path $p : x =_{A \times B} y$, by fun
       )
   )
 ```
+
+```rzk
+#def paths-in-prod-equiv-prod-of-paths
+  ( A B : U)
+  ( a₁ a₂ : A)
+  ( b₁ b₂ : B)
+  : equivalence
+    ( ( a₁ , b₁) = (a₂ , b₂))
+    ( prod (a₁ = a₂) (b₁ = b₂))
+  :=
+  ( path-in-prod-to-prod-of-paths A B (a₁ , b₁) (a₂ , b₂)
+  , qinv-to-isequiv
+    ( ( a₁ , b₁) = (a₂ , b₂))
+    ( prod (a₁ = a₂) (b₁ = b₂))
+    ( path-in-prod-to-prod-of-paths A B (a₁ , b₁) (a₂ , b₂))
+    ( prod-path-qinv A B a₁ a₂ b₁ b₂))
+```
