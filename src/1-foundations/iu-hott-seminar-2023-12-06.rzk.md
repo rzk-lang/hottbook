@@ -6,42 +6,6 @@
 
 # Sets and logic in HoTT
 
-```rzk
-#define is-set
-  ( A : U)
-  : U
-  :=
-    ( x : A)
-  → ( y : A)
-  → ( p : x = y)
-  → ( q : x = y)
-  → p = q
-```
-
-```rzk
-#define is-set-Unit
-  : is-set Unit
-  :=
-    \ x y p q →
-      path-ind Unit
-      ( \ x' y' p' → p' = q)
-      ( \ x' →
-        path-ind Unit
-        ( \ x'' y' q' → refl_{x''} = q')
-        ( \ x'' → refl)
-        x y q
-        )
-      x y p
-```
-
-```rzk title="HoTT Book, Definition 2.4.1"
-#define homotopy
-  ( A : U)
-  ( B : A → U)
-  ( f g : (a : A) → B a)
-  : U
-  := (x : A) → f x = g x
-```
 
 ```rzk title="HoTT Book, Definition 2.4.10"
 #define is-equiv
