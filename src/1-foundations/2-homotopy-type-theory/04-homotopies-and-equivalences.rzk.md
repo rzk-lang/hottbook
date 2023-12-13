@@ -167,6 +167,23 @@ The traditional notion of isomorphism is poorly behaved for proof-relevant mathe
     and $(– \cdot p) : (z =_A x) \to (z =_A y)$
     have quasi-inverses given by $(p^{−1} \cdot –)$ and $(– \cdot p^{−1})$, respectively.
 
+#### Quasi-inverse has a quasi-inverse
+
+```rzk
+#define inverse-from-qinv
+  ( A B : U)
+  ( f : A → B)
+  : qinv A B f → (B → A)
+  := \ (g , _) → g
+
+#define qinv-inverse-from-qinv
+  ( A B : U)
+  ( f : A → B)
+  : ( qinv-f : qinv A B f)
+  → qinv B A (inverse-from-qinv A B f qinv-f)
+  := \ (g , (α , β)) → (f , (β , α))
+```
+
 #### Quasi-inverse of the concatenation from the right side
 
 !!! tip "Change of variables in the code"
@@ -248,7 +265,7 @@ One of numerous, but equivalent ways to define `isequiv`:
 
 !!! note "Definition 2.4.10."
 
-    $$\mathsf{isequiv}(f) :\equiv (\sum_{(g:B \to A)} (f \circ g \sim id_B)) \times (\sum_{(h:B \to A)} (h \circ f \sim id_A)).$$
+    $$\mathsf{isequiv}(f) :\equiv \left(\sum_{(g:B \to A)} (f \circ g \sim id_B)\right) \times \left(\sum_{(h:B \to A)} (h \circ f \sim id_A)\right).$$
 
 ```rzk
 #def isequiv
@@ -261,7 +278,9 @@ One of numerous, but equivalent ways to define `isequiv`:
   ( Σ ( h : B → A) , homotopy A (\ _ → A) (compose A B A h f) (id A))
 ```
 
-1. For the $\mathsf{qinv}(f) \to \mathsf{equiv}(f)$ direction, $g$ can play the role of both $g$ and $h$, i.e. we take $(g, \alpha, \beta)$ to $(g, \alpha, g, \beta)$.
+### Proof of Property 1
+
+For the $\mathsf{qinv}(f) \to \mathsf{isequiv}(f)$ direction, $g$ can play the role of both $g$ and $h$, i.e. we take $(g, \alpha, \beta)$ to $(g, \alpha, g, \beta)$.
 
 ```rzk
 #def qinv-to-isequiv
@@ -271,7 +290,9 @@ One of numerous, but equivalent ways to define `isequiv`:
   := \ (g , (α , β)) → ((g , α) , (g , β))
 ```
 
-2. For the other direction, we are given $(g, \alpha, h, \beta)$. Notice that $h \circ f \circ g \sim_{\alpha} h$ and $h \circ f \circ g \sim_{\beta} g$. Let $\gamma$ be the composite homotopy
+### Proof of Property 2
+
+For the other direction, we are given $(g, \alpha, h, \beta)$. Notice that $h \circ f \circ g \sim_{\alpha} h$ and $h \circ f \circ g \sim_{\beta} g$. Let $\gamma$ be the composite homotopy
 
     $$g \sim_{\beta^{-1}} h \circ f \circ g \sim_{\alpha} h,$$
 
@@ -307,60 +328,81 @@ One of numerous, but equivalent ways to define `isequiv`:
             ( β x))) -- h (f x) = id x
 ```
 
-3. Proof of the third property requires identifying the identity types of cartesian products and dependent pair types, which are discussed in Sections 2.6 and 2.7.
+### Proof of Property 3
+
+Proof of the third property requires identifying the identity types of cartesian products and dependent pair types,
+which are discussed in Sections [2.6](06-cartesian-product-types.rzk.md) and [2.7](07-sigma-types.rzk.md).
 
 ## Equivalence of types
-!!! lemma "Definition 2.4.11."
-    An equivalence from type $A$ to type $B$ is defined to be a function $f : A \to B$ together with an inhabitant of $\mathsf{equiv}(f)$.
 
-    $$(A \simeq B) :\equiv \Sigma_{(f:A \to B)} \mathsf{equiv}(f).$$
+!!! lemma "Definition 2.4.11."
+    An equivalence from type $A$ to type $B$ is defined to be a function $f : A \to B$ together with an inhabitant of $\mathsf{isequiv}(f)$.
+
+    $$(A \simeq B) :\equiv \sum_{(f:A \to B)} \mathsf{isequiv}(f).$$
 
 !!! lemma "Note"
-    If we have a function $f : A \to B$ and we know that $e : \mathsf{equiv}(f)$, we may write $f : A \simeq B$, rather than $(f, e)$.
+    If we have a function $f : A \to B$ and we know that $e : \mathsf{isequiv}(f)$, we may write $f : A \simeq B$, rather than $(f, e)$.
 
 ```rzk
 #def equivalence
-    ( A B : U)
+  ( A B : U)
   : U
   := Σ (f : A → B) , isequiv A B f
 ```
 
 ## Type equivalences are equivalence relations
+
 !!! lemma "Lemma 2.4.12."
+
     Type equivalence is an equivalence relation on $U$. More specifically:
 
     1. For any $A$, the identity function $id_A$ is an equivalence; hence $A \simeq A$.
     2. For any $f : A \simeq B$, we have an equivalence $f^{-1} : B \simeq A$.
     3. For any $f : A \simeq B$ and $g : B \simeq C$, we have $g \circ f : A \simeq C$.
 
-1. Reflexivity
+### Reflexivity
+
 ```rzk
 #def equivalence-refl
-    ( A : U)
+  ( A : U)
   : equivalence A A
-  := (id A , ((id A , \ x → refl) , (id A , \ x → refl)))
+  :=
+  ( id A
+  , ( ( id A , \ x → refl)
+    , ( id A , \ x → refl)))
 ```
 
-2. Symmetry
+### Symmetry
+
 ```rzk
+#def inverse-from-equivalence
+  ( A B : U)
+  : equivalence A B → (B → A)
+  :=
+  \ (f , isequiv-f) →
+    inverse-from-qinv A B f (isequiv-to-qinv A B f isequiv-f)
+
+#def isequiv-inverse-from-equivalence
+  ( A B : U)
+  : ( f : equivalence A B)
+  → isequiv B A (inverse-from-equivalence A B f)
+  :=
+  \ (f , isequiv-f) →
+    qinv-to-isequiv B A
+    ( inverse-from-equivalence A B (f , isequiv-f))
+    ( qinv-inverse-from-qinv A B f (isequiv-to-qinv A B f isequiv-f))
+
 #def equivalence-sym
-    ( A B : U)
+  ( A B : U)
   : equivalence A B → equivalence B A
-  := \ (f , isequiv-f) →
-        ( first (isequiv-to-qinv A B f isequiv-f)
-        , qinv-to-isequiv
-            B
-            A
-            ( first (isequiv-to-qinv A B f isequiv-f))
-            ( f
-            , ( second (second (isequiv-to-qinv A B f isequiv-f))
-              , first (second (isequiv-to-qinv A B f isequiv-f))
-              )
-            )
-        )
+  :=
+  \ f →
+    ( inverse-from-equivalence A B f
+    , isequiv-inverse-from-equivalence A B f)
 ```
 
-3. Transitivity
+### Transitivity
+
 ```rzk
 -- #def equivalence-trans
 --     (A B C : U)
