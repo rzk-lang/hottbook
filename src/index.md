@@ -7,5 +7,5 @@ This project contains formalisations that follow [the HoTT Book](https://homotop
 From the root of the project's repository, run:
 
 ```sh
-rzk typecheck src/**/*.rzk.md
+rzk typecheck
 ```
