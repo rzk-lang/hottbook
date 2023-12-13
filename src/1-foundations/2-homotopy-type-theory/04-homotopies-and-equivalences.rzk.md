@@ -470,53 +470,98 @@ H(f x) = H(f x) • id (H x) • (H x)⁻¹ = f (H x) • H x • (H x)⁻¹ = f
 
 ```rzk
 #def homotopy-id-swap
-     ( A : U)
-     ( f : A → A)
-     ( H : homotopy A (\ _ → A) f (id A))
-     ( x : A)
+  ( A : U)
+  ( f : A → A)
+  ( H : homotopy A (\ _ → A) f (id A))
+  ( x : A)
   : H (f x) = ap A A f (f x) (id A x) (H x)
-  := 3-path-concat
-          ( f (f x) = (f x)) -- type of points
-          -- 1st point: H (f x)
+  :=
+  3-path-concat
+  ( f (f x) = (f x)) -- type of points
+  -- 1st point: H (f x)
+  ( H (f x))
+  -- 2nd point: (H (f x) • (H x)) • (H x)⁻¹
+  ( path-concat A (f (f x)) x (f x)
+    ( path-concat A (f (f x)) (f x) x
+      ( H (f x))
+      ( H x))
+    ( path-sym A (f x) x
+      ( H x)))
+  -- 3rd point:  (f (H x) • (H x)) • (H x)⁻¹
+  ( path-concat A (f (f x)) x (f x)
+    ( path-concat A (f (f x)) (f x) x
+      ( ap A A f (f x) x (H x))
+      ( H x))
+    ( path-sym A (f x) x
+      ( H x)))
+  -- 4th point: f (H x)
+  ( ap A A f (f x) x (H x))
+
+  -- proof that H (f x) = (H (f x) • H x) • (H x)⁻¹
+  ( path-sym
+    ( f (f x) = f x)
+    ( path-concat A (f (f x)) x (f x)
+      ( path-concat A (f (f x)) (f x) x
+        ( H (f x))
+        ( H x))
+      ( path-sym A (f x) x
+        ( H x)))
+    ( H (f x))
+    ( right-concat-right-inv-remove-refl A (f (f x)) (f x) x
+      ( H (f x))
+      ( H x)))
+
+  -- proof that (H (f x) • H x) • (H x)⁻¹ = (f (H x) • (H x)) • (H x)⁻¹
+  ( ap
+    ( f (f x) = x) -- (type of domain)
+    ( f (f x) = f x) -- (type of codomain)
+
+    ( \ p' →
+        path-concat A (f (f x)) x (f x)
+          ( p')
+          ( path-sym A (f x) x
+            ( H x)))
+
+    -- function-to-apply: whiskering by (Hx)⁻¹, a.k.a. cancel out H x
+    ( path-concat A (f (f x)) (f x) x
+      ( H (f x))
+      ( H x)) -- left point in path below
+    ( path-concat A (f (f x)) (f x) x
+      ( ap A A f (f x) x (H x))
+      ( H x)) -- right point in path below
+    ( path-concat
+        ( f (f x) = x)
+        -- (H (f x) • H x)
+        ( path-concat A (f (f x)) (f x) x
           ( H (f x))
-          -- 2nd point: (H (f x) • (H x)) • (H x)⁻¹
-          ( path-concat A (f (f x)) x (f x) (path-concat A (f (f x)) (f x) x (H (f x)) (H x)) (path-sym A (f x) x (H x)))
-          -- 3rd point:  (f (H x) • (H x)) • (H x)⁻¹
-          ( path-concat A (f (f x)) x (f x) (path-concat A (f (f x)) (f x) x (ap A A f (f x) x (H x)) (H x)) (path-sym A (f x) x (H x)))
-          -- 4th point: f (H x)
+          ( H x))
+        -- (H (f x) • id (H x))
+        ( path-concat A (f (f x)) (f x) x
+          ( H (f x))
+          ( ap A A (\ z → z) (f x) x (H x)))
+        -- f (H x) • (H x)
+        ( path-concat A (f (f x)) (f x) x
           ( ap A A f (f x) x (H x))
-          -- proof that H (f x) = (H (f x) • H x) • (H x)⁻¹
-          ( path-sym
-               ( f (f x) = f x)
-               ( path-concat A (f (f x)) x (f x) (path-concat A (f (f x)) (f x) x (H (f x)) (H x)) (path-sym A (f x) x (H x)))
-               ( H (f x))
-               ( right-concat-right-inv-remove-refl A (f (f x)) (f x) x (H (f x)) (H x)))
-          -- proof that (H (f x) • H x) • (H x)⁻¹ = (f (H x) • (H x)) • (H x)⁻¹
-          ( ap
-               ( f (f x) = x) -- (type of domain)
-               ( f (f x) = f x) -- (type of codomain)
-               ( \ p' → path-concat A (f (f x)) x (f x) p' (path-sym A (f x) x (H x)))
-               -- function-to-apply: whiskering by (Hx)⁻¹, a.k.a. cancel out H x
-               ( path-concat A (f (f x)) (f x) x (H (f x)) (H x)) -- left point in path below
-               ( path-concat A (f (f x)) (f x) x (ap A A f (f x) x (H x)) (H x)) -- right point in path below
-               ( path-concat
-                    ( f (f x) = x)
-                    -- (H (f x) • H x)
-                    ( path-concat A (f (f x)) ((\ (z : A) → z) (f x)) ((\ (z : A) → z) x) (H (f x)) (H x))
-                    -- (H (f x) • id (H x))
-                    ( path-concat A (f (f x)) ((\ (z : A) → z) (f x)) ((\ (z : A) → z) x) (H (f x)) (ap A A (\ (z : A) → z) (f x) x (H x)))
-                    -- f (H x) • (H x)
-                    ( path-concat A (f (f x)) (f x) ((\ (z : A) → z) x) (ap A A f (f x) x (H x)) (H x))
-                    -- (H (f x) • H x) = (H (f x) • id (H x))
-                    ( ap
-                         ( f x = x) -- domain
-                         ( ( f (f x)) = x) -- codomain
-                         ( \ p' → path-concat A (f (f x)) ((\ (z : A) → z) (f x)) ((\ (z : A) → z) x) (H (f x)) p') -- action of concatenation
-                         ( H x) -- left point in path
-                         ( ap A A (\ z → z) (f x) x (H x)) -- right point in path
-                         ( path-sym (f x = x) (ap A A (\ z → z) (f x) x (H x)) (H x) (ap-id A (f x) x (H x))))
-                    -- (H (f x) • id (H x)) = f (H x) • (H x)
-                    ( hom-naturality A A f (\ z → z) H (f x) x (H x))))
-          -- proof that (f (H x) • (H x)) • (H x)⁻¹ = f (H x)
-          ( right-concat-right-inv-remove-refl A (f (f x)) (f x) x (ap A A f (f x) (id A x) (H x)) (H x))
+          ( H x))
+        -- (H (f x) • H x) = (H (f x) • id (H x))
+        ( ap
+          ( f x = x) -- domain
+          ( ( f (f x)) = x) -- codomain
+          ( \ p' →
+              path-concat A (f (f x)) (f x) x
+                ( H (f x))
+                ( p')) -- action of concatenation
+          ( H x) -- left point in path
+          ( ap A A (\ z → z) (f x) x (H x)) -- right point in path
+          ( path-sym (f x = x)
+            ( ap A A (\ z → z) (f x) x (H x))
+            ( H x)
+            ( ap-id A (f x) x (H x))))
+        -- (H (f x) • id (H x)) = f (H x) • (H x)
+        ( hom-naturality A A f (\ z → z) H (f x) x (H x))))
+
+  -- proof that (f (H x) • (H x)) • (H x)⁻¹ = f (H x)
+  ( right-concat-right-inv-remove-refl A (f (f x)) (f x) x
+    ( ap A A f (f x) (id A x) (H x))
+    ( H x))
 ```
