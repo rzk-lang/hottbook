@@ -1,4 +1,4 @@
-# 2.4 Homotopies are equivalences
+# Propositions as types?
 
 This is a literate Rzk file:
 

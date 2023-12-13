@@ -22,7 +22,7 @@ nav:
           - 2.1 Types are higher groupoids: 1-foundations/2-homotopy-type-theory/01-types-are-higher-groupoids.rzk.md
           - 2.2 Functions are functors: 1-foundations/2-homotopy-type-theory/02-functions-are-functors.rzk.md
           - 2.3 Type families are fibrations: 1-foundations/2-homotopy-type-theory/03-type-families-are-fibrations.rzk.md
-          - 2.4 Homotopies are equivalences: 1-foundations/2-homotopy-type-theory/04-homotopies-are-equivalences.rzk.md
+          - 2.4 Homotopies and equivalences: 1-foundations/2-homotopy-type-theory/04-homotopies-and-equivalences.rzk.md
           - 2.5 The higher groupoid structure of type formers: 1-foundations/2-homotopy-type-theory/05-the-higher-groupoid-structure-of-type-formers.rzk.md
           - 2.6 Cartesian product types: 1-foundations/2-homotopy-type-theory/06-cartesian-product-types.rzk.md
           - 2.7 Σ-types: 1-foundations/2-homotopy-type-theory/07-sigma-types.rzk.md
@@ -35,6 +35,8 @@ nav:
           - "2.14 Example: equality of structures": 1-foundations/2-homotopy-type-theory/14-example-equality-of-structures.rzk.md
           - 2.15 Universal properties: 1-foundations/2-homotopy-type-theory/15-universal-properties.rzk.md
           - Exercises: 1-foundations/2-homotopy-type-theory/exercises/README.md
+      - 3 Sets and Logic:
+          - 3.1 Sets and n-types: 1-foundations/3-sets-and-logic/01-sets-and-n-types.rzk.md
 
 markdown_extensions:
   - admonition
