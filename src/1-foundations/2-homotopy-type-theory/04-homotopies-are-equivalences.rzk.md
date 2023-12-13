@@ -14,11 +14,11 @@ This is a literate Rzk file:
 
 ```rzk
 #def homotopy
-    (A : U)
-    (P : A → U)
-    (f g : (x : A) → P x)
-    : U
-    := (x : A) → f x = g x
+    ( A : U)
+    ( P : A → U)
+    ( f g : (x : A) → P x)
+  : U
+  := (x : A) → f x = g x
 ```
 
 ## Homotopies are equivalence relations
@@ -34,31 +34,31 @@ This is a literate Rzk file:
 1. Reflexivity:
 ```rzk
 #def homotopy-refl
-    (A : U)
-    (P : A → U)
-    (f : (x : A) → P x)
-    : homotopy A P f f
-    := \ x → refl
+    ( A : U)
+    ( P : A → U)
+    ( f : (x : A) → P x)
+  : homotopy A P f f
+  := \ x → refl
 ```
 
 2. Symmetry:
 ```rzk
 #def homotopy-sym:
-    (A : U)
-    (P : A → U)
-    (f g : (x : A) → P x)
-    : homotopy A P f g → homotopy A P g f
-    := \ hom → \ x → path-sym (P x) (f x) (g x) (hom x)
+    ( A : U)
+    ( P : A → U)
+    ( f g : (x : A) → P x)
+  : homotopy A P f g → homotopy A P g f
+  := \ hom → \ x → path-sym (P x) (f x) (g x) (hom x)
 ```
 
 3. Transitivity:
 ```rzk
 #def homotopy-trans
-    (A : U)
-    (P : A → U)
-    (f g h : (x : A) → P x)
-    : homotopy A P f g → homotopy A P g h → homotopy A P f h
-    := \ hom-fg → \ hom-gh → \ x → path-concat (P x) (f x) (g x) (h x) (hom-fg x) (hom-gh x)
+    ( A : U)
+    ( P : A → U)
+    ( f g h : (x : A) → P x)
+  : homotopy A P f g → homotopy A P g h → homotopy A P f h
+  := \ hom-fg → \ hom-gh → \ x → path-concat (P x) (f x) (g x) (h x) (hom-fg x) (hom-gh x)
 ```
 
 ## Naturality
@@ -71,16 +71,16 @@ This is a literate Rzk file:
 
 ```rzk
 #def hom-naturality
-    (A B : U)
-    (f g : A → B)
-    (H : homotopy A (\ _ → B) f g)
-    (x y : A)
-    (p : x = y)
-    : path-concat B (f x) (g x) (g y) (H x) (ap A B g x y p)
+    ( A B : U)
+    ( f g : A → B)
+    ( H : homotopy A (\ _ → B) f g)
+    ( x y : A)
+    ( p : x = y)
+  : path-concat B (f x) (g x) (g y) (H x) (ap A B g x y p)
         = path-concat B (f x) (f y) (g y) (ap A B f x y p) (H y)
-    := path-ind
+  := path-ind
         A
-        (\ x' y' p' → path-concat B (f x') (g x') (g y') (H x') (ap A B g x' y' p')
+        ( \ x' y' p' → path-concat B (f x') (g x') (g y') (H x') (ap A B g x' y' p')
             = path-concat B (f x') (f y') (g y') (ap A B f x' y' p') (H y')
         )
         -- ? : path-concat B (f x') (g x') (g x') (H x') (ap A B g x' x' refl) =
@@ -88,18 +88,18 @@ This is a literate Rzk file:
         --     path-concat B (f x') (g x') (g x') (H x') refl =
         --       path-concat B (f x') (f x') (g x') refl (H x')
         -- Both sides of the equality are equal to (H x'), we can use transitivity
-        (\ x' → path-concat -- lhs = rhs
-            (f x' = g x')
-            (path-concat B (f x') (g x') (g x') (H x') refl) -- lhs
-            (H x')
-            (path-concat B (f x') (f x') (g x') refl (H x')) -- rhs
-            (path-sym -- lhs = H x'
-                (f x' = g x')
-                (H x')
-                (path-concat B (f x') (g x') (g x') (H x') refl)
-                (concat-refl B (f x') (g x') (H x')) -- H x' = lhs
+        ( \ x' → path-concat -- lhs = rhs
+            ( f x' = g x')
+            ( path-concat B (f x') (g x') (g x') (H x') refl) -- lhs
+            ( H x')
+            ( path-concat B (f x') (f x') (g x') refl (H x')) -- rhs
+            ( path-sym -- lhs = H x'
+                ( f x' = g x')
+                ( H x')
+                ( path-concat B (f x') (g x') (g x') (H x') refl)
+                ( concat-refl B (f x') (g x') (H x')) -- H x' = lhs
             )
-            (refl-concat B (f x') (g x') (H x')) -- H x' = rhs
+            ( refl-concat B (f x') (g x') (H x')) -- H x' = rhs
         )
         x y p
 ```
@@ -129,13 +129,13 @@ The traditional notion of isomorphism is poorly behaved for proof-relevant mathe
 
 ```rzk
 #def qinv
-    (A B : U)
-    (f : A → B)
-    : U
-    := Σ (g : B → A),
-        prod
-                        (homotopy B (\ _ → B) (compose B A B f g) (id B))
-                        (homotopy A (\ _ → A) (compose A B A g f) (id A))
+    ( A B : U)
+    ( f : A → B)
+  : U
+  := Σ (g : B → A)
+      , prod
+                        ( homotopy B (\ _ → B) (compose B A B f g) (id B))
+                        ( homotopy A (\ _ → A) (compose A B A g f) (id A))
 ```
 
 ### Examples
@@ -144,11 +144,11 @@ The traditional notion of isomorphism is poorly behaved for proof-relevant mathe
 
 ```rzk
 #def qinv-id
-     (A : U)
-     : qinv A A (id A)
-     := (id A, 
-          (\ x → refl, 
-          \ x → refl))
+     ( A : U)
+  : qinv A A (id A)
+  := (id A
+        , ( \ x → refl
+        , \ x → refl))
 ```
 
 !!! note "Example 2.4.8. Quasi-inverse for path concatenation"
@@ -162,103 +162,103 @@ The traditional notion of isomorphism is poorly behaved for proof-relevant mathe
 
 ```rzk title="Definition of right concatenation as a function, and its inverse"
 #def right-concat
-     (A : U)
-     (x y z : A)
-     (q : y = z)
-     : (x = y) → (x = z)
-     := \ p → path-concat A x y z p q
+     ( A : U)
+     ( x y z : A)
+     ( q : y = z)
+  : ( x = y) → (x = z)
+  := \ p → path-concat A x y z p q
 
 
 #def right-concat-inv
-     (A : U)
-     (x y z : A)
-     (q : y = z)
-     : (x = z) → (x = y)
-     := right-concat A x z y (path-sym A y z q)
+     ( A : U)
+     ( x y z : A)
+     ( q : y = z)
+  : ( x = z) → (x = y)
+  := right-concat A x z y (path-sym A y z q)
 
 ```
 
 ```rzk title="Proofs that both compositions are homotopical to identity"
 #def right-concat-right-inv-remove-refl
-     (A : U)
-     (x y z : A)
-     (p : x = y)
-     (q : y = z)
-     : (compose (x = y) (x = z) (x = y) (right-concat-inv A x y z q) (right-concat A x y z q)) p = p
-     := 3-path-concat
-          (x = y) -- type of things that are connected my paths
+     ( A : U)
+     ( x y z : A)
+     ( p : x = y)
+     ( q : y = z)
+  : ( compose (x = y) (x = z) (x = y) (right-concat-inv A x y z q) (right-concat A x y z q)) p = p
+  := 3-path-concat
+          ( x = y) -- type of things that are connected my paths
           -- 1st point: (p • q) • q⁻¹
-          (compose (x = y) (x = z) (x = y) (right-concat-inv A x y z q) (right-concat A x y z q) p)
+          ( compose (x = y) (x = z) (x = y) (right-concat-inv A x y z q) (right-concat A x y z q) p)
           -- 2nd point: p • (q • q⁻¹)
-          (path-concat A x y y p (path-concat A y z y q (path-sym A y z q)))
+          ( path-concat A x y y p (path-concat A y z y q (path-sym A y z q)))
           -- 3rd point: p • refl
-          (path-concat A x y y p refl)
+          ( path-concat A x y y p refl)
           -- 4th point: p
           p
           -- 1st proof: (p • q) • q⁻¹ = p • (q • q⁻¹)
-          (concat-assoc-2 A x y z y
+          ( concat-assoc-2 A x y z y
                p
                q
-               (path-sym A y z q)
+               ( path-sym A y z q)
           )
           -- 2nd proof: p • (q • q⁻¹) = p • refl
-          (ap
-               (y = y)
-               (x = y)
-               (\ p' → (path-concat A x y y p p'))
-               (path-concat A y z y q (path-sym A y z q))
+          ( ap
+               ( y = y)
+               ( x = y)
+               ( \ p' → (path-concat A x y y p p'))
+               ( path-concat A y z y q (path-sym A y z q))
                refl
-               (inverse-r A y z q)
+               ( inverse-r A y z q)
           )
           -- 3rd proof: p • refl = p
-          (path-sym (x = y) p (path-concat A x y y p refl) (concat-refl A x y p))
+          ( path-sym (x = y) p (path-concat A x y y p refl) (concat-refl A x y p))
 
 
 #def right-concat-left-inv-remove-refl
-     (A : U)
-     (x y z : A)
-     (r : x = z)
-     (q : y = z)
-     : (compose (x = z) (x = y) (x = z) (right-concat A x y z q) (right-concat-inv A x y z q)) r = r
-     := 3-path-concat
-          (x = z) -- type of things that are connected my paths
+     ( A : U)
+     ( x y z : A)
+     ( r : x = z)
+     ( q : y = z)
+  : ( compose (x = z) (x = y) (x = z) (right-concat A x y z q) (right-concat-inv A x y z q)) r = r
+  := 3-path-concat
+          ( x = z) -- type of things that are connected my paths
           -- 1st point: (r • q⁻¹) • q
-          (compose (x = z) (x = y) (x = z) (right-concat A x y z q) (right-concat-inv A x y z q) r)
+          ( compose (x = z) (x = y) (x = z) (right-concat A x y z q) (right-concat-inv A x y z q) r)
           -- 2nd point: r • (q⁻¹ • q)
-          (path-concat A x z z r (path-concat A z y z (path-sym A y z q) q))
+          ( path-concat A x z z r (path-concat A z y z (path-sym A y z q) q))
           -- 3rd point: r • refl
-          (path-concat A x z z r refl)
+          ( path-concat A x z z r refl)
           -- 4th point: p
           r
           -- 1st proof: (r • q⁻¹) • q = r • (q⁻¹ • q)
-          (concat-assoc-2 A x z y z
+          ( concat-assoc-2 A x z y z
                r
-               (path-sym A y z q)
+               ( path-sym A y z q)
                q
           )
           -- 2nd proof: r • (q⁻¹ • q) = r • refl
-          (ap
-               (z = z)
-               (x = z)
-               (\ p' → (path-concat A x z z r p'))
-               (path-concat A z y z (path-sym A y z q) q)
+          ( ap
+               ( z = z)
+               ( x = z)
+               ( \ p' → (path-concat A x z z r p'))
+               ( path-concat A z y z (path-sym A y z q) q)
                refl
-               (inverse-l A y z q)
+               ( inverse-l A y z q)
           )
           -- 3rd proof: r • refl = r
-          (path-sym (x = z) r (path-concat A x z z r refl) (concat-refl A x z r))
+          ( path-sym (x = z) r (path-concat A x z z r refl) (concat-refl A x z r))
 ```     
 
 ```rzk title="Proof for quasi-inverse of right concatenation"
 #def right-concat-inv-is-qinv-for-right-concat
-     (A : U)
-     (x y z : A)
-     (q : y = z)
-     : qinv (x = y) (x = z) (right-concat A x y z q)
-     := (right-concat-inv A x y z q,
-          (
-               \ (r : x = z) → right-concat-left-inv-remove-refl  A x y z r q,
-               \ (p : x = y) → right-concat-right-inv-remove-refl A x y z p q
+     ( A : U)
+     ( x y z : A)
+     ( q : y = z)
+  : qinv (x = y) (x = z) (right-concat A x y z q)
+  := (right-concat-inv A x y z q
+        , (
+               \ (r : x = z) → right-concat-left-inv-remove-refl  A x y z r q
+             , \ (p : x = y) → right-concat-right-inv-remove-refl A x y z p q
           ))
 ```
 
@@ -276,22 +276,22 @@ One of numerous, but equivalent ways to define `isequiv`:
 
 ```rzk
 #def isequiv
-    (A B : U)
-    (f : A → B)
-    : U
-    := prod
-        (Σ (g : B → A), homotopy B (\ _ → B) (compose B A B f g) (id B))
-        (Σ (h : B → A), homotopy A (\ _ → A) (compose A B A h f) (id A))
+    ( A B : U)
+    ( f : A → B)
+  : U
+  := prod
+        ( Σ ( g : B → A) , homotopy B (\ _ → B) (compose B A B f g) (id B))
+        ( Σ ( h : B → A) , homotopy A (\ _ → A) (compose A B A h f) (id A))
 ```
 
 1. For the $qinv(f) \to isequiv(f)$ direction, $g$ can play the role of both $g$ and $h$, i.e. we take $(g, \alpha, \beta)$ to $(g, \alpha, g, \beta)$.
 
 ```rzk
 #def qinv-to-isequiv
-    (A B : U)
-    (f : A → B)
-    : (qinv A B f) → (isequiv A B f)
-    := \ (g, (α, β)) → ((g, α), (g, β))
+    ( A B : U)
+    ( f : A → B)
+  : ( qinv A B f) → (isequiv A B f)
+  := \ (g , (α , β)) → ((g , α) , (g , β))
 ```
 
 2. For the other direction, we are given $(g, \alpha, h, \beta)$. Notice that $h \circ f \circ g \sim_{\alpha} h$ and $h \circ f \circ g \sim_{\beta} g$. Let $\gamma$ be the composite homotopy
@@ -302,38 +302,38 @@ meaning $\gamma(x) :\equiv \beta(g(x))^{-1} \cdot h(\alpha(x))$. Now define $\be
 
 ```rzk
 #def isequiv-to-qinv
-    (A B : U)
-    (f : A → B)
-    : (isequiv A B f) → (qinv A B f)
-    := \ ((g, α), (h, β)) →
-        (g,
-            (α,
-                \ x → path-concat -- g (f x) = id x
+    ( A B : U)
+    ( f : A → B)
+  : ( isequiv A B f) → (qinv A B f)
+  := \ ((g , α) , (h , β)) →
+        ( g
+          , ( α
+              , \ x → path-concat -- g (f x) = id x
                     A
-                    (compose A B A g f x)
-                    (compose A B A h f x)
-                    (id A x)
-                    (path-concat -- g (f x) = h (f x)
+                    ( compose A B A g f x)
+                    ( compose A B A h f x)
+                    ( id A x)
+                    ( path-concat -- g (f x) = h (f x)
                         A
-                        (g (f x))
-                        (h (f (g (f x))))
-                        (h (f x))
-                        (path-sym -- g (f x) = (h . f . g) (f x)
+                        ( g (f x))
+                        ( h (f (g (f x))))
+                        ( h (f x))
+                        ( path-sym -- g (f x) = (h . f . g) (f x)
                             A
-                            (compose A B A h f (g (f x)))
-                            (id A (g (f x)))
-                            (β (g (f x)))
+                            ( compose A B A h f (g (f x)))
+                            ( id A (g (f x)))
+                            ( β (g (f x)))
                         )
-                        (ap -- (h . f . g) (f x) = h (f x)
+                        ( ap -- (h . f . g) (f x) = h (f x)
                             B
                             A
                             h
-                            (compose B A B f g (f x))
-                            (id B (f x))
-                            (α (f x))
+                            ( compose B A B f g (f x))
+                            ( id B (f x))
+                            ( α (f x))
                         )
                     )
-                    (β x) -- h (f x) = id x
+                    ( β x) -- h (f x) = id x
             )
         )
 ```
@@ -351,9 +351,9 @@ meaning $\gamma(x) :\equiv \beta(g(x))^{-1} \cdot h(\alpha(x))$. Now define $\be
 
 ```rzk
 #def equivalence
-    (A B : U)
-    : U
-    := Σ (f : A → B), isequiv A B f
+    ( A B : U)
+  : U
+  := Σ (f : A → B) , isequiv A B f
 ```
 
 ## Type equivalences are equivalence relations
@@ -367,22 +367,22 @@ meaning $\gamma(x) :\equiv \beta(g(x))^{-1} \cdot h(\alpha(x))$. Now define $\be
 1. Reflexivity
 ```rzk
 #def equivalence-refl
-    (A : U)
-    : equivalence A A
-    := (id A, ((id A, \ x → refl), (id A, \ x → refl)))
+    ( A : U)
+  : equivalence A A
+  := (id A , ((id A , \ x → refl) , (id A , \ x → refl)))
 ```
 
 2. Symmetry
 ```rzk
 #def equivalence-sym
-    (A B : U)
-    : equivalence A B → equivalence B A
-    := \ (f, isequiv-f) →
+    ( A B : U)
+  : equivalence A B → equivalence B A
+  := \ (f , isequiv-f) →
         ( first (isequiv-to-qinv A B f isequiv-f)
         , qinv-to-isequiv
             B
             A
-            (first (isequiv-to-qinv A B f isequiv-f))
+            ( first (isequiv-to-qinv A B f isequiv-f))
             ( f
             , ( second (second (isequiv-to-qinv A B f isequiv-f))
               , first (second (isequiv-to-qinv A B f isequiv-f))
@@ -421,53 +421,53 @@ H(f x) = H(f x) • id (H x) • (H x)⁻¹ = f (H x) • H x • (H x)⁻¹ = f
 
 ```rzk
 #def homotopy-id-swap
-     (A : U)
-     (f : A → A)
-     (H : homotopy A (\ _ → A) f (id A))
-     (x : A)
-     : H (f x) = ap A A f (f x) (id A x) (H x)
-     := 3-path-concat
-          (f (f x) = (f x)) -- type of points
+     ( A : U)
+     ( f : A → A)
+     ( H : homotopy A (\ _ → A) f (id A))
+     ( x : A)
+  : H (f x) = ap A A f (f x) (id A x) (H x)
+  := 3-path-concat
+          ( f (f x) = (f x)) -- type of points
           -- 1st point: H (f x)
-          (H (f x))
+          ( H (f x))
           -- 2nd point: (H (f x) • (H x)) • (H x)⁻¹
-          (path-concat A (f (f x)) x (f x) (path-concat A (f (f x)) (f x) x (H (f x)) (H x)) (path-sym A (f x) x (H x)))
+          ( path-concat A (f (f x)) x (f x) (path-concat A (f (f x)) (f x) x (H (f x)) (H x)) (path-sym A (f x) x (H x)))
           -- 3rd point:  (f (H x) • (H x)) • (H x)⁻¹ 
-          (path-concat A (f (f x)) x (f x) (path-concat A (f (f x)) (f x) x (ap A A f (f x) x (H x)) (H x)) (path-sym A (f x) x (H x)))
+          ( path-concat A (f (f x)) x (f x) (path-concat A (f (f x)) (f x) x (ap A A f (f x) x (H x)) (H x)) (path-sym A (f x) x (H x)))
           -- 4th point: f (H x)
-          (ap A A f (f x) x (H x))
+          ( ap A A f (f x) x (H x))
           -- proof that H (f x) = (H (f x) • H x) • (H x)⁻¹
-          (path-sym
-               (f (f x) = f x) 
-               (path-concat A (f (f x)) x (f x) (path-concat A (f (f x)) (f x) x (H (f x)) (H x)) (path-sym A (f x) x (H x)))
-               (H (f x))
-               (right-concat-right-inv-remove-refl A (f (f x)) (f x) x (H (f x)) (H x)))
+          ( path-sym
+               ( f (f x) = f x) 
+               ( path-concat A (f (f x)) x (f x) (path-concat A (f (f x)) (f x) x (H (f x)) (H x)) (path-sym A (f x) x (H x)))
+               ( H (f x))
+               ( right-concat-right-inv-remove-refl A (f (f x)) (f x) x (H (f x)) (H x)))
           -- proof that (H (f x) • H x) • (H x)⁻¹ = (f (H x) • (H x)) • (H x)⁻¹
-          (ap 
-               (f (f x) = x) -- (type of domain) 
-               (f (f x) = f x) -- (type of codomain) 
-               (\ p' → path-concat A (f (f x)) x (f x) p' (path-sym A (f x) x (H x)))
+          ( ap 
+               ( f (f x) = x) -- (type of domain) 
+               ( f (f x) = f x) -- (type of codomain) 
+               ( \ p' → path-concat A (f (f x)) x (f x) p' (path-sym A (f x) x (H x)))
                -- function-to-apply: whiskering by (Hx)⁻¹, a.k.a. cancel out H x
-               (path-concat A (f (f x)) (f x) x (H (f x)) (H x)) -- left point in path below
-               (path-concat A (f (f x)) (f x) x (ap A A f (f x) x (H x)) (H x)) -- right point in path below
-               (path-concat
-                    (f (f x) = x)
+               ( path-concat A (f (f x)) (f x) x (H (f x)) (H x)) -- left point in path below
+               ( path-concat A (f (f x)) (f x) x (ap A A f (f x) x (H x)) (H x)) -- right point in path below
+               ( path-concat
+                    ( f (f x) = x)
                     -- (H (f x) • H x)
-                    (path-concat A (f (f x)) ((\ (z : A) → z) (f x)) ((\ (z : A) → z) x) (H (f x)) (H x))
+                    ( path-concat A (f (f x)) ((\ (z : A) → z) (f x)) ((\ (z : A) → z) x) (H (f x)) (H x))
                     -- (H (f x) • id (H x))
-                    (path-concat A (f (f x)) ((\ (z : A) → z) (f x)) ((\ (z : A) → z) x) (H (f x)) (ap A A (\ (z : A) → z) (f x) x (H x)))
+                    ( path-concat A (f (f x)) ((\ (z : A) → z) (f x)) ((\ (z : A) → z) x) (H (f x)) (ap A A (\ (z : A) → z) (f x) x (H x)))
                     -- f (H x) • (H x)
-                    (path-concat A (f (f x)) (f x) ((\ (z : A) → z) x) (ap A A f (f x) x (H x)) (H x))
+                    ( path-concat A (f (f x)) (f x) ((\ (z : A) → z) x) (ap A A f (f x) x (H x)) (H x))
                     -- (H (f x) • H x) = (H (f x) • id (H x))
-                    (ap
-                         (f x = x) -- domain
-                         ((f (f x)) = x) -- codomain
-                         (\p' → path-concat A (f (f x)) ((\ (z : A) → z) (f x)) ((\ (z : A) → z) x) (H (f x)) p') -- action of concatenation
-                         ( H x ) -- left point in path
-                         (ap A A (\ z → z) (f x) x (H x)) -- right point in path
-                         (path-sym (f x = x) (ap A A (\ z → z) (f x) x (H x)) (H x) (ap-id A (f x) x (H x))))
+                    ( ap
+                         ( f x = x) -- domain
+                         ( ( f (f x)) = x) -- codomain
+                         ( \ p' → path-concat A (f (f x)) ((\ (z : A) → z) (f x)) ((\ (z : A) → z) x) (H (f x)) p') -- action of concatenation
+                         ( H x) -- left point in path
+                         ( ap A A (\ z → z) (f x) x (H x)) -- right point in path
+                         ( path-sym (f x = x) (ap A A (\ z → z) (f x) x (H x)) (H x) (ap-id A (f x) x (H x))))
                     -- (H (f x) • id (H x)) = f (H x) • (H x)
-                    (hom-naturality A A f (\ z → z) H (f x) x (H x))))
+                    ( hom-naturality A A f (\ z → z) H (f x) x (H x))))
           -- proof that (f (H x) • (H x)) • (H x)⁻¹ = f (H x)
-          (right-concat-right-inv-remove-refl A (f (f x)) (f x) x (ap A A f (f x) (id A x) (H x)) (H x))
+          ( right-concat-right-inv-remove-refl A (f (f x)) (f x) x (ap A A f (f x) (id A x) (H x)) (H x))
 ```
