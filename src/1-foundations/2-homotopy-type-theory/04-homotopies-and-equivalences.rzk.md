@@ -375,12 +375,21 @@ which are discussed in Sections [2.6](06-cartesian-product-types.rzk.md) and [2.
 ### Symmetry
 
 ```rzk
+#def inverse-from-isequiv
+  ( A B : U)
+  ( f : A → B)
+  : isequiv A B f → (B → A)
+  :=
+  \ isequiv-f →
+    inverse-from-qinv A B f
+    ( isequiv-to-qinv A B f isequiv-f)
+
 #def inverse-from-equivalence
   ( A B : U)
   : equivalence A B → (B → A)
   :=
   \ (f , isequiv-f) →
-    inverse-from-qinv A B f (isequiv-to-qinv A B f isequiv-f)
+    inverse-from-isequiv A B f isequiv-f
 
 #def isequiv-inverse-from-equivalence
   ( A B : U)
