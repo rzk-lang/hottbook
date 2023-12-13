@@ -683,6 +683,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#related-statements-used-in-further-proofs" class="md-nav__link">
+    Related statements used in further proofs:
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -738,11 +745,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-homotopies-are-equivalences.rzk/" class="md-nav__link">
+      <a href="../04-homotopies-and-equivalences.rzk/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    2.4 Homotopies are equivalences
+    2.4 Homotopies and equivalences
   </span>
   
 
@@ -1000,6 +1007,68 @@
 
               
             
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3 Sets and Logic
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            3 Sets and Logic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3-sets-and-logic/01-sets-and-n-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.1 Sets and n-types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1085,6 +1154,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-statements-used-in-further-proofs" class="md-nav__link">
+    Related statements used in further proofs:
+  </a>
   
 </li>
       
@@ -1242,6 +1318,34 @@ have the following:</p>
 </span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="err">          </span><span class="c">-- path-concat A x&#39; z&#39; w&#39; q&#39; r&#39; = path-concat A x&#39; z&#39; w&#39; q&#39; r&#39; )</span>
 </span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="err">        ( </span><span class="p">\ </span>x&#39; z&#39; q&#39; w&#39; r&#39; <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
 </span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="err">        x y p) z q w r</span>
+</span></code></pre></div>
+<h2 id="related-statements-used-in-further-proofs">Related statements used in further proofs:<a class="headerlink" href="#related-statements-used-in-further-proofs" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Concatencation of three paths</p>
+</div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:3-path-concat" id="define:3-path-concat" style="visibility: visible; position: relative; color: inherit">3-path-concat</a></span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="err">  </span><span class="p">( </span>x y z w <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="err">  : ( x = y) → (y = z) → (z = w) → (x = w)</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="err">  := </span><span class="p">\ </span>p q r <span class="err">→ path-concat A x z w (path-concat A x y z p q) r</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Associativity symmetrical to 2.1.4-4</p>
+<div class="arithmatex">\[(p \cdot q) \cdot r = p \cdot (q \cdot r)\]</div>
+</div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:concat-assoc-2" id="define:concat-assoc-2" style="visibility: visible; position: relative; color: inherit">concat-assoc-2</a></span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="err">  </span><span class="p">( </span>x y z w <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="err">  </span><span class="p">( </span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="err">  </span><span class="p">( </span>q <span class="p">:</span><span class="err"> y = z)</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="err">  </span><span class="p">( </span>r <span class="p">:</span><span class="err"> z = w)</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="err">  : path-concat A x z w (path-concat A x y z p q) r</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="err">    = path-concat A x y w p (path-concat A y z w q r)</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="err">  := path-sym</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="err">      ( x = w)</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="err">      ( path-concat A x y w p (path-concat A y z w q r))</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="err">      ( path-concat A x z w (path-concat A x y z p q) r)</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="err">      ( concat-assoc A x y z w p q r)</span>
 </span></code></pre></div>
 
 

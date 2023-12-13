@@ -1,0 +1,1998 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../03-type-families-are-fibrations.rzk/">
+      
+      
+        <link rel="next" href="../05-the-higher-groupoid-structure-of-type-formers.rzk/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
+    
+    
+      
+        <title>2.4 Homotopies and equivalences - HoTT Book formalisation in Rzk proof assistant</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.9f615399.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.649f08f9.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#24-homotopies-and-equivalences" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="HoTT Book formalisation in Rzk proof assistant" class="md-header__button md-logo" aria-label="HoTT Book formalisation in Rzk proof assistant" data-md-component="logo">
+      
+  <img src="../../../assets/images/logo-1000x1000.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HoTT Book formalisation in Rzk proof assistant
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2.4 Homotopies and equivalences
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rzk-lang/hottbook" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rzk-lang/hottbook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="HoTT Book formalisation in Rzk proof assistant" class="md-nav__button md-logo" aria-label="HoTT Book formalisation in Rzk proof assistant" data-md-component="logo">
+      
+  <img src="../../../assets/images/logo-1000x1000.png" alt="logo">
+
+    </a>
+    HoTT Book formalisation in Rzk proof assistant
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rzk-lang/hottbook" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rzk-lang/hottbook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    General
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    1 Type Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            1 Type Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1-type-theory/04-dependent-function-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4 Dependent function types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1-type-theory/05-product-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.5 Product types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1-type-theory/06-dependent-pair-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.6 Dependent pair types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1-type-theory/07-coproduct-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.7 Coproduct types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1-type-theory/08-booleans.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.8 The type of booleans
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1-type-theory/09-natural-numbers.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.9 The natural numbers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1-type-theory/10-pattern-matching-and-recursion.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.10 Pattern matching and recursion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1-type-theory/11-propositions-as-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.11 Propositions as types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1-type-theory/12-identity-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.12 Identity types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1-type-theory/exercises/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercises
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    2 Homotopy Type Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            2 Homotopy Type Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-types-are-higher-groupoids.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.1 Types are higher groupoids
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-functions-are-functors.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.2 Functions are functors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-type-families-are-fibrations.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.3 Type families are fibrations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    2.4 Homotopies and equivalences
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    2.4 Homotopies and equivalences
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#homotopies-between-functions" class="md-nav__link">
+    Homotopies between functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#homotopies-are-equivalence-relations" class="md-nav__link">
+    Homotopies are equivalence relations
+  </a>
+  
+    <nav class="md-nav" aria-label="Homotopies are equivalence relations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reflexivity" class="md-nav__link">
+    Reflexivity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symmetry" class="md-nav__link">
+    Symmetry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transitivity" class="md-nav__link">
+    Transitivity
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#naturality" class="md-nav__link">
+    Naturality
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quasi-inverses" class="md-nav__link">
+    Quasi-Inverses
+  </a>
+  
+    <nav class="md-nav" aria-label="Quasi-Inverses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quasi-inverse-has-a-quasi-inverse" class="md-nav__link">
+    Quasi-inverse has a quasi-inverse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quasi-inverse-of-the-concatenation-from-the-right-side" class="md-nav__link">
+    Quasi-inverse of the concatenation from the right side
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#equivalences" class="md-nav__link">
+    Equivalences
+  </a>
+  
+    <nav class="md-nav" aria-label="Equivalences">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proof-of-property-1" class="md-nav__link">
+    Proof of Property 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof-of-property-2" class="md-nav__link">
+    Proof of Property 2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof-of-property-3" class="md-nav__link">
+    Proof of Property 3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#equivalence-of-types" class="md-nav__link">
+    Equivalence of types
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-equivalences-are-equivalence-relations" class="md-nav__link">
+    Type equivalences are equivalence relations
+  </a>
+  
+    <nav class="md-nav" aria-label="Type equivalences are equivalence relations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reflexivity_1" class="md-nav__link">
+    Reflexivity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symmetry_1" class="md-nav__link">
+    Symmetry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transitivity_1" class="md-nav__link">
+    Transitivity
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proof-of-corollary-244" class="md-nav__link">
+    Proof of Corollary 2.4.4
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-the-higher-groupoid-structure-of-type-formers.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.5 The higher groupoid structure of type formers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-cartesian-product-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.6 Cartesian product types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-sigma-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.7 Σ-types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-the-unit-type.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.8 The unit type
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-pi-types-and-function-extensionality.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.9 Π-types and the function extensionality axiom
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-universes-and-univalence-axiom.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.10 Universes and univalence axiom
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-identity-type.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.11 Identity type
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-coproducts.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.12 Coproducts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-natural-numbers.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.13 Natural numbers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-example-equality-of-structures.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.14 Example: equality of structures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-universal-properties.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.15 Universal properties
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercises/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercises
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3 Sets and Logic
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            3 Sets and Logic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3-sets-and-logic/01-sets-and-n-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.1 Sets and n-types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#homotopies-between-functions" class="md-nav__link">
+    Homotopies between functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#homotopies-are-equivalence-relations" class="md-nav__link">
+    Homotopies are equivalence relations
+  </a>
+  
+    <nav class="md-nav" aria-label="Homotopies are equivalence relations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reflexivity" class="md-nav__link">
+    Reflexivity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symmetry" class="md-nav__link">
+    Symmetry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transitivity" class="md-nav__link">
+    Transitivity
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#naturality" class="md-nav__link">
+    Naturality
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quasi-inverses" class="md-nav__link">
+    Quasi-Inverses
+  </a>
+  
+    <nav class="md-nav" aria-label="Quasi-Inverses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quasi-inverse-has-a-quasi-inverse" class="md-nav__link">
+    Quasi-inverse has a quasi-inverse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quasi-inverse-of-the-concatenation-from-the-right-side" class="md-nav__link">
+    Quasi-inverse of the concatenation from the right side
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#equivalences" class="md-nav__link">
+    Equivalences
+  </a>
+  
+    <nav class="md-nav" aria-label="Equivalences">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proof-of-property-1" class="md-nav__link">
+    Proof of Property 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof-of-property-2" class="md-nav__link">
+    Proof of Property 2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof-of-property-3" class="md-nav__link">
+    Proof of Property 3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#equivalence-of-types" class="md-nav__link">
+    Equivalence of types
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-equivalences-are-equivalence-relations" class="md-nav__link">
+    Type equivalences are equivalence relations
+  </a>
+  
+    <nav class="md-nav" aria-label="Type equivalences are equivalence relations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reflexivity_1" class="md-nav__link">
+    Reflexivity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symmetry_1" class="md-nav__link">
+    Symmetry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transitivity_1" class="md-nav__link">
+    Transitivity
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proof-of-corollary-244" class="md-nav__link">
+    Proof of Corollary 2.4.4
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/rzk-lang/hottbook/edit/master/1-foundations/2-homotopy-type-theory/04-homotopies-and-equivalences.rzk.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="24-homotopies-and-equivalences">2.4 Homotopies and equivalences<a class="headerlink" href="#24-homotopies-and-equivalences" title="Permanent link">&para;</a></h1>
+<p>This is a literate Rzk file:</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">#lang</span><span class="p"> </span><span class="s">rzk-1</span>
+</span></code></pre></div>
+<h2 id="homotopies-between-functions">Homotopies between functions<a class="headerlink" href="#homotopies-between-functions" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Definition 2.4.1.</p>
+<p>Let <span class="arithmatex">\(f, g : \prod_{(x:A)} P(x)\)</span> be two sections of a type family <span class="arithmatex">\(P : A \to U\)</span>.
+A homotopy from <span class="arithmatex">\(f\)</span> to <span class="arithmatex">\(g\)</span> is a dependent function of type</p>
+<div class="arithmatex">\[(f \sim g) :\equiv \prod_{(x:A)} (f(x) = g(x)).\]</div>
+</div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:homotopy" id="define:homotopy" style="visibility: visible; position: relative; color: inherit">homotopy</a></span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">  </span><span class="p">( </span>P <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → P x)</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="err">  : U</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="err">  := </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → f x = g x</span>
+</span></code></pre></div>
+<h2 id="homotopies-are-equivalence-relations">Homotopies are equivalence relations<a class="headerlink" href="#homotopies-are-equivalence-relations" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Lemma 2.4.2.</p>
+<p>Homotopy is an equivalence relation on each dependent function type <span class="arithmatex">\(\prod_{(x:A)} P(x)\)</span>.
+That is, we have elements of the types</p>
+<div class="arithmatex">\[\prod_{f : \prod_{(x:A)} P(x)} (f \sim f)\]</div>
+<div class="arithmatex">\[\prod_{f, g : \prod_{(x:A)} P(x)} (f \sim g) \to (g \sim f)\]</div>
+<div class="arithmatex">\[\prod_{f, g, h : \prod_{(x:A)} P(x)} (f \sim g) \to (g \sim h) \to (f \sim h)\]</div>
+</div>
+<h3 id="reflexivity">Reflexivity<a class="headerlink" href="#reflexivity" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:homotopy-refl" id="define:homotopy-refl" style="visibility: visible; position: relative; color: inherit">homotopy-refl</a></span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">  </span><span class="p">( </span>P <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → P x)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="err">  : homotopy A P f f</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="err">  := </span><span class="p">\ </span>x <span class="err">→ </span><span class="s">refl</span>
+</span></code></pre></div>
+<h3 id="symmetry">Symmetry<a class="headerlink" href="#symmetry" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:homotopy-sym" id="define:homotopy-sym" style="visibility: visible; position: relative; color: inherit">homotopy-sym</a></span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">  </span><span class="p">( </span>P <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → P x)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="err">  : homotopy A P f g → homotopy A P g f</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="err">  :=</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="err">  </span><span class="p">\ </span>hom x <span class="err">→</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="err">    path-sym (P x) (f x) (g x) (hom x)</span>
+</span></code></pre></div>
+<h3 id="transitivity">Transitivity<a class="headerlink" href="#transitivity" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:homotopy-trans" id="define:homotopy-trans" style="visibility: visible; position: relative; color: inherit">homotopy-trans</a></span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">    </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">    </span><span class="p">( </span>P <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="err">    </span><span class="p">( </span>f g h <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → P x)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="err">  : homotopy A P f g</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="err">  → homotopy A P g h</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="err">  → homotopy A P f h</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="err">  :=</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="err">  </span><span class="p">\ </span>hom-fg hom-gh x <span class="err">→</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="err">    path-concat (P x) (f x) (g x) (h x) (hom-fg x) (hom-gh x)</span>
+</span></code></pre></div>
+<h2 id="naturality">Naturality<a class="headerlink" href="#naturality" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Lemma 2.4.3.</p>
+<p>Suppose <span class="arithmatex">\(H : f \sim g\)</span> is a homotopy between functions <span class="arithmatex">\(f, g: A \to B\)</span> and let <span class="arithmatex">\(p : x =_A y\)</span>. Then we have</p>
+<div class="arithmatex">\[H(x) \cdot g(p) = f(p) \cdot H(y).\]</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When dealing with paths, authors write <span class="arithmatex">\(f(p)\)</span> to mean <span class="arithmatex">\(ap_f(p)\)</span>.</p>
+</div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:hom-naturality" id="define:hom-naturality" style="visibility: visible; position: relative; color: inherit">hom-naturality</a></span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="err">  </span><span class="p">( </span>H <span class="p">:</span><span class="err"> homotopy A (</span><span class="p">\ </span>_ <span class="err">→ B) f g)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="err">  : </span><span class="p">( </span>x <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="err">  → </span><span class="p">( </span>y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="err">  → </span><span class="p">( </span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="err">  → path-concat B (f x) (g x) (g y) (H x) (ap A B g x y p)</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="err">  = path-concat B (f x) (f y) (g y) (ap A B f x y p) (H y)</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="err">  :=</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="err">  path-ind A</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="err">  ( </span><span class="p">\ </span>x&#39; y&#39; p&#39; <span class="err">→</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="err">      path-concat B (f x&#39;) (g x&#39;) (g y&#39;) (H x&#39;) (ap A B g x&#39; y&#39; p&#39;)</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="err">    = path-concat B (f x&#39;) (f y&#39;) (g y&#39;) (ap A B f x&#39; y&#39; p&#39;) (H y&#39;))</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="err">  ( </span><span class="p">\ </span>x&#39; <span class="err">→ path-sym </span><span class="c">-- H x&#39; ∙ refl = H x&#39;</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="err">            ( f x&#39; = g x&#39;)</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="err">            ( H x&#39;)</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="err">            ( path-concat B (f x&#39;) (g x&#39;) (g x&#39;) (H x&#39;) </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="err">            ( concat-refl B (f x&#39;) (g x&#39;) (H x&#39;)) </span><span class="c">-- H x&#39; = H x&#39; ∙ refl</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="err">        )</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Corollary 2.4.4.</p>
+<p>Let <span class="arithmatex">\(H : f \sim id_A\)</span> be a homotopy, with <span class="arithmatex">\(f : A \to A\)</span>. Then, for any <span class="arithmatex">\(x : A\)</span> we have</p>
+<div class="arithmatex">\[H(f(x)) = f(H(x)).\]</div>
+<p>Here <span class="arithmatex">\(f(x)\)</span> denotes the ordinary application of <span class="arithmatex">\(f\)</span> to <span class="arithmatex">\(x\)</span>, while <span class="arithmatex">\(f(H(x))\)</span> denotes <span class="arithmatex">\(ap_f(H(x))\)</span>.</p>
+</div>
+<p>Proof <a href="#define:homotopy-id-swap"><code class="language-rzk highlight"><span class="err">homotopy-id-swap</span></code></a> is given in the end of the file.</p>
+<h2 id="quasi-inverses">Quasi-Inverses<a class="headerlink" href="#quasi-inverses" title="Permanent link">&para;</a></h2>
+<p>The traditional notion of isomorphism is poorly behaved for proof-relevant mathematics. Thus, it is given the name of quasi-inverse.</p>
+<div class="admonition note">
+<p class="admonition-title">Definition 2.4.6.</p>
+<p>For a function <span class="arithmatex">\(f : A → B\)</span>,
+a <strong>quasi-inverse</strong> of <span class="arithmatex">\(f\)</span> is a triple <span class="arithmatex">\((g, \alpha, \beta)\)</span> consisting of
+a function <span class="arithmatex">\(g : B → A\)</span>
+and homotopies <span class="arithmatex">\(\alpha : f \circ g \sim id_B\)</span>
+and <span class="arithmatex">\(\beta : g \circ f \sim id_A\)</span>.</p>
+</div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:qinv" id="define:qinv" style="visibility: visible; position: relative; color: inherit">qinv</a></span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="err">  : U</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="err">  :=</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="err">  </span><span class="kt">Σ</span><span class="err"> </span><span class="p">( </span>g <span class="p">:</span><span class="err"> B → A)</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="err">  , prod</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="err">    ( homotopy B (</span><span class="p">\ </span>_ <span class="err">→ B) (compose B A B f g) (id B))</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="err">    ( homotopy A (</span><span class="p">\ </span>_ <span class="err">→ A) (compose A B A g f) (id A))</span>
+</span></code></pre></div>
+<h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h3>
+<div class="admonition example">
+<p class="admonition-title">Example 2.4.7. Identity quasi-inverse</p>
+<p>The identity function <span class="arithmatex">\(id_A : A \to A\)</span> has a quasi-inverse given by <span class="arithmatex">\(id_A\)</span> itself,
+together with homotopies defined by <span class="arithmatex">\(\alpha(y) :\equiv \mathsf{refl}_y\)</span> and <span class="arithmatex">\(\beta(x) :\equiv \mathsf{refl}_x\)</span>.</p>
+</div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:qinv-id" id="define:qinv-id" style="visibility: visible; position: relative; color: inherit">qinv-id</a></span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="err">  : qinv A A (id A)</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="err">  :=</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="err">  ( id A</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="err">  , ( </span><span class="p">\ </span>y <span class="err">→ </span><span class="s">refl</span><span class="err">_{y}</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="err">    , </span><span class="p">\ </span>x <span class="err">→ </span><span class="s">refl</span><span class="err">_{x}))</span>
+</span></code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Example 2.4.8. Quasi-inverse for path concatenation</p>
+<p>For any <span class="arithmatex">\(p : x =_A y\)</span> and <span class="arithmatex">\(z : A\)</span>,
+the functions <span class="arithmatex">\((p \cdot –) : (y =_A z) \to (x =_A z)\)</span>
+and <span class="arithmatex">\((– \cdot p) : (z =_A x) \to (z =_A y)\)</span>
+have quasi-inverses given by <span class="arithmatex">\((p^{−1} \cdot –)\)</span> and <span class="arithmatex">\((– \cdot p^{−1})\)</span>, respectively.</p>
+</div>
+<h4 id="quasi-inverse-has-a-quasi-inverse">Quasi-inverse has a quasi-inverse<a class="headerlink" href="#quasi-inverse-has-a-quasi-inverse" title="Permanent link">&para;</a></h4>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:inverse-from-qinv" id="define:inverse-from-qinv" style="visibility: visible; position: relative; color: inherit">inverse-from-qinv</a></span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="err">  : qinv A B f → (B → A)</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="err">  := \ (g , _) → g</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:qinv-inverse-from-qinv" id="define:qinv-inverse-from-qinv" style="visibility: visible; position: relative; color: inherit">qinv-inverse-from-qinv</a></span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="err">  : </span><span class="p">( </span>qinv-f <span class="p">:</span><span class="err"> qinv A B f)</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="err">  → qinv B A (inverse-from-qinv A B f qinv-f)</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="err">  := \ (g , (α , β)) → (f , (β , α))</span>
+</span></code></pre></div>
+<h4 id="quasi-inverse-of-the-concatenation-from-the-right-side">Quasi-inverse of the concatenation from the right side<a class="headerlink" href="#quasi-inverse-of-the-concatenation-from-the-right-side" title="Permanent link">&para;</a></h4>
+<div class="admonition tip">
+<p class="admonition-title">Change of variables in the code</p>
+<p>Note the change of variables: <span class="arithmatex">\(p \mapsto q, x \mapsto y, y \mapsto z, z \mapsto x\)</span>. That is, the code corrsesponds to the statement that for any <span class="arithmatex">\(q : y =_A z\)</span> and <span class="arithmatex">\(x : A\)</span>, the function <span class="arithmatex">\((– \cdot q) : (x =_A y) \to (x =_A z)\)</span> have quasi-inverse given by <span class="arithmatex">\((– \cdot q^{−1})\)</span>, respectively.</p>
+</div>
+<div class="language-rzk highlight"><span class="filename">Definition of right concatenation as a function, and its inverse</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:right-concat" id="define:right-concat" style="visibility: visible; position: relative; color: inherit">right-concat</a></span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="err">  </span><span class="p">( </span>x y z <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="err">  </span><span class="p">( </span>q <span class="p">:</span><span class="err"> y = z)</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="err">  : ( x = y) → (x = z)</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="err">  := </span><span class="p">\ </span>p <span class="err">→ path-concat A x y z p q</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:right-concat-inv" id="define:right-concat-inv" style="visibility: visible; position: relative; color: inherit">right-concat-inv</a></span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="err">  </span><span class="p">( </span>x y z <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="err">  </span><span class="p">( </span>q <span class="p">:</span><span class="err"> y = z)</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="err">  : ( x = z) → (x = y)</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="err">  := right-concat A x z y (path-sym A y z q)</span>
+</span></code></pre></div>
+<div class="language-rzk highlight"><span class="filename">Proofs that both compositions are homotopical to identity</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:right-concat-right-inv-remove-refl" id="define:right-concat-right-inv-remove-refl" style="visibility: visible; position: relative; color: inherit">right-concat-right-inv-remove-refl</a></span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="err">  </span><span class="p">( </span>x y z <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="err">  </span><span class="p">( </span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="err">  : </span><span class="p">( </span>q <span class="p">:</span><span class="err"> y = z)</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="err">  → right-concat-inv A x y z q (right-concat A x y z q p) </span><span class="c">-- (p ∙ q) ∙ q⁻¹</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="err">  = p</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="err">  :=</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="err">  path-ind A</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="err">  </span><span class="p">( </span>\ x&#39; y&#39; p&#39; →
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>      ( q <span class="p">:</span><span class="err"> y&#39; = z) → right-concat-inv A x&#39; y&#39; z q (right-concat A x&#39; y&#39; z q p&#39;) = p&#39;)</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="err">  ( </span><span class="p">\ </span>x&#39; <span class="err">→ inverse-r A x&#39; z)</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="err">  ( x)</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="err">  ( y)</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="err">  ( p)</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:right-concat-left-inv-remove-refl" id="define:right-concat-left-inv-remove-refl" style="visibility: visible; position: relative; color: inherit">right-concat-left-inv-remove-refl</a></span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="err">  </span><span class="p">( </span>x y z <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="err">  </span><span class="p">( </span>r <span class="p">:</span><span class="err"> x = z)</span>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="err">  : </span><span class="p">( </span>q <span class="p">:</span><span class="err"> y = z)</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="err">  → right-concat A x y z q (right-concat-inv A x y z q r) </span><span class="c">-- (r ∙ q⁻¹) ∙ q</span>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="err">  = r</span>
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="err">  :=</span>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="err">  path-ind A</span>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="err">  </span><span class="p">( </span>\ x&#39; z&#39; r&#39; →
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>      ( q <span class="p">:</span><span class="err"> y = z&#39;) → right-concat A x&#39; y z&#39; q (right-concat-inv A x&#39; y z&#39; q r&#39;) = r&#39;)</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="err">  ( </span><span class="p">\ </span>x&#39; <span class="err">→ inverse-l A y x&#39;)</span>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a><span class="err">  ( x)</span>
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a><span class="err">  ( z)</span>
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a><span class="err">  ( r)</span>
+</span></code></pre></div>
+<div class="language-rzk highlight"><span class="filename">Proof for quasi-inverse of right concatenation</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:right-concat-inv-is-qinv-for-right-concat" id="define:right-concat-inv-is-qinv-for-right-concat" style="visibility: visible; position: relative; color: inherit">right-concat-inv-is-qinv-for-right-concat</a></span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="err">  </span><span class="p">( </span>x y z <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="err">  </span><span class="p">( </span>q <span class="p">:</span><span class="err"> y = z)</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="err">  : qinv (x = y) (x = z) (right-concat A x y z q)</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="err">  :=</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="err">  </span><span class="p">( </span>right-concat-inv A x y z q
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>  , ( \ (r <span class="p">:</span><span class="err"> x = z) → right-concat-left-inv-remove-refl  A x y z r q</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="err">    , \ </span><span class="p">(</span>p <span class="p">:</span><span class="err"> x = y) → right-concat-right-inv-remove-refl A x y z p q))</span>
+</span></code></pre></div>
+<h2 id="equivalences">Equivalences<a class="headerlink" href="#equivalences" title="Permanent link">&para;</a></h2>
+<p>An improved notion, <a href="#define:isequiv"><code>isequiv</code></a>, has the following properties:</p>
+<ol>
+<li>For each <span class="arithmatex">\(f : A \to B\)</span> there is a function <span class="arithmatex">\(\mathsf{qinv}(f) \to \mathsf{isequiv}(f)\)</span></li>
+<li>Similarly, for each <span class="arithmatex">\(f\)</span> we have <span class="arithmatex">\(\mathsf{isequiv}(f) \to \mathsf{qinv}(f)\)</span>; thus the two are logically equivalent.</li>
+<li>For any two inhabitants <span class="arithmatex">\(e_1, e_2 : \mathsf{isequiv}(f)\)</span>, we have <span class="arithmatex">\(e_1 = e_2\)</span>.</li>
+</ol>
+<p>One of numerous, but equivalent ways to define <code>isequiv</code>:</p>
+<div class="admonition note">
+<p class="admonition-title">Definition 2.4.10.</p>
+<div class="arithmatex">\[\mathsf{isequiv}(f) :\equiv \left(\sum_{(g:B \to A)} (f \circ g \sim id_B)\right) \times \left(\sum_{(h:B \to A)} (h \circ f \sim id_A)\right).\]</div>
+</div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:isequiv" id="define:isequiv" style="visibility: visible; position: relative; color: inherit">isequiv</a></span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="err">  : U</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="err">  :=</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="err">  prod</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="err">  </span><span class="p">( </span>Σ ( g <span class="p">:</span><span class="err"> B → A) , homotopy B (</span><span class="p">\ </span>_ <span class="err">→ B) (compose B A B f g) (id B))</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="err">  </span><span class="p">( </span>Σ ( h <span class="p">:</span><span class="err"> B → A) , homotopy A (</span><span class="p">\ </span>_ <span class="err">→ A) (compose A B A h f) (id A))</span>
+</span></code></pre></div>
+<h3 id="proof-of-property-1">Proof of Property 1<a class="headerlink" href="#proof-of-property-1" title="Permanent link">&para;</a></h3>
+<p>For the <span class="arithmatex">\(\mathsf{qinv}(f) \to \mathsf{isequiv}(f)\)</span> direction, <span class="arithmatex">\(g\)</span> can play the role of both <span class="arithmatex">\(g\)</span> and <span class="arithmatex">\(h\)</span>, i.e. we take <span class="arithmatex">\((g, \alpha, \beta)\)</span> to <span class="arithmatex">\((g, \alpha, g, \beta)\)</span>.</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:qinv-to-isequiv" id="define:qinv-to-isequiv" style="visibility: visible; position: relative; color: inherit">qinv-to-isequiv</a></span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="err">  : qinv A B f → isequiv A B f</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="err">  := \ (g , (α , β)) → ((g , α) , (g , β))</span>
+</span></code></pre></div>
+<h3 id="proof-of-property-2">Proof of Property 2<a class="headerlink" href="#proof-of-property-2" title="Permanent link">&para;</a></h3>
+<p>For the other direction, we are given <span class="arithmatex">\((g, \alpha, h, \beta)\)</span>. Notice that <span class="arithmatex">\(h \circ f \circ g \sim_{\alpha} h\)</span> and <span class="arithmatex">\(h \circ f \circ g \sim_{\beta} g\)</span>. Let <span class="arithmatex">\(\gamma\)</span> be the composite homotopy</p>
+<div class="language-text highlight"><pre><span></span><code>$$g \sim_{\beta^{-1}} h \circ f \circ g \sim_{\alpha} h,$$
+
+meaning $\gamma(x) :\equiv \beta(g(x))^{-1} \cdot h(\alpha(x))$. Now define $\beta&#39;(x) :\equiv \gamma(f(x)) \cdot \beta(x)$. Then $(g, \alpha, \beta) : \mathsf{qinv}(f)&#39;$.
+</code></pre></div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:isequiv-to-qinv" id="define:isequiv-to-qinv" style="visibility: visible; position: relative; color: inherit">isequiv-to-qinv</a></span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="err">  : isequiv A B f → qinv A B f</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="err">  :=</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="err">  \ ((g , α) , (h , β)) →</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="err">    ( g</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="err">      , ( α</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="err">        , </span><span class="p">\ </span>x <span class="err">→</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="err">            </span><span class="c">-- g (f x) = h (f (g (f x))) = h (f x) = x</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="err">            path-concat A </span><span class="c">-- g (f x) = id x</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="err">            ( compose A B A g f x)</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="err">            ( compose A B A h f x)</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="err">            ( id A x)</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="err">            ( path-concat A </span><span class="c">-- g (f x) = h (f x)</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="err">              ( g (f x))</span>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="err">              ( h (f (g (f x))))</span>
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="err">              ( h (f x))</span>
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="err">              ( path-sym A </span><span class="c">-- g (f x) = (h . f . g) (f x)</span>
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="err">                ( compose A B A h f (g (f x)))</span>
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="err">                ( id A (g (f x)))</span>
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="err">                ( β (g (f x))))</span>
+</span><span id="__span-14-23"><a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="err">              ( ap B A h </span><span class="c">-- (h . f . g) (f x) = h (f x)</span>
+</span><span id="__span-14-24"><a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="err">                ( compose B A B f g (f x))</span>
+</span><span id="__span-14-25"><a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a><span class="err">                ( id B (f x))</span>
+</span><span id="__span-14-26"><a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a><span class="err">                ( α (f x))))</span>
+</span><span id="__span-14-27"><a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a><span class="err">            ( β x))) </span><span class="c">-- h (f x) = id x</span>
+</span></code></pre></div>
+<h3 id="proof-of-property-3">Proof of Property 3<a class="headerlink" href="#proof-of-property-3" title="Permanent link">&para;</a></h3>
+<p>Proof of the third property requires identifying the identity types of cartesian products and dependent pair types,
+which are discussed in Sections <a href="../06-cartesian-product-types.rzk/">2.6</a> and <a href="../07-sigma-types.rzk/">2.7</a>.</p>
+<h2 id="equivalence-of-types">Equivalence of types<a class="headerlink" href="#equivalence-of-types" title="Permanent link">&para;</a></h2>
+<div class="admonition lemma">
+<p class="admonition-title">Definition 2.4.11.</p>
+<p>An equivalence from type <span class="arithmatex">\(A\)</span> to type <span class="arithmatex">\(B\)</span> is defined to be a function <span class="arithmatex">\(f : A \to B\)</span> together with an inhabitant of <span class="arithmatex">\(\mathsf{isequiv}(f)\)</span>.</p>
+<div class="arithmatex">\[(A \simeq B) :\equiv \sum_{(f:A \to B)} \mathsf{isequiv}(f).\]</div>
+</div>
+<div class="admonition lemma">
+<p class="admonition-title">Note</p>
+<p>If we have a function <span class="arithmatex">\(f : A \to B\)</span> and we know that <span class="arithmatex">\(e : \mathsf{isequiv}(f)\)</span>, we may write <span class="arithmatex">\(f : A \simeq B\)</span>, rather than <span class="arithmatex">\((f, e)\)</span>.</p>
+</div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equivalence" id="define:equivalence" style="visibility: visible; position: relative; color: inherit">equivalence</a></span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="err">  : U</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="err">  := </span><span class="kt">Σ</span><span class="err"> </span><span class="p">(</span>f <span class="p">:</span><span class="err"> A → B) , isequiv A B f</span>
+</span></code></pre></div>
+<h2 id="type-equivalences-are-equivalence-relations">Type equivalences are equivalence relations<a class="headerlink" href="#type-equivalences-are-equivalence-relations" title="Permanent link">&para;</a></h2>
+<div class="admonition lemma">
+<p class="admonition-title">Lemma 2.4.12.</p>
+<p>Type equivalence is an equivalence relation on <span class="arithmatex">\(U\)</span>. More specifically:</p>
+<ol>
+<li>For any <span class="arithmatex">\(A\)</span>, the identity function <span class="arithmatex">\(id_A\)</span> is an equivalence; hence <span class="arithmatex">\(A \simeq A\)</span>.</li>
+<li>For any <span class="arithmatex">\(f : A \simeq B\)</span>, we have an equivalence <span class="arithmatex">\(f^{-1} : B \simeq A\)</span>.</li>
+<li>For any <span class="arithmatex">\(f : A \simeq B\)</span> and <span class="arithmatex">\(g : B \simeq C\)</span>, we have <span class="arithmatex">\(g \circ f : A \simeq C\)</span>.</li>
+</ol>
+</div>
+<h3 id="reflexivity_1">Reflexivity<a class="headerlink" href="#reflexivity_1" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equivalence-refl" id="define:equivalence-refl" style="visibility: visible; position: relative; color: inherit">equivalence-refl</a></span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="err">  : equivalence A A</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="err">  :=</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="err">  ( id A</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="err">  , ( ( id A , </span><span class="p">\ </span>x <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="err">    , ( id A , </span><span class="p">\ </span>x <span class="err">→ </span><span class="s">refl</span><span class="err">)))</span>
+</span></code></pre></div>
+<h3 id="symmetry_1">Symmetry<a class="headerlink" href="#symmetry_1" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:inverse-from-isequiv" id="define:inverse-from-isequiv" style="visibility: visible; position: relative; color: inherit">inverse-from-isequiv</a></span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="err">  : isequiv A B f → (B → A)</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="err">  :=</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="err">  </span><span class="p">\ </span>isequiv-f <span class="err">→</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="err">    inverse-from-qinv A B f</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="err">    ( isequiv-to-qinv A B f isequiv-f)</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:inverse-from-equivalence" id="define:inverse-from-equivalence" style="visibility: visible; position: relative; color: inherit">inverse-from-equivalence</a></span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="err">  : equivalence A B → (B → A)</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="err">  :=</span>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="err">  \ (f , isequiv-f) →</span>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="err">    inverse-from-isequiv A B f isequiv-f</span>
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:isequiv-inverse-from-equivalence" id="define:isequiv-inverse-from-equivalence" style="visibility: visible; position: relative; color: inherit">isequiv-inverse-from-equivalence</a></span>
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="err">  : </span><span class="p">( </span>f <span class="p">:</span><span class="err"> equivalence A B)</span>
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="err">  → isequiv B A (inverse-from-equivalence A B f)</span>
+</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="err">  :=</span>
+</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="err">  \ (f , isequiv-f) →</span>
+</span><span id="__span-17-23"><a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="err">    qinv-to-isequiv B A</span>
+</span><span id="__span-17-24"><a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="err">    ( inverse-from-equivalence A B (f , isequiv-f))</span>
+</span><span id="__span-17-25"><a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="err">    ( qinv-inverse-from-qinv A B f (isequiv-to-qinv A B f isequiv-f))</span>
+</span><span id="__span-17-26"><a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>
+</span><span id="__span-17-27"><a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equivalence-sym" id="define:equivalence-sym" style="visibility: visible; position: relative; color: inherit">equivalence-sym</a></span>
+</span><span id="__span-17-28"><a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-17-29"><a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a><span class="err">  : equivalence A B → equivalence B A</span>
+</span><span id="__span-17-30"><a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a><span class="err">  :=</span>
+</span><span id="__span-17-31"><a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a><span class="err">  </span><span class="p">\ </span>f <span class="err">→</span>
+</span><span id="__span-17-32"><a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a><span class="err">    ( inverse-from-equivalence A B f</span>
+</span><span id="__span-17-33"><a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a><span class="err">    , isequiv-inverse-from-equivalence A B f)</span>
+</span></code></pre></div>
+<h3 id="transitivity_1">Transitivity<a class="headerlink" href="#transitivity_1" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:qinv-trans" id="define:qinv-trans" style="visibility: visible; position: relative; color: inherit">qinv-trans</a></span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="err">  </span><span class="p">( </span>g <span class="p">:</span><span class="err"> B → C)</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="err">  : qinv A B f → qinv B C g → qinv A C (compose A B C g f)</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="err">  :=</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="err">  \ (f⁻¹ , (α-f , β-f)) (g⁻¹ , (α-g , β-g)) →</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="err">    ( compose C B A f⁻¹ g⁻¹</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="err">    , ( </span><span class="p">\ </span>c <span class="err">→</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="err">          path-concat C</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="err">          ( g (f (f⁻¹ (g⁻¹ c))))</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="err">          ( g (g⁻¹ c))</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="err">          ( c)</span>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="err">          ( ap B C g</span>
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="err">            ( f (f⁻¹ (g⁻¹ c)))</span>
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="err">            ( g⁻¹ c)</span>
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="err">            ( α-f (g⁻¹ c)))</span>
+</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a><span class="err">          ( α-g c)</span>
+</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="err">      , </span><span class="p">\ </span>a <span class="err">→</span>
+</span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a><span class="err">          path-concat A</span>
+</span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a><span class="err">          ( f⁻¹ (g⁻¹ (g (f a))))</span>
+</span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="err">          ( f⁻¹ (f a))</span>
+</span><span id="__span-18-23"><a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a><span class="err">          ( a)</span>
+</span><span id="__span-18-24"><a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a><span class="err">          ( ap B A f⁻¹</span>
+</span><span id="__span-18-25"><a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a><span class="err">            ( g⁻¹ (g (f a)))</span>
+</span><span id="__span-18-26"><a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a><span class="err">            ( f a)</span>
+</span><span id="__span-18-27"><a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a><span class="err">            ( β-g (f a)))</span>
+</span><span id="__span-18-28"><a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a><span class="err">          ( β-f a)))</span>
+</span><span id="__span-18-29"><a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a>
+</span><span id="__span-18-30"><a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a><span class="kr">#define</span><span class="p"> </span><span class="nf"><a href="#define:equivalence-trans" id="define:equivalence-trans" style="visibility: visible; position: relative; color: inherit">equivalence-trans</a></span>
+</span><span id="__span-18-31"><a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-18-32"><a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a><span class="err">  : equivalence A B</span>
+</span><span id="__span-18-33"><a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a><span class="err">  → equivalence B C</span>
+</span><span id="__span-18-34"><a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a><span class="err">  → equivalence A C</span>
+</span><span id="__span-18-35"><a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a><span class="err">  :=</span>
+</span><span id="__span-18-36"><a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a><span class="err">  \ (f , isequiv-f) (g , isequiv-g) →</span>
+</span><span id="__span-18-37"><a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a><span class="err">    ( compose A B C g f</span>
+</span><span id="__span-18-38"><a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a><span class="err">    , qinv-to-isequiv A C</span>
+</span><span id="__span-18-39"><a id="__codelineno-18-39" name="__codelineno-18-39" href="#__codelineno-18-39"></a><span class="err">      ( compose A B C g f)</span>
+</span><span id="__span-18-40"><a id="__codelineno-18-40" name="__codelineno-18-40" href="#__codelineno-18-40"></a><span class="err">      ( qinv-trans A B C f g</span>
+</span><span id="__span-18-41"><a id="__codelineno-18-41" name="__codelineno-18-41" href="#__codelineno-18-41"></a><span class="err">        ( isequiv-to-qinv A B f isequiv-f)</span>
+</span><span id="__span-18-42"><a id="__codelineno-18-42" name="__codelineno-18-42" href="#__codelineno-18-42"></a><span class="err">        ( isequiv-to-qinv B C g isequiv-g)))</span>
+</span></code></pre></div>
+<h2 id="proof-of-corollary-244">Proof of Corollary 2.4.4<a class="headerlink" href="#proof-of-corollary-244" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><span class="filename">Proof for corollary 2.4.4. Homotopy with id</span><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>lemma 2.4.3 :  H(x) • g  (p)   = f (p)   • H y
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Substitutions:
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>x → f x
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>y → x
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>g → id
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>p → H x
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>Result of application of lemma with the corresponding values:
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>H(f x) • id (H x) = f (H x) • H x
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>By right-concatenating (H x)⁻¹ to the both sides, we have
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>H(f x) = H(f x) • id (H x) • (H x)⁻¹ = f (H x) • H x • (H x)⁻¹ = f (H x)
+</span></code></pre></div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:homotopy-id-swap" id="define:homotopy-id-swap" style="visibility: visible; position: relative; color: inherit">homotopy-id-swap</a></span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → A)</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="err">  </span><span class="p">( </span>H <span class="p">:</span><span class="err"> homotopy A (</span><span class="p">\ </span>_ <span class="err">→ A) f (id A))</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="err">  </span><span class="p">( </span>x <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="err">  : H (f x) = ap A A f (f x) (id A x) (H x)</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="err">  :=</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="err">  3-path-concat</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="err">  ( f (f x) = (f x)) </span><span class="c">-- type of points</span>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="err">  </span><span class="c">-- 1st point: H (f x)</span>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="err">  ( H (f x))</span>
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="err">  </span><span class="c">-- 2nd point: (H (f x) • (H x)) • (H x)⁻¹</span>
+</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="err">  ( path-concat A (f (f x)) x (f x)</span>
+</span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="err">    ( path-concat A (f (f x)) (f x) x</span>
+</span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a><span class="err">      ( H (f x))</span>
+</span><span id="__span-20-16"><a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a><span class="err">      ( H x))</span>
+</span><span id="__span-20-17"><a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a><span class="err">    ( path-sym A (f x) x</span>
+</span><span id="__span-20-18"><a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a><span class="err">      ( H x)))</span>
+</span><span id="__span-20-19"><a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a><span class="err">  </span><span class="c">-- 3rd point:  (f (H x) • (H x)) • (H x)⁻¹</span>
+</span><span id="__span-20-20"><a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a><span class="err">  ( path-concat A (f (f x)) x (f x)</span>
+</span><span id="__span-20-21"><a id="__codelineno-20-21" name="__codelineno-20-21" href="#__codelineno-20-21"></a><span class="err">    ( path-concat A (f (f x)) (f x) x</span>
+</span><span id="__span-20-22"><a id="__codelineno-20-22" name="__codelineno-20-22" href="#__codelineno-20-22"></a><span class="err">      ( ap A A f (f x) x (H x))</span>
+</span><span id="__span-20-23"><a id="__codelineno-20-23" name="__codelineno-20-23" href="#__codelineno-20-23"></a><span class="err">      ( H x))</span>
+</span><span id="__span-20-24"><a id="__codelineno-20-24" name="__codelineno-20-24" href="#__codelineno-20-24"></a><span class="err">    ( path-sym A (f x) x</span>
+</span><span id="__span-20-25"><a id="__codelineno-20-25" name="__codelineno-20-25" href="#__codelineno-20-25"></a><span class="err">      ( H x)))</span>
+</span><span id="__span-20-26"><a id="__codelineno-20-26" name="__codelineno-20-26" href="#__codelineno-20-26"></a><span class="err">  </span><span class="c">-- 4th point: f (H x)</span>
+</span><span id="__span-20-27"><a id="__codelineno-20-27" name="__codelineno-20-27" href="#__codelineno-20-27"></a><span class="err">  ( ap A A f (f x) x (H x))</span>
+</span><span id="__span-20-28"><a id="__codelineno-20-28" name="__codelineno-20-28" href="#__codelineno-20-28"></a>
+</span><span id="__span-20-29"><a id="__codelineno-20-29" name="__codelineno-20-29" href="#__codelineno-20-29"></a><span class="err">  </span><span class="c">-- proof that H (f x) = (H (f x) • H x) • (H x)⁻¹</span>
+</span><span id="__span-20-30"><a id="__codelineno-20-30" name="__codelineno-20-30" href="#__codelineno-20-30"></a><span class="err">  ( path-sym</span>
+</span><span id="__span-20-31"><a id="__codelineno-20-31" name="__codelineno-20-31" href="#__codelineno-20-31"></a><span class="err">    ( f (f x) = f x)</span>
+</span><span id="__span-20-32"><a id="__codelineno-20-32" name="__codelineno-20-32" href="#__codelineno-20-32"></a><span class="err">    ( path-concat A (f (f x)) x (f x)</span>
+</span><span id="__span-20-33"><a id="__codelineno-20-33" name="__codelineno-20-33" href="#__codelineno-20-33"></a><span class="err">      ( path-concat A (f (f x)) (f x) x</span>
+</span><span id="__span-20-34"><a id="__codelineno-20-34" name="__codelineno-20-34" href="#__codelineno-20-34"></a><span class="err">        ( H (f x))</span>
+</span><span id="__span-20-35"><a id="__codelineno-20-35" name="__codelineno-20-35" href="#__codelineno-20-35"></a><span class="err">        ( H x))</span>
+</span><span id="__span-20-36"><a id="__codelineno-20-36" name="__codelineno-20-36" href="#__codelineno-20-36"></a><span class="err">      ( path-sym A (f x) x</span>
+</span><span id="__span-20-37"><a id="__codelineno-20-37" name="__codelineno-20-37" href="#__codelineno-20-37"></a><span class="err">        ( H x)))</span>
+</span><span id="__span-20-38"><a id="__codelineno-20-38" name="__codelineno-20-38" href="#__codelineno-20-38"></a><span class="err">    ( H (f x))</span>
+</span><span id="__span-20-39"><a id="__codelineno-20-39" name="__codelineno-20-39" href="#__codelineno-20-39"></a><span class="err">    ( right-concat-right-inv-remove-refl A (f (f x)) (f x) x</span>
+</span><span id="__span-20-40"><a id="__codelineno-20-40" name="__codelineno-20-40" href="#__codelineno-20-40"></a><span class="err">      ( H (f x))</span>
+</span><span id="__span-20-41"><a id="__codelineno-20-41" name="__codelineno-20-41" href="#__codelineno-20-41"></a><span class="err">      ( H x)))</span>
+</span><span id="__span-20-42"><a id="__codelineno-20-42" name="__codelineno-20-42" href="#__codelineno-20-42"></a>
+</span><span id="__span-20-43"><a id="__codelineno-20-43" name="__codelineno-20-43" href="#__codelineno-20-43"></a><span class="err">  </span><span class="c">-- proof that (H (f x) • H x) • (H x)⁻¹ = (f (H x) • (H x)) • (H x)⁻¹</span>
+</span><span id="__span-20-44"><a id="__codelineno-20-44" name="__codelineno-20-44" href="#__codelineno-20-44"></a><span class="err">  ( ap</span>
+</span><span id="__span-20-45"><a id="__codelineno-20-45" name="__codelineno-20-45" href="#__codelineno-20-45"></a><span class="err">    ( f (f x) = x) </span><span class="c">-- (type of domain)</span>
+</span><span id="__span-20-46"><a id="__codelineno-20-46" name="__codelineno-20-46" href="#__codelineno-20-46"></a><span class="err">    ( f (f x) = f x) </span><span class="c">-- (type of codomain)</span>
+</span><span id="__span-20-47"><a id="__codelineno-20-47" name="__codelineno-20-47" href="#__codelineno-20-47"></a>
+</span><span id="__span-20-48"><a id="__codelineno-20-48" name="__codelineno-20-48" href="#__codelineno-20-48"></a><span class="err">    ( </span><span class="p">\ </span>p&#39; <span class="err">→</span>
+</span><span id="__span-20-49"><a id="__codelineno-20-49" name="__codelineno-20-49" href="#__codelineno-20-49"></a><span class="err">        path-concat A (f (f x)) x (f x)</span>
+</span><span id="__span-20-50"><a id="__codelineno-20-50" name="__codelineno-20-50" href="#__codelineno-20-50"></a><span class="err">          ( p&#39;)</span>
+</span><span id="__span-20-51"><a id="__codelineno-20-51" name="__codelineno-20-51" href="#__codelineno-20-51"></a><span class="err">          ( path-sym A (f x) x</span>
+</span><span id="__span-20-52"><a id="__codelineno-20-52" name="__codelineno-20-52" href="#__codelineno-20-52"></a><span class="err">            ( H x)))</span>
+</span><span id="__span-20-53"><a id="__codelineno-20-53" name="__codelineno-20-53" href="#__codelineno-20-53"></a>
+</span><span id="__span-20-54"><a id="__codelineno-20-54" name="__codelineno-20-54" href="#__codelineno-20-54"></a><span class="err">    </span><span class="c">-- function-to-apply: whiskering by (Hx)⁻¹, a.k.a. cancel out H x</span>
+</span><span id="__span-20-55"><a id="__codelineno-20-55" name="__codelineno-20-55" href="#__codelineno-20-55"></a><span class="err">    ( path-concat A (f (f x)) (f x) x</span>
+</span><span id="__span-20-56"><a id="__codelineno-20-56" name="__codelineno-20-56" href="#__codelineno-20-56"></a><span class="err">      ( H (f x))</span>
+</span><span id="__span-20-57"><a id="__codelineno-20-57" name="__codelineno-20-57" href="#__codelineno-20-57"></a><span class="err">      ( H x)) </span><span class="c">-- left point in path below</span>
+</span><span id="__span-20-58"><a id="__codelineno-20-58" name="__codelineno-20-58" href="#__codelineno-20-58"></a><span class="err">    ( path-concat A (f (f x)) (f x) x</span>
+</span><span id="__span-20-59"><a id="__codelineno-20-59" name="__codelineno-20-59" href="#__codelineno-20-59"></a><span class="err">      ( ap A A f (f x) x (H x))</span>
+</span><span id="__span-20-60"><a id="__codelineno-20-60" name="__codelineno-20-60" href="#__codelineno-20-60"></a><span class="err">      ( H x)) </span><span class="c">-- right point in path below</span>
+</span><span id="__span-20-61"><a id="__codelineno-20-61" name="__codelineno-20-61" href="#__codelineno-20-61"></a><span class="err">    ( path-concat</span>
+</span><span id="__span-20-62"><a id="__codelineno-20-62" name="__codelineno-20-62" href="#__codelineno-20-62"></a><span class="err">        ( f (f x) = x)</span>
+</span><span id="__span-20-63"><a id="__codelineno-20-63" name="__codelineno-20-63" href="#__codelineno-20-63"></a><span class="err">        </span><span class="c">-- (H (f x) • H x)</span>
+</span><span id="__span-20-64"><a id="__codelineno-20-64" name="__codelineno-20-64" href="#__codelineno-20-64"></a><span class="err">        ( path-concat A (f (f x)) (f x) x</span>
+</span><span id="__span-20-65"><a id="__codelineno-20-65" name="__codelineno-20-65" href="#__codelineno-20-65"></a><span class="err">          ( H (f x))</span>
+</span><span id="__span-20-66"><a id="__codelineno-20-66" name="__codelineno-20-66" href="#__codelineno-20-66"></a><span class="err">          ( H x))</span>
+</span><span id="__span-20-67"><a id="__codelineno-20-67" name="__codelineno-20-67" href="#__codelineno-20-67"></a><span class="err">        </span><span class="c">-- (H (f x) • id (H x))</span>
+</span><span id="__span-20-68"><a id="__codelineno-20-68" name="__codelineno-20-68" href="#__codelineno-20-68"></a><span class="err">        ( path-concat A (f (f x)) (f x) x</span>
+</span><span id="__span-20-69"><a id="__codelineno-20-69" name="__codelineno-20-69" href="#__codelineno-20-69"></a><span class="err">          ( H (f x))</span>
+</span><span id="__span-20-70"><a id="__codelineno-20-70" name="__codelineno-20-70" href="#__codelineno-20-70"></a><span class="err">          ( ap A A (</span><span class="p">\ </span>z <span class="err">→ z) (f x) x (H x)))</span>
+</span><span id="__span-20-71"><a id="__codelineno-20-71" name="__codelineno-20-71" href="#__codelineno-20-71"></a><span class="err">        </span><span class="c">-- f (H x) • (H x)</span>
+</span><span id="__span-20-72"><a id="__codelineno-20-72" name="__codelineno-20-72" href="#__codelineno-20-72"></a><span class="err">        ( path-concat A (f (f x)) (f x) x</span>
+</span><span id="__span-20-73"><a id="__codelineno-20-73" name="__codelineno-20-73" href="#__codelineno-20-73"></a><span class="err">          ( ap A A f (f x) x (H x))</span>
+</span><span id="__span-20-74"><a id="__codelineno-20-74" name="__codelineno-20-74" href="#__codelineno-20-74"></a><span class="err">          ( H x))</span>
+</span><span id="__span-20-75"><a id="__codelineno-20-75" name="__codelineno-20-75" href="#__codelineno-20-75"></a><span class="err">        </span><span class="c">-- (H (f x) • H x) = (H (f x) • id (H x))</span>
+</span><span id="__span-20-76"><a id="__codelineno-20-76" name="__codelineno-20-76" href="#__codelineno-20-76"></a><span class="err">        ( ap</span>
+</span><span id="__span-20-77"><a id="__codelineno-20-77" name="__codelineno-20-77" href="#__codelineno-20-77"></a><span class="err">          ( f x = x) </span><span class="c">-- domain</span>
+</span><span id="__span-20-78"><a id="__codelineno-20-78" name="__codelineno-20-78" href="#__codelineno-20-78"></a><span class="err">          ( ( f (f x)) = x) </span><span class="c">-- codomain</span>
+</span><span id="__span-20-79"><a id="__codelineno-20-79" name="__codelineno-20-79" href="#__codelineno-20-79"></a><span class="err">          ( </span><span class="p">\ </span>p&#39; <span class="err">→</span>
+</span><span id="__span-20-80"><a id="__codelineno-20-80" name="__codelineno-20-80" href="#__codelineno-20-80"></a><span class="err">              path-concat A (f (f x)) (f x) x</span>
+</span><span id="__span-20-81"><a id="__codelineno-20-81" name="__codelineno-20-81" href="#__codelineno-20-81"></a><span class="err">                ( H (f x))</span>
+</span><span id="__span-20-82"><a id="__codelineno-20-82" name="__codelineno-20-82" href="#__codelineno-20-82"></a><span class="err">                ( p&#39;)) </span><span class="c">-- action of concatenation</span>
+</span><span id="__span-20-83"><a id="__codelineno-20-83" name="__codelineno-20-83" href="#__codelineno-20-83"></a><span class="err">          ( H x) </span><span class="c">-- left point in path</span>
+</span><span id="__span-20-84"><a id="__codelineno-20-84" name="__codelineno-20-84" href="#__codelineno-20-84"></a><span class="err">          ( ap A A (</span><span class="p">\ </span>z <span class="err">→ z) (f x) x (H x)) </span><span class="c">-- right point in path</span>
+</span><span id="__span-20-85"><a id="__codelineno-20-85" name="__codelineno-20-85" href="#__codelineno-20-85"></a><span class="err">          ( path-sym (f x = x)</span>
+</span><span id="__span-20-86"><a id="__codelineno-20-86" name="__codelineno-20-86" href="#__codelineno-20-86"></a><span class="err">            ( ap A A (</span><span class="p">\ </span>z <span class="err">→ z) (f x) x (H x))</span>
+</span><span id="__span-20-87"><a id="__codelineno-20-87" name="__codelineno-20-87" href="#__codelineno-20-87"></a><span class="err">            ( H x)</span>
+</span><span id="__span-20-88"><a id="__codelineno-20-88" name="__codelineno-20-88" href="#__codelineno-20-88"></a><span class="err">            ( ap-id A (f x) x (H x))))</span>
+</span><span id="__span-20-89"><a id="__codelineno-20-89" name="__codelineno-20-89" href="#__codelineno-20-89"></a><span class="err">        </span><span class="c">-- (H (f x) • id (H x)) = f (H x) • (H x)</span>
+</span><span id="__span-20-90"><a id="__codelineno-20-90" name="__codelineno-20-90" href="#__codelineno-20-90"></a><span class="err">        ( hom-naturality A A f (</span><span class="p">\ </span>z <span class="err">→ z) H (f x) x (H x))))</span>
+</span><span id="__span-20-91"><a id="__codelineno-20-91" name="__codelineno-20-91" href="#__codelineno-20-91"></a>
+</span><span id="__span-20-92"><a id="__codelineno-20-92" name="__codelineno-20-92" href="#__codelineno-20-92"></a><span class="err">  </span><span class="c">-- proof that (f (H x) • (H x)) • (H x)⁻¹ = f (H x)</span>
+</span><span id="__span-20-93"><a id="__codelineno-20-93" name="__codelineno-20-93" href="#__codelineno-20-93"></a><span class="err">  ( right-concat-right-inv-remove-refl A (f (f x)) (f x) x</span>
+</span><span id="__span-20-94"><a id="__codelineno-20-94" name="__codelineno-20-94" href="#__codelineno-20-94"></a><span class="err">    ( ap A A f (f x) (id A x) (H x))</span>
+</span><span id="__span-20-95"><a id="__codelineno-20-95" name="__codelineno-20-95" href="#__codelineno-20-95"></a><span class="err">    ( H x))</span>
+</span></code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../03-type-families-are-fibrations.rzk/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 2.3 Type families are fibrations" rel="prev">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                2.3 Type families are fibrations
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../05-the-higher-groupoid-structure-of-type-formers.rzk/" class="md-footer__link md-footer__link--next" aria-label="Next: 2.5 The higher groupoid structure of type formers" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                2.5 The higher groupoid structure of type formers
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.action.edit", "navigation.footer", "navigation.sections", "navigation.path"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
+      
+        <script src="../../../javascript/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+      
+    
+  </body>
+</html>

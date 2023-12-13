@@ -643,11 +643,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-homotopies-are-equivalences.rzk/" class="md-nav__link">
+      <a href="../04-homotopies-and-equivalences.rzk/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    2.4 Homotopies are equivalences
+    2.4 Homotopies and equivalences
   </span>
   
 
@@ -915,6 +915,68 @@
 
               
             
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3 Sets and Logic
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            3 Sets and Logic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3-sets-and-logic/01-sets-and-n-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.1 Sets and n-types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -966,6 +1028,29 @@
 <h1 id="28-the-unit-type">2.8 The unit type<a class="headerlink" href="#28-the-unit-type" title="Permanent link">&para;</a></h1>
 <p>This is a literate Rzk file:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">#lang</span><span class="p"> </span><span class="s">rzk-1</span>
+</span></code></pre></div>
+<p>For <code class="language-rzk highlight"><span class="kt">Unit</span></code> type, uniqueness principle is built-in. That is, for any <code class="language-rzk highlight"><span class="err">x, y : Unit</span></code>, we have <code class="language-rzk highlight"><span class="s">refl</span><span class="err"> : x = y</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Theorem 2.8.1.</p>
+<p>For any <span class="arithmatex">\(x, y : \mathbb{1}\)</span>, we have <span class="arithmatex">\((x = y) \simeq \mathbb{1}\)</span>.</p>
+</div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:paths-in-unit-equiv-unit" id="define:paths-in-unit-equiv-unit" style="visibility: visible; position: relative; color: inherit">paths-in-unit-equiv-unit</a></span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">    </span><span class="p">( </span>x y <span class="p">:</span><span class="err"> Unit)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">  : equivalence (x = y) Unit</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="err">    </span><span class="c">-- provide a function - a constant map to unit</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="err">  :=</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="err">  </span><span class="p">( </span>\ (p <span class="p">:</span><span class="err"> x = y) → </span><span class="s">unit</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="err">  , ( </span><span class="c">-- provide right inverse - a constant map to refl_{unit}</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="err">      </span><span class="p">( </span>\ (u <span class="p">:</span><span class="err"> Unit) → </span><span class="s">refl</span><span class="err">_{</span><span class="s">unit</span><span class="err">}</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="err">      , </span><span class="c">-- prove that composition is homotopical to id_Unit</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="err">        \ </span><span class="p">(</span>u <span class="p">:</span><span class="err"> Unit) → </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="err">    , </span><span class="c">-- provide left inverse - a constant map to refl_{unit}</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="err">      </span><span class="p">( </span>\ (u <span class="p">:</span><span class="err"> Unit) → </span><span class="s">refl</span><span class="err">_{</span><span class="s">unit</span><span class="err">}</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="err">      , </span><span class="c">-- prove that composition is homotopical to id_{x = y}; use path induction on p</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="err">        path-ind Unit</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="err">        ( </span><span class="p">\ </span>x&#39; y&#39; p&#39; <span class="err">→ </span><span class="s">refl</span><span class="err">_{</span><span class="s">unit</span><span class="err">} = p&#39;)</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="err">        ( </span><span class="p">\ </span>x&#39; <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="err">        x y)))</span>
 </span></code></pre></div>
 
 
