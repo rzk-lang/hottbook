@@ -403,14 +403,62 @@ which are discussed in Sections [2.6](06-cartesian-product-types.rzk.md) and [2.
 
 ### Transitivity
 
-```rzk
--- #def equivalence-trans
---     (A B C : U)
---     : equivalence A B → equivalence B C → equivalence A C
---     := \ (f, isequiv-f) (g, isequiv-g) →
+```
+#define qinv-trans
+  ( A B C : U)
+  ( f : A → B)
+  ( g : B → C)
+  : qinv A B f → qinv B C g → qinv A C (compose A B C g f)
+  :=
+  \ (f⁻¹ , (α-f , β-f)) (g⁻¹ , (α-g , β-g)) →
+    ( compose C B A f⁻¹ g⁻¹
+    , ( \ c →
+          path-concat C
+          ( g (f (f⁻¹ (g⁻¹ c))))
+          ( g (g⁻¹ c))
+          ( c)
+          ( ap B C g
+            ( f (f⁻¹ (g⁻¹ c)))
+            ( g⁻¹ c)
+            ( α-f (g⁻¹ c)))
+          ( α-g c)
+      , \ a →
+          path-concat A
+          ( f⁻¹ (g⁻¹ (g (f a))))
+          ( f⁻¹ (f a))
+          (a)
+          ( ap B A f⁻¹
+            (g⁻¹ (g (f a)))
+            (f a)
+            ( α-f (g⁻¹ c)))
+          ( α-g c)))
+
+#def equivalence-trans
+  ( A B C : U)
+  : equivalence A B → equivalence B C → equivalence A C
+  :=
+  \ (f , isequiv-f) (g , isequiv-g) →
+    ( \ ((f⁻¹ , (α-f , β-f)) : (qinv A B f)) ((g⁻¹ , (α-g , β-g)) : (qinv B C g)) →
+        ( compose A B C g f
+        , qinv-to-isequiv A C (compose A B C g f)
+            ( compose C B A f⁻¹ g⁻¹
+            , ( \ c → path-concat C -- g f f⁻¹ g⁻¹ c = g g⁻¹ c = c
+                ( g (f (f⁻¹ (g⁻¹ (c)))))
+                ( g (g⁻¹ (c)))
+                ( c)
+                ( ap B C g (f (f⁻¹ (g⁻¹ (c)))) (g⁻¹ (c)) (α-f (g⁻¹ (c))))
+                ( α-g c)
+              , \ a → path-concat A -- f⁻¹ g⁻¹ g f a = f⁻¹ f a = a
+                ( f⁻¹ (g⁻¹ (g (f (a)))))
+                ( f⁻¹ (f (a)))
+                ( a)
+                ( ap B A f⁻¹ (g⁻¹ (g (f (a)))) (f (a)) (β-g (f (a))))
+                ( β-f a)))))
+  ( isequiv-to-qinv A B f isequiv-f)
+  ( isequiv-to-qinv B C g isequiv-g)
 ```
 
-
+## Proof of Corollary 2.4.4
 
 ``` title="Proof for corollary 2.4.4. Homotopy with id"
 lemma 2.4.3 :  H(x) • g  (p)   = f (p)   • H y
