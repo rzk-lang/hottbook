@@ -37,6 +37,13 @@ nav:
           - Exercises: 1-foundations/2-homotopy-type-theory/exercises/README.md
       - 3 Sets and Logic:
           - 3.1 Sets and n-types: 1-foundations/3-sets-and-logic/01-sets-and-n-types.rzk.md
+          - 3.2 Propositions as Types?: 1-foundations/3-sets-and-logic/02-propositions-as-types.rzk.md
+          - 3.3 Mere propositions: 1-foundations/3-sets-and-logic/03-mere-propositions.rzk.md
+          - 3.11 Contractibility: 1-foundations/3-sets-and-logic/11-contractibility.rzk.md
+
+not_in_nav: |
+  1-foundations/0-chapter-template/
+  1-foundations/*/exercises/*.rzk.md
 
 markdown_extensions:
   - admonition
